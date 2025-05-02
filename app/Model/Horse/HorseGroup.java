@@ -1,4 +1,7 @@
-package app.Model;
+package app.Model.Horse;
+
+import app.Model.Player.Player;
+import app.Model.Spot;
 
 import java.util.ArrayList;
 import java.util.Collections;

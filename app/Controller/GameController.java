@@ -8,7 +8,7 @@ import app.Model.Enum.BoardType;
 import app.Model.Enum.GameEventType;
 import app.Model.Enum.YutResult;
 import app.Model.Game;
-import app.Model.Horse;
+import app.Model.Horse.Horse;
 import app.View.GameView;
 import app.View.SwingGameView;
 
