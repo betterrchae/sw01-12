@@ -176,13 +176,22 @@ public class Game {
         }
 
         // 말 또는 말 그룹 이동
-        boolean moved = false;
+        boolean moved;
         if (horse.isInGroup()) {
             HorseGroup group = horse.getGroup();
             moved = group.move(nextSpot);
+
+            if (moved) {
+                // 그룹 내 모든 말의 위치를 Board에 반영
+                for (Horse h : group.getHorses()) {
+                    board.updateHorsePosition(h);
+                }
+            }
         } else {
             moved = horse.move(nextSpot);
-            board.updateHorsePosition(horse);
+            if (moved) {
+                board.updateHorsePosition(horse);
+            }
         }
 
         if (!moved) {
@@ -192,23 +201,27 @@ public class Game {
         // 현재 결과에서 사용한 결과 제거
         currentResults.remove(result);
 
-        // 도착 칸에 다른 플레이어의 말이 있는지 확인
-        List<Horse> horsesAtSpot = board.getHorsesAtSpot(nextSpot);
-        List<Horse> enemyHorses = horsesAtSpot.stream()
+        // ② 점유 말 목록 정리 (도착한 말 자신 제외)
+        List<Horse> occupants = board.getHorsesAtSpot(nextSpot).stream()
+                .filter(h -> h != horse) // 내 말(이동해온) 제외
+                .collect(Collectors.toList());
+
+        List<Horse> enemyHorses = occupants.stream()
                 .filter(h -> h.getOwner() != currentPlayer)
                 .collect(Collectors.toList());
 
-        boolean captured = false;
-        if (!enemyHorses.isEmpty()) {
-            // 상대 말 잡기
-            captured = captureHorses(horse, enemyHorses);
-        } else {
-            // 같은 플레이어의 말이 있는지 확인해 업기
-            List<Horse> friendlyHorses = horsesAtSpot.stream()
-                    .filter(h -> h.getOwner() == currentPlayer && h != horse)
-                    .collect(Collectors.toList());
 
-            if (!friendlyHorses.isEmpty()) {
+        // 같은 팀(아군) 말
+        List<Horse> friendlyHorses = occupants.stream()
+                .filter(h -> h.getOwner() == currentPlayer)
+                .collect(Collectors.toList());
+
+        boolean captured = false;
+        if (!enemyHorses.isEmpty()) {                 // 진짜 적이 있을 때만 잡기
+            captured = captureHorses(horse, enemyHorses);
+        } else if (!friendlyHorses.isEmpty()) {       // 적이 없고 아군만 있으면 → 그룹
+            // 이후 로직이 필요합니다 (예: 그룹화 처리 등)
+        if (!friendlyHorses.isEmpty()) {
                 groupHorses(horse, friendlyHorses);
             }
         }
