@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
     </list>
-    <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="" />
+    <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="">
+      <change beforePath="$PROJECT_DIR$/app/View/GameViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/GameViewFactory.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "feat/10",
+    "git-widget-placeholder": "feat/12",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
@@ -146,6 +148,22 @@
     <MESSAGE value=":memo: Write README.md" />
     <MESSAGE value=":sparkles: Horse.java" />
     <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Horse.java" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

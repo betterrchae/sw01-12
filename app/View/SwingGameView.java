@@ -522,15 +522,9 @@ public class SwingGameView implements GameView {
                 g2d.setColor(Color.BLACK);
                 g2d.drawRoundRect(x, y, horseSize, horseSize, 8, 8);
 
-                // 그룹화된 말은 표시
-                if (horse.isInGroup()) {
-                    g2d.setColor(Color.WHITE);
-                    g2d.drawString("G", pos.x - 3, pos.y + 4);
-                } else {
-                    // 말 번호 표시
-                    g2d.setColor(Color.WHITE);
-                    g2d.drawString(String.valueOf(horse.getId() + 1), pos.x - 3, pos.y + 4);
-                }
+                g2d.setColor(Color.WHITE);
+                g2d.drawString(String.valueOf(horse.getId() + 1), pos.x - 3, pos.y + 4);
+
             }
         }
 
