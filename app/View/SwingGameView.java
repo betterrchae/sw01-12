@@ -9,9 +9,9 @@ import app.Model.Enum.YutResult;
 import app.Model.Event.GameEvent;
 import app.Model.Board;
 import app.Model.Game;
-import app.Model.Horse;
+import app.Model.Horse.Horse;
 import app.Model.Line;
-import app.Model.Player;
+import app.Model.Player.Player;
 import app.Model.Spot;
 
 import java.awt.*;
