@@ -15,6 +15,7 @@ import app.View.SwingGameView;
 public class GameController {
   private final Game game;
   private final GameView view;
+  private boolean hasThrownYut; // 윷을 던졌는지 여부
 
   public GameController(Game game, GameView view) {
     this.game = game;
@@ -29,6 +30,9 @@ public class GameController {
     for (GameEventType type : GameEventType.values()) {
       game.addEventListener(type, view);
     }
+
+    // 턴 변경 이벤트 리스너 추가 (hasThrownYut 초기화)
+    game.addEventListener(GameEventType.TURN_CHANGE, event -> hasThrownYut = false);
   }
 
   public Game getGame() {
@@ -39,12 +43,25 @@ public class GameController {
     game.setupGame(playerCount, horseCount, boardType);
     view.updateBoard(game.getBoard());
     view.updatePlayers(game.getPlayers());
+    hasThrownYut = false; // 새 게임 시작시 초기화
   }
 
   public void handleYutThrow(boolean isRandom, YutResult specificResult) {
-    YutResult result = game.throwYut(isRandom, specificResult);
-    if (result != null) {
-      // 화면에는 이미 이벤트를 통해 표시됨
+    // 윷이나 모가 나와서 한 번 더 던질 수 있는 경우 또는 아직 윷을 던지지 않은 경우만 던지기 가능
+    if (game.canThrowAgain() || !hasThrownYut) {
+      YutResult result = game.throwYut(isRandom, specificResult);
+      if (result != null) {
+        // 윷을 던졌음을 표시
+        hasThrownYut = true;
+
+        // 윷이나 모가 나오면 canThrowAgain이 true로 설정됨
+        // 빽도로 인해 턴이 넘어가면 hasThrownYut이 자동으로 false로 초기화됨
+      }
+    } else {
+      // 이미 윷을 던졌고 윷/모가 아니면 말을 이동해야 함을 알림
+      JOptionPane.showMessageDialog(null,
+          "이미 윷을 던졌습니다. 말을 이동시켜야 합니다.",
+          "알림", JOptionPane.INFORMATION_MESSAGE);
     }
   }
 
@@ -66,18 +83,30 @@ public class GameController {
 
       if (option == JOptionPane.OK_OPTION) {
         YutResult selectedResult = (YutResult) resultCombo.getSelectedItem();
-        game.moveHorse(horse, selectedResult);
+        boolean moved = game.moveHorse(horse, selectedResult);
+
+        // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
+        // (말 잡기나 윷/모가 나와 추가 던지기가 가능한 경우)
+        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+          hasThrownYut = false;
+        }
       }
     } else {
       // 다른 UI 구현체에 대한 처리
       if (!availableResults.isEmpty()) {
-        game.moveHorse(horse, availableResults.get(0));
+        boolean moved = game.moveHorse(horse, availableResults.get(0));
+
+        // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
+        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+          hasThrownYut = false;
+        }
       }
     }
   }
 
   public void handleRestartGame() {
     game.restart();
+    hasThrownYut = false;
     view.showSetupDialog();
   }
 
