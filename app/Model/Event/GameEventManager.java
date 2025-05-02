@@ -1,11 +1,11 @@
-package View.Code.Event;
+package app.Model.Event;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import View.Code.Enum.GameEventType;
+import app.Model.Enum.GameEventType;
 
 public class GameEventManager {
   private final Map<GameEventType, List<GameEventListener>> listeners;

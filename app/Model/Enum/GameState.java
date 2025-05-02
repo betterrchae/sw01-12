@@ -1,4 +1,4 @@
-package View.Code.Enum;
+package app.Model.Enum;
 
 public enum GameState {
   SETUP("설정"), // 게임 설정 중

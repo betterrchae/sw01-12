@@ -1,4 +1,4 @@
-package View.Code.View;
+package app.View;
 
 public class GameViewFactory {
   public static GameView createGameView(String uiType) {

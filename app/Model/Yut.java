@@ -1,8 +1,8 @@
-package View.Code.Model;
+package app.Model;
 
-import View.Code.Enum.YutResult;
-import View.Code.Strategy.RandomYutThrowStrategy;
-import View.Code.Strategy.YutThrowStrategy;
+import app.Model.Enum.YutResult;
+import app.Model.Strategy.RandomYutThrowStrategy;
+import app.Model.Strategy.YutThrowStrategy;
 
 public class Yut {
     private YutThrowStrategy strategy;

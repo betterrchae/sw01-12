@@ -1,4 +1,4 @@
-package View.Code.Model;
+package app.Model;
 
 import java.awt.Color;
 import java.util.ArrayList;

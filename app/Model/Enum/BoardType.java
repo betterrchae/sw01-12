@@ -1,4 +1,4 @@
-package View.Code.Enum;
+package app.Model.Enum;
 
 public enum BoardType {
   SQUARE("사각형"),

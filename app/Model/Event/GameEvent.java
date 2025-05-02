@@ -1,10 +1,10 @@
-package View.Code.Event;
+package app.Model.Event;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import View.Code.Enum.GameEventType;
+import app.Model.Enum.GameEventType;
 
 public class GameEvent {
   private final GameEventType type;

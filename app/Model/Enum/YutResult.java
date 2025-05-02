@@ -1,4 +1,4 @@
-package View.Code.Enum;
+package app.Model.Enum;
 
 public enum YutResult {
   BACKDO(-1, "빽도"), // 뒤로 한 칸

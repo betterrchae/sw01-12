@@ -1,18 +1,18 @@
-package View.Code.View;
+package app.View;
 
 import javax.swing.*;
 
-import View.Code.Controller.GameController;
-import View.Code.Enum.BoardType;
-import View.Code.Enum.GameState;
-import View.Code.Enum.YutResult;
-import View.Code.Event.GameEvent;
-import View.Code.Model.Board;
-import View.Code.Model.Game;
-import View.Code.Model.Horse;
-import View.Code.Model.Line;
-import View.Code.Model.Player;
-import View.Code.Model.Spot;
+import app.Controller.GameController;
+import app.Model.Enum.BoardType;
+import app.Model.Enum.GameState;
+import app.Model.Enum.YutResult;
+import app.Model.Event.GameEvent;
+import app.Model.Board;
+import app.Model.Game;
+import app.Model.Horse;
+import app.Model.Line;
+import app.Model.Player;
+import app.Model.Spot;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

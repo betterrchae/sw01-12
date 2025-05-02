@@ -1,4 +1,4 @@
-package View.Code.Enum;
+package app.Model.Enum;
 
 public enum GameEventType {
   GAME_SETUP("게임 설정"),

@@ -1,16 +1,16 @@
-package View.Code.Strategy;
+package app.Model.Strategy;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import View.Code.Enum.BoardType;
-import View.Code.Enum.YutResult;
-import View.Code.Model.Board;
-import View.Code.Model.Line;
-import View.Code.Model.Path;
-import View.Code.Model.Spot;
-import View.Code.View.BoardLayoutStrategy;
+import app.Model.Enum.BoardType;
+import app.Model.Enum.YutResult;
+import app.Model.Board;
+import app.Model.Line;
+import app.Model.Path;
+import app.Model.Spot;
+import app.View.BoardLayoutStrategy;
 
 public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         @Override

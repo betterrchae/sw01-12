@@ -1,6 +1,6 @@
-package View.Code.View;
+package app.View;
 
-import View.Code.Model.Board;
+import app.Model.Board;
 
 public interface BoardLayoutStrategy {
   Board createBoard();
