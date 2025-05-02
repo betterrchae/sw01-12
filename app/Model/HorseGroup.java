@@ -1,4 +1,4 @@
-package View.Code.Model;
+package app.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;

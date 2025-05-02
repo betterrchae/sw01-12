@@ -1,6 +1,6 @@
-package View.Code.Strategy;
+package app.Model.Strategy;
 
-import View.Code.Enum.YutResult;
+import app.Model.Enum.YutResult;
 
 public class SpecificYutThrowStrategy implements YutThrowStrategy {
     private final YutResult specificResult;

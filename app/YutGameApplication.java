@@ -1,9 +1,9 @@
-package View.Code;
+package app;
 
-import View.Code.Controller.GameController;
-import View.Code.Model.Game;
-import View.Code.View.GameView;
-import View.Code.View.GameViewFactory;
+import app.Controller.GameController;
+import app.Model.Game;
+import app.View.GameView;
+import app.View.GameViewFactory;
 
 public class YutGameApplication {
   public static void main(String[] args) {

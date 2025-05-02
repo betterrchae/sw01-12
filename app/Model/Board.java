@@ -1,4 +1,4 @@
-package View.Code.Model;
+package app.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import View.Code.Enum.BoardType;
-import View.Code.Enum.YutResult;
+import app.Model.Enum.BoardType;
+import app.Model.Enum.YutResult;
 
 public class Board {
   private final BoardType type;

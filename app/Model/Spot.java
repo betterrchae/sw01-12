@@ -1,10 +1,10 @@
-package View.Code.Model;
+package app.Model;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
-import View.Code.Enum.YutResult;
+import app.Model.Enum.YutResult;
 
 public class Spot {
   private final int id;

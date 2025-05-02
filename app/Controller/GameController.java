@@ -1,16 +1,16 @@
-package View.Code.Controller;
+package app.Controller;
 
 import java.util.List;
 
 import javax.swing.*;
 
-import View.Code.Enum.BoardType;
-import View.Code.Enum.GameEventType;
-import View.Code.Enum.YutResult;
-import View.Code.Model.Game;
-import View.Code.Model.Horse;
-import View.Code.View.GameView;
-import View.Code.View.SwingGameView;
+import app.Model.Enum.BoardType;
+import app.Model.Enum.GameEventType;
+import app.Model.Enum.YutResult;
+import app.Model.Game;
+import app.Model.Horse;
+import app.View.GameView;
+import app.View.SwingGameView;
 
 public class GameController {
   private final Game game;

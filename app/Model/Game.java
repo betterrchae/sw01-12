@@ -1,4 +1,4 @@
-package View.Code.Model;
+package app.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import View.Code.Enum.BoardType;
-import View.Code.Enum.GameEventType;
-import View.Code.Enum.GameState;
-import View.Code.Enum.YutResult;
-import View.Code.Event.GameEvent;
-import View.Code.Event.GameEventListener;
-import View.Code.Event.GameEventManager;
-import View.Code.Strategy.RandomYutThrowStrategy;
-import View.Code.Strategy.SpecificYutThrowStrategy;
-import View.Code.View.BoardFactory;
+import app.Model.Enum.BoardType;
+import app.Model.Enum.GameEventType;
+import app.Model.Enum.GameState;
+import app.Model.Enum.YutResult;
+import app.Model.Event.GameEvent;
+import app.Model.Event.GameEventListener;
+import app.Model.Event.GameEventManager;
+import app.Model.Strategy.RandomYutThrowStrategy;
+import app.Model.Strategy.SpecificYutThrowStrategy;
+import app.View.BoardFactory;
 
 import java.awt.*;
 

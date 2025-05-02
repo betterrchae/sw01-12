@@ -1,11 +1,11 @@
-package View.Code.View;
+package app.View;
 
 import java.util.List;
 
-import View.Code.Enum.YutResult;
-import View.Code.Event.GameEventListener;
-import View.Code.Model.Board;
-import View.Code.Model.Player;
+import app.Model.Enum.YutResult;
+import app.Model.Event.GameEventListener;
+import app.Model.Board;
+import app.Model.Player;
 
 public interface GameView extends GameEventListener {
   void initialize();

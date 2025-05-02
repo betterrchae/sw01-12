@@ -1,8 +1,8 @@
-package View.Code.View;
+package app.View;
 
-import View.Code.Enum.BoardType;
-import View.Code.Model.Board;
-import View.Code.Strategy.SquareBoardLayoutStrategy;
+import app.Model.Enum.BoardType;
+import app.Model.Board;
+import app.Model.Strategy.SquareBoardLayoutStrategy;
 
 public class BoardFactory {
   public static Board createBoard(BoardType type) {

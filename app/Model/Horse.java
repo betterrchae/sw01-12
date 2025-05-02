@@ -1,4 +1,4 @@
-package View.Code.Model;
+package app.Model;
 
 public class Horse {
   private final int id;
