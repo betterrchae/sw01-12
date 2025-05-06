@@ -1,4 +1,7 @@
-package app.Model;
+package app.Model.Horse;
+
+import app.Model.Player.Player;
+import app.Model.Spot;
 
 public class Horse {
   private final int id;

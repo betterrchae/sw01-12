@@ -8,6 +8,7 @@ import java.util.Map;
 
 import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
+import app.Model.Horse.Horse;
 
 public class Board {
   private final BoardType type;

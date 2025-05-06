@@ -9,9 +9,9 @@ import app.Model.Enum.YutResult;
 import app.Model.Event.GameEvent;
 import app.Model.Board;
 import app.Model.Game;
-import app.Model.Horse;
+import app.Model.Horse.Horse;
 import app.Model.Line;
-import app.Model.Player;
+import app.Model.Player.Player;
 import app.Model.Spot;
 
 import java.awt.*;
@@ -522,15 +522,9 @@ public class SwingGameView implements GameView {
                 g2d.setColor(Color.BLACK);
                 g2d.drawRoundRect(x, y, horseSize, horseSize, 8, 8);
 
-                // 그룹화된 말은 표시
-                if (horse.isInGroup()) {
-                    g2d.setColor(Color.WHITE);
-                    g2d.drawString("G", pos.x - 3, pos.y + 4);
-                } else {
-                    // 말 번호 표시
-                    g2d.setColor(Color.WHITE);
-                    g2d.drawString(String.valueOf(horse.getId() + 1), pos.x - 3, pos.y + 4);
-                }
+                g2d.setColor(Color.WHITE);
+                g2d.drawString(String.valueOf(horse.getId() + 1), pos.x - 3, pos.y + 4);
+
             }
         }
 
