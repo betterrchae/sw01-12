@@ -68,40 +68,35 @@ public class GameController {
   public void handleHorseSelection(Horse horse) {
     // 선택한 말에 대해 사용 가능한 윷 결과 확인
     List<YutResult> availableResults = game.getCurrentResults();
-    if (availableResults.isEmpty()) {
-      return;
-    }
+      if (!availableResults.isEmpty()) {// 윷 결과 선택 다이얼로그 표시
+          // 다른 UI 구현체에 대한 처리
+          if (view instanceof SwingGameView) {
+              JComboBox<YutResult> resultCombo = new JComboBox<>(
+                      availableResults.toArray(new YutResult[0]));
 
-    // 윷 결과 선택 다이얼로그 표시
-    if (view instanceof SwingGameView) {
-      JComboBox<YutResult> resultCombo = new JComboBox<>(
-          availableResults.toArray(new YutResult[0]));
+              int option = JOptionPane.showConfirmDialog(null,
+                      new Object[]{"이동할 윷 결과를 선택하세요:", resultCombo},
+                      "윷 선택", JOptionPane.OK_CANCEL_OPTION);
 
-      int option = JOptionPane.showConfirmDialog(null,
-          new Object[] { "이동할 윷 결과를 선택하세요:", resultCombo },
-          "윷 선택", JOptionPane.OK_CANCEL_OPTION);
+              if (option == JOptionPane.OK_OPTION) {
+                  YutResult selectedResult = (YutResult) resultCombo.getSelectedItem();
+                  boolean moved = game.moveHorse(horse, selectedResult);
 
-      if (option == JOptionPane.OK_OPTION) {
-        YutResult selectedResult = (YutResult) resultCombo.getSelectedItem();
-        boolean moved = game.moveHorse(horse, selectedResult);
-        
-        // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
-        // (말 잡기나 윷/모가 나와 추가 던지기가 가능한 경우)
-        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
-          hasThrownYut = false;
-        }
+                  // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
+                  // (말 잡기나 윷/모가 나와 추가 던지기가 가능한 경우)
+                  if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+                      hasThrownYut = false;
+                  }
+              }
+          } else {
+              boolean moved = game.moveHorse(horse, availableResults.get(0));
+
+              // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
+              if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+                  hasThrownYut = false;
+              }
+          }
       }
-    } else {
-      // 다른 UI 구현체에 대한 처리
-      if (!availableResults.isEmpty()) {
-        boolean moved = game.moveHorse(horse, availableResults.get(0));
-
-        // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
-        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
-          hasThrownYut = false;
-        }
-      }
-    }
   }
 
   public void handleRestartGame() {

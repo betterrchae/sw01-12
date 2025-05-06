@@ -15,7 +15,6 @@ public class Board {
     private final List<Spot> spots;
     private final List<Line> lines;
     private final List<Path> paths;
-    private final Spot startSpot;
     private final Spot finishSpot;
     private final Map<Integer, List<Horse>> horsePositions;
 
@@ -26,13 +25,10 @@ public class Board {
         this.paths = new ArrayList<>(paths);
         this.horsePositions = new HashMap<>();
 
-        Spot start = null;
         Spot finish = null;
         for (Spot spot : spots) {
-            if (spot.isStart()) start = spot;
-            if (spot.isFinish()) finish = spot;
+            if (spot.isFinish()) { finish = spot; }
         }
-        this.startSpot = start;
         this.finishSpot = finish;
 
         confirmBackdoConnections();
@@ -51,28 +47,12 @@ public class Board {
         }
     }
 
-    public BoardType getType() {
-        return type;
-    }
-
     public List<Spot> getSpots() {
         return Collections.unmodifiableList(spots);
     }
 
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines);
-    }
-
-    public List<Path> getPaths() {
-        return Collections.unmodifiableList(paths);
-    }
-
-    public Spot getStartSpot() {
-        return startSpot;
-    }
-
-    public Spot getFinishSpot() {
-        return finishSpot;
     }
 
     public List<Horse> getHorsesAtSpot(Spot spot) {
@@ -94,13 +74,6 @@ public class Board {
         if (spot == null) return;
         int id = spot.getId();
         horsePositions.computeIfAbsent(id, k -> new ArrayList<>()).add(horse);
-    }
-
-    public Spot getSpotById(int id) {
-        for (Spot spot : spots) {
-            if (spot.getId() == id) return spot;
-        }
-        return null;
     }
 
     public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
@@ -181,14 +154,6 @@ public class Board {
         }
         return s;
     }
-
-    public Path getPathByName(String name) {
-        for (Path p : paths) {
-            if (name.equals(p.getName())) return p;
-        }
-        return null;
-    }
-
 
     private Spot calculateFirstMove(YutResult result) {
         if (result == YutResult.BACKDO) return null;
