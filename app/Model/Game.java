@@ -105,7 +105,8 @@ public class Game {
     YutResult result = yut.throwYut();
 
     // 빽도가 나왔고 현재 플레이어의 모든 말이 아직 시작하지 않았으면 턴 넘김
-    if (result == YutResult.BACKDO && !hasMovableHorses(result) && players.isEmpty()) {
+    // 빽도가 나오기 전에 결과가 있으면 턴이 안넘어가게 함
+    if (result == YutResult.BACKDO && !hasMovableHorses(result) && currentResults.isEmpty()) {
       // 이벤트 발생: 빽도로 인한 턴 변경
       Map<String, Object> data = new HashMap<>();
       data.put("player", currentPlayer);
