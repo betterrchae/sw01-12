@@ -4,16 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java">
+    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":recycle: pull dev">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/app/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/Model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/Model/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/2025sw-dev/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/YutGameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/YutGameApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/BoardType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/YutResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEventListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEventManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Horse/Horse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Horse/HorseGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Line.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Player/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/SpecificYutThrowStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/SquareBoardLayoutStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/YutThrowStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Yut.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardLayoutStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" beforeDir="false" />
     </list>
     <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,9 +58,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,9 +73,9 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
+  &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2wWx2UCAne6wIiS2VahomOtWQIl" />
+  <component name="ProjectId" id="2vZU1iPtsUC9ZkqmbLoZJs71m61" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -44,15 +84,12 @@
   "keyToString": {
     "Application.YutGameApplication.executor": "Run",
     "Application.app.YutGameApplication.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "feat/20",
+    "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
@@ -60,13 +97,18 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true",
+    "애플리케이션.YutGameApplication.executor": "Run",
     "애플리케이션.app.YutGameApplication.executor": "Run"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -110,39 +152,115 @@
     <recent_temporary>
       <list>
         <item itemvalue="애플리케이션.app.YutGameApplication" />
+        <item itemvalue="애플리케이션.YutGameApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java" />
-      <created>1746170924760</created>
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment="" />
+      <created>1744351876605</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1746170924760</updated>
+      <updated>1744351876605</updated>
+      <workItem from="1744351877651" duration="2194000" />
+      <workItem from="1744354850942" duration="853000" />
+      <workItem from="1746168634131" duration="969000" />
+      <workItem from="1746169776639" duration="20000" />
+      <workItem from="1746519090741" duration="195000" />
+      <workItem from="1746519292578" duration="524000" />
+      <workItem from="1746519928645" duration="4039000" />
     </task>
+    <task id="LOCAL-00001" summary=":memo: Write README.md">
+      <option name="closed" value="true" />
+      <created>1744354912060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744354912061</updated>
+    </task>
+    <task id="LOCAL-00002" summary=":sparkles: Horse.java">
+      <option name="closed" value="true" />
+      <created>1746168853477</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746168853477</updated>
+    </task>
+    <task id="LOCAL-00003" summary=":bug: 대각선 아랫부분 거꾸로 되어있는 버그 수정">
+      <option name="closed" value="true" />
+      <created>1746520441519</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746520441519</updated>
+    </task>
+    <task id="LOCAL-00004" summary=":bug: 대각선 내부에서 그롭 or catched 적용되던것 고침">
+      <option name="closed" value="true" />
+      <created>1746521217921</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746521217921</updated>
+    </task>
+    <task id="LOCAL-00005" summary=":recycle: pull dev">
+      <option name="closed" value="true" />
+      <created>1746521733065</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746521733065</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/feat/14" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":memo: Write README.md" />
     <MESSAGE value=":sparkles: Horse.java" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Horse.java" />
+    <MESSAGE value=":bug: workspace" />
+    <MESSAGE value=":bug: 대각선 아랫부분 거꾸로 되어있는 버그 수정" />
+    <MESSAGE value=":bug: 대각선 내부에서 그롭 or catched 적용되던것 고침" />
+    <MESSAGE value=":recycle: pull dev" />
+    <option name="LAST_COMMIT_MESSAGE" value=":recycle: pull dev" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
-          <line>45</line>
+          <line>42</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
-          <line>46</line>
+          <line>43</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
