@@ -82,11 +82,13 @@ public class Board {
     }
 
     public void updateHorsePosition(Horse horse) {
+        // 1) 모든 스팟에서 해당 말을 제거해 이전 위치 기록을 삭제
+        horsePositions.values().forEach(list -> list.remove(horse));
+        // 2) 현재 위치(새 스팟)에 말 추가
         Spot spot = horse.getCurrentSpot();
         if (spot == null) return;
         int id = spot.getId();
         horsePositions.computeIfAbsent(id, k -> new ArrayList<>()).add(horse);
-        horsePositions.values().forEach(list -> list.removeIf(h -> h != horse && h.equals(horse)));
     }
 
     public Spot getSpotById(int id) {
@@ -120,12 +122,7 @@ public class Board {
 
         Spot dest;
         if (path != null && path.isShortcut()) {
-            // 4-a) YUT↔MO 스왑
             int moveCount = result.getMoveCount();
-            if (isEntry) {
-                if (result == YutResult.YUT) moveCount = YutResult.MO.getMoveCount();
-                else if (result == YutResult.MO) moveCount = YutResult.YUT.getMoveCount();
-            }
 
             // 4-b) 중앙에 “딱” 멈출 경우 우선 처리
             int currIdx = path.getSpots().indexOf(currentSpot);
@@ -140,9 +137,6 @@ public class Board {
             // 4-d) 오버슈트 발생 시 메인 루트로 복귀
             int stepsToEnd = path.getSpots().size() - 1 - currIdx;
             int overshoot = moveCount - stepsToEnd;
-            if ("diagTopLeftToBotRight".equals(path.getName())) {
-                overshoot += 1;
-            }
             dest = moveAlongMainPath(path.getLastSpot(), overshoot);
         } else {
             // 5) 일반 메인 경로
