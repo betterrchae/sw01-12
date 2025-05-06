@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d654c9f-1eb6-4528-b5ec-1dee4da58be9" name="Changes" comment="">
+    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
+    </list>
+    <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="">
+      <change beforePath="$PROJECT_DIR$/app/View/GameViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/GameViewFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +18,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -27,18 +38,45 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.YutGameApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Application.app.YutGameApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/15",
-    "last_opened_file_path": "C:/Users/micha/SelfStudyJava/YutGame/sw01-12",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feat/12",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="app.Model.Horse" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="YutGameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.app.YutGameApplication" />
+      <module name="sw01-12" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app.YutGameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.YutGameApplication" />
       <module name="sw01-12" />
       <extension name="coverage">
@@ -51,11 +89,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="sw01-12" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.app.YutGameApplication" />
         <item itemvalue="Application.YutGameApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,15 +120,32 @@
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":memo: Write README.md" />
+    <MESSAGE value=":sparkles: Horse.java" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Horse.java" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

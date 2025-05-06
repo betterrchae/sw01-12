@@ -5,7 +5,7 @@ import java.util.List;
 import app.Model.Enum.YutResult;
 import app.Model.Event.GameEventListener;
 import app.Model.Board;
-import app.Model.Player;
+import app.Model.Player.Player;
 
 public interface GameView extends GameEventListener {
   void initialize();

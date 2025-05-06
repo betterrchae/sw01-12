@@ -1,4 +1,7 @@
-package app.Model;
+package app.Model.Player;
+
+import app.Model.Horse.Horse;
+import app.Model.Horse.HorseGroup;
 
 import java.awt.Color;
 import java.util.ArrayList;
