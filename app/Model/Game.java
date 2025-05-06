@@ -192,7 +192,7 @@ public class Game {
     // 도착 칸에 다른 플레이어의 말이 있는지 확인
     List<Horse> horsesAtSpot = board.getHorsesAtSpot(nextSpot);
     List<Horse> enemyHorses = horsesAtSpot.stream()
-        .filter(h -> h.getOwner() != currentPlayer)
+        .filter(h -> h.getOwner() != currentPlayer && !nextSpot.isFinish())
         .collect(Collectors.toList());
 
     boolean captured = false;
@@ -207,6 +207,17 @@ public class Game {
 
       if (!friendlyHorses.isEmpty()) {
         groupHorses(horse, friendlyHorses);
+      }
+    }
+
+    // 도착 지점에 도달했는지 확인
+    if (nextSpot.isFinish()) {
+      if (horse.isInGroup()) {
+        for (Horse h : horse.getGroup().getHorses()) {
+          h.setFinished(true);
+        }
+      } else {
+        horse.setFinished(true);
       }
     }
 
