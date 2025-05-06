@@ -126,31 +126,68 @@ public class Board {
   }
 
   public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
-    // 출발 전인 경우
+// 출발 전인 경우
     if (currentSpot == null) {
-      // 시작점에서 출발
+// 시작점에서 출발
       return calculateFirstMove(result);
     }
 
-    // 빽도인 경우
-    if (result == YutResult.BACKDO) {
-      // 시작점에서는 빽도 사용 불가
-      if (currentSpot.isStart()) {
-        return null;
-      }
+// 이미 도착한 말은 더 이상 이동할 수 없음
+    if (currentSpot.isFinish()) {
+      return null;
+    }
 
-      // 이전 칸으로 이동
+// 빽도인 경우
+    if (result == YutResult.BACKDO) {
+// 이전 칸으로 이동
       return currentSpot.getPrevSpot();
     }
 
-    // 특별 경로 확인 (모서리에서의 지름길)
-    if (currentSpot.hasPath(result)) {
-      Path path = currentSpot.getNextPath(result);
-      return path.getFirstSpot();
+    // 시작점(0번)에서 도 이상이 나오면 완주로 처리
+    // 단, 처음 출발하는 경우는 제외
+    if (currentSpot.isStart() && !currentSpot.equals(calculateFirstMove(YutResult.DO))) {
+      return finishSpot;
+    }
+    
+// 이동할 칸 수
+    int steps = result.getMoveCount();
+    Spot nextSpot = currentSpot;
+
+// 한 칸씩 이동하면서 시작 지점을 지나는지 확인
+    boolean passedStart = false;
+
+    for (int i = 0; i < steps; i++) {
+// 첫 번째 이동에서만 특별 경로 확인 (모서리에서의 지름길)
+      if (i == 0 && nextSpot.hasPath(result)) {
+        Path path = nextSpot.getNextPath(result);
+        nextSpot = path.getFirstSpot();
+      } else {
+// 기본 다음 칸으로 이동
+        Spot tempNext = nextSpot.getNextSpot(YutResult.DO);
+
+// 다음 칸이 없으면 도착으로 처리
+        if (tempNext == null) {
+          return finishSpot;
+        }
+
+        nextSpot = tempNext;
+      }
+
+// 시작 지점을 지나면 표시
+      if (nextSpot.isStart()) {
+        passedStart = true;
+      }
+
+// 도착 지점을 지나면 바로 도착으로 처리
+      if (nextSpot.isFinish()) {
+        return finishSpot;
+      }
     }
 
-    // 기본 다음 칸 반환
-    return currentSpot.getNextSpot(result);
+// 시작 지점을 지났으면 한 바퀴를 돈 것이므로 도착으로 처리하지 않음
+// 윷놀이 규칙에 따라 한 바퀴를 돌아도 계속 진행
+
+    return nextSpot;
   }
 
   private Spot calculateFirstMove(YutResult result) {
