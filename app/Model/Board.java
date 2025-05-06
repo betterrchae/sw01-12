@@ -11,174 +11,175 @@ import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
 
 public class Board {
-  private final BoardType type;
-  private final List<Spot> spots;
-  private final List<Line> lines;
-  private final List<Path> paths;
-  private final Spot startSpot;
-  private final Spot finishSpot;
-  private final Map<Integer, List<Horse>> horsePositions;
+    private final BoardType type;
+    private final List<Spot> spots;
+    private final List<Line> lines;
+    private final List<Path> paths;
+    private final Spot startSpot;
+    private final Spot finishSpot;
+    private final Map<Integer, List<Horse>> horsePositions;
 
-  public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths) {
-    this.type = type;
-    this.spots = new ArrayList<>(spots);
-    this.lines = new ArrayList<>(lines);
-    this.paths = new ArrayList<>(paths);
-    this.horsePositions = new HashMap<>();
+    public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths) {
+        this.type = type;
+        this.spots = new ArrayList<>(spots);
+        this.lines = new ArrayList<>(lines);
+        this.paths = new ArrayList<>(paths);
+        this.horsePositions = new HashMap<>();
 
-    // 시작 지점과 도착 지점 설정
-    Spot start = null;
-    Spot finish = null;
-    for (Spot spot : spots) {
-      if (spot.isStart()) {
-        start = spot;
-      }
-      if (spot.isFinish()) {
-        finish = spot;
-      }
-    }
-
-    this.startSpot = start;
-    this.finishSpot = finish;
-
-    confirmBackdoConnections();
-  }
-
-  private void confirmBackdoConnections() {
-    for (Spot spot : spots) {
-      // Spot 클래스에 이미 setPrevSpot이 호출되었는지 확인
-      if (spot.getPrevSpot() == null && !spot.isStart()) {
-        // 이 칸이 다른 칸의 다음 칸인지 확인
-        for (Spot other : spots) {
-          if (other.getNextSpot(YutResult.DO) == spot) {
-            spot.setPrevSpot(other);
-            break;
-          }
+        Spot start = null;
+        Spot finish = null;
+        for (Spot spot : spots) {
+            if (spot.isStart()) start = spot;
+            if (spot.isFinish()) finish = spot;
         }
-      }
-    }
-  }
+        this.startSpot = start;
+        this.finishSpot = finish;
 
-  public BoardType getType() {
-    return type;
-  }
-
-  public List<Spot> getSpots() {
-    return Collections.unmodifiableList(spots);
-  }
-
-  public List<Line> getLines() {
-    return Collections.unmodifiableList(lines);
-  }
-
-  public List<Path> getPaths() {
-    return Collections.unmodifiableList(paths);
-  }
-
-  public Spot getStartSpot() {
-    return startSpot;
-  }
-
-  public Spot getFinishSpot() {
-    return finishSpot;
-  }
-
-  public void updateHorsePosition(Horse horse) {
-    Spot spot = horse.getCurrentSpot();
-    if (spot == null) {
-      return;
+        confirmBackdoConnections();
     }
 
-    int spotId = spot.getId();
-    if (!horsePositions.containsKey(spotId)) {
-      horsePositions.put(spotId, new ArrayList<>());
+    private void confirmBackdoConnections() {
+        for (Spot spot : spots) {
+            if (spot.getPrevSpot() == null && !spot.isStart()) {
+                for (Spot other : spots) {
+                    if (other.getNextSpot(YutResult.DO) == spot) {
+                        spot.setPrevSpot(other);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    // 기존 위치에서 제거
-    for (List<Horse> horses : horsePositions.values()) {
-      horses.remove(horse);
+    public BoardType getType() {
+        return type;
     }
 
-    // 새 위치에 추가
-    horsePositions.get(spotId).add(horse);
-  }
-
-  public List<Horse> getHorsesAtSpot(Spot spot) {
-    if (spot == null) {
-      return Collections.emptyList();
+    public List<Spot> getSpots() {
+        return Collections.unmodifiableList(spots);
     }
 
-    int spotId = spot.getId();
-    if (!horsePositions.containsKey(spotId)) {
-      return Collections.emptyList();
+    public List<Line> getLines() {
+        return Collections.unmodifiableList(lines);
     }
 
-    return Collections.unmodifiableList(horsePositions.get(spotId));
-  }
-
-  public Spot getSpotById(int id) {
-    for (Spot spot : spots) {
-      if (spot.getId() == id) {
-        return spot;
-      }
-    }
-    return null;
-  }
-
-  public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
-    // 출발 전인 경우
-    if (currentSpot == null) {
-      // 시작점에서 출발
-      return calculateFirstMove(result);
+    public List<Path> getPaths() {
+        return Collections.unmodifiableList(paths);
     }
 
-    // 빽도인 경우
-    if (result == YutResult.BACKDO) {
-      // 시작점에서는 빽도 사용 불가
-      if (currentSpot.isStart()) {
+    public Spot getStartSpot() {
+        return startSpot;
+    }
+
+    public Spot getFinishSpot() {
+        return finishSpot;
+    }
+
+    public List<Horse> getHorsesAtSpot(Spot spot) {
+        if (spot == null) return Collections.emptyList();
+        int id = spot.getId();
+        return horsePositions.containsKey(id) ? Collections.unmodifiableList(horsePositions.get(id)) : Collections.emptyList();
+    }
+
+    public void updateHorsePosition(Horse horse) {
+        Spot spot = horse.getCurrentSpot();
+        if (spot == null) return;
+        int id = spot.getId();
+        horsePositions.computeIfAbsent(id, k -> new ArrayList<>()).add(horse);
+        horsePositions.values().forEach(list -> list.removeIf(h -> h != horse && h.equals(horse)));
+    }
+
+    public Spot getSpotById(int id) {
+        for (Spot spot : spots) {
+            if (spot.getId() == id) return spot;
+        }
         return null;
-      }
-
-      // 이전 칸으로 이동
-      return currentSpot.getPrevSpot();
     }
 
-    // 특별 경로 확인 (모서리에서의 지름길)
-    if (currentSpot.hasPath(result)) {
-      Path path = currentSpot.getNextPath(result);
-      return path.getFirstSpot();
-    }
-
-    // 기본 다음 칸 반환
-    return currentSpot.getNextSpot(result);
-  }
-
-  private Spot calculateFirstMove(YutResult result) {
-    // 출발점에서 윷 결과에 따라 이동 계산
-    switch (result) {
-      case BACKDO:
-        // 빽도는 출발에서는 이동 불가
-        return null;
-      case DO:
-      case GAE:
-      case GEOL:
-      case YUT:
-      case MO:
-        // 기본 경로로 이동
-        Path mainPath = paths.stream()
-            .filter(p -> !p.isShortcut() && "main".equals(p.getName()))
-            .findFirst()
-            .orElse(null);
-
-        if (mainPath == null) {
-          return null;
+    public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
+        // 1) 첫 이동
+        if (currentSpot == null) {
+            return calculateFirstMove(result);
+        }
+        // 2) 백도 처리
+        if (result == YutResult.BACKDO) {
+            return currentSpot.isStart() ? null : currentSpot.getPrevSpot();
         }
 
-        List<Spot> pathSpots = mainPath.getSpots();
-        int targetIndex = Math.min(result.getMoveCount(), pathSpots.size() - 1);
-        return pathSpots.get(targetIndex);
-      default:
+        // 3) Shortcut 경로 찾기 (진입 지점 또는 중간 지점)
+        boolean isEntry = currentSpot.hasPath(result);
+        Path path = isEntry ? currentSpot.getNextPath(result) : null;
+        if (path == null) {
+            for (Path p : paths) {
+                if (p.isShortcut() && p.getSpots().contains(currentSpot)) {
+                    path = p;
+                    break;
+                }
+            }
+        }
+
+        Spot dest;
+        if (path != null && path.isShortcut()) {
+            // 4-a) YUT↔MO 스왑
+            int moveCount = result.getMoveCount();
+            if (isEntry) {
+                if (result == YutResult.YUT) moveCount = YutResult.MO.getMoveCount();
+                else if (result == YutResult.MO) moveCount = YutResult.YUT.getMoveCount();
+            }
+
+            // 4-b) 중앙에 “딱” 멈출 경우 우선 처리
+            int currIdx = path.getSpots().indexOf(currentSpot);
+
+
+            // 4-c) 대각선 내 일반 이동 시도
+            dest = moveAlongPath(path, currentSpot, moveCount);
+            if (dest != null) {
+                return dest;
+            }
+
+            // 4-d) 오버슈트 발생 시 메인 루트로 복귀
+            int stepsToEnd = path.getSpots().size() - 1 - currIdx;
+            int overshoot = moveCount - stepsToEnd;
+            if ("diagTopLeftToBotRight".equals(path.getName())) {
+                overshoot += 1;
+            }
+            dest = moveAlongMainPath(path.getLastSpot(), overshoot);
+        } else {
+            // 5) 일반 메인 경로
+            dest = moveAlongMainPath(currentSpot, result.getMoveCount());
+        }
+
+        return dest;
+    }
+
+
+    private Spot moveAlongPath(Path path, Spot fromSpot, int moveCount) {
+        if (path == null) return null;
+        return path.getSpotAfterMove(fromSpot, moveCount);
+    }
+
+    private Spot moveAlongMainPath(Spot startSpot, int rem) {
+        Spot s = startSpot;
+        for (int i = 0; i < rem; i++) {
+            s = s.getNextSpot(YutResult.DO);
+            if (s == null) break;
+        }
+        return s;
+    }
+
+    public Path getPathByName(String name) {
+        for (Path p : paths) {
+            if (name.equals(p.getName())) return p;
+        }
         return null;
     }
-  }
+
+    private Spot calculateFirstMove(YutResult result) {
+        if (result == YutResult.BACKDO) return null;
+        Path mainPath = paths.stream().filter(p -> !p.isShortcut() && "main".equals(p.getName())).findFirst().orElse(null);
+        if (mainPath == null) return null;
+        List<Spot> ps = mainPath.getSpots();
+        int idx = Math.min(result.getMoveCount(), ps.size() - 1);
+        return ps.get(idx);
+    }
 }

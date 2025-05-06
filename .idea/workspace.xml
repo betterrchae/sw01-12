@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/YutGameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/YutGameApplication.java" afterDir="false" />
     </list>
-    <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="">
-      <change beforePath="$PROJECT_DIR$/app/View/GameViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/GameViewFactory.java" afterDir="false" />
-    </list>
+    <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +24,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -41,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "feat/12",
+    "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
@@ -49,8 +49,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.YutGameApplication.executor": "Run",
+    "애플리케이션.app.YutGameApplication.executor": "Run"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -88,17 +90,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="sw01-12" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.app.YutGameApplication" />
-        <item itemvalue="Application.YutGameApplication" />
+        <item itemvalue="애플리케이션.YutGameApplication" />
+        <item itemvalue="애플리케이션.app.YutGameApplication" />
       </list>
     </recent_temporary>
   </component>
