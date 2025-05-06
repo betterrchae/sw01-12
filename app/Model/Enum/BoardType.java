@@ -8,10 +8,10 @@ public enum BoardType {
   private final String displayName;
 
   BoardType(String displayName) {
-    this.displayName = displayName;
+      this.displayName = displayName;
   }
 
-  public String getDisplayName() {
-    return displayName;
-  }
+    public String getDisplayName() {
+        return displayName;
+    }
 }

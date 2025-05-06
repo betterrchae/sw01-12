@@ -1,15 +1,10 @@
 package app.Model.Player;
 
 import app.Model.Horse.Horse;
-import app.Model.Horse.HorseGroup;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Player {
   private final String name;
@@ -45,22 +40,6 @@ public class Player {
 
   public boolean isAllHorsesFinished() {
     return horses.stream().allMatch(Horse::isFinished);
-  }
-
-  public List<Horse> getAvailableHorses() {
-    return horses.stream()
-        .filter(h -> !h.isFinished() && !h.isInGroup())
-        .collect(Collectors.toList());
-  }
-
-  public List<HorseGroup> getHorseGroups() {
-    Set<HorseGroup> groups = new HashSet<>();
-    for (Horse horse : horses) {
-      if (horse.isInGroup()) {
-        groups.add(horse.getGroup());
-      }
-    }
-    return new ArrayList<>(groups);
   }
 
   @Override

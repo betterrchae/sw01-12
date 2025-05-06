@@ -54,13 +54,6 @@ public class Horse {
     return group != null;
   }
 
-  public void leaveGroup() {
-    if (group != null) {
-      group.removeHorse(this);
-      this.group = null;
-    }
-  }
-
   public boolean move(Spot destination) {
     if (isFinished) {
       return false;

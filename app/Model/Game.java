@@ -34,7 +34,7 @@ public class Game {
   private int currentPlayerIndex;
   private GameState state;
   private final GameEventManager eventManager;
-  private List<YutResult> currentResults;
+  private final List<YutResult> currentResults;
   private boolean canThrowAgain;
 
   public Game() {
@@ -176,7 +176,7 @@ public class Game {
     }
 
     // 말 또는 말 그룹 이동
-    boolean moved = false;
+    boolean moved;
     if (horse.isInGroup()) {
       HorseGroup group = horse.getGroup();
       moved = group.move(nextSpot);
@@ -379,9 +379,5 @@ public class Game {
 
   public void addEventListener(GameEventType type, GameEventListener listener) {
     eventManager.addListener(type, listener);
-  }
-
-  public void removeEventListener(GameEventType type, GameEventListener listener) {
-    eventManager.removeListener(type, listener);
   }
 }

@@ -75,7 +75,7 @@ public class Spot {
     // 기본 다음 칸 반환
     if (nextSpots.containsKey(YutResult.DO)) {
       Spot next = nextSpots.get(YutResult.DO);
-      YutResult remaining = null;
+      YutResult remaining;
 
       switch (result) {
         case DO:
@@ -98,9 +98,7 @@ public class Spot {
           return null;
       }
 
-      if (remaining != null) {
         return next.getNextSpot(remaining);
-      }
     }
 
     return null;

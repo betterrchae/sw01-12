@@ -6,40 +6,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
 
 public class Board {
-  private final BoardType type;
   private final List<Spot> spots;
   private final List<Line> lines;
   private final List<Path> paths;
-  private final Spot startSpot;
-  private final Spot finishSpot;
+    private final Spot finishSpot;
   private final Map<Integer, List<Horse>> horsePositions;
 
-  public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths) {
-    this.type = type;
-    this.spots = new ArrayList<>(spots);
+  public Board(List<Spot> spots, List<Line> lines, List<Path> paths) {
+      this.spots = new ArrayList<>(spots);
     this.lines = new ArrayList<>(lines);
     this.paths = new ArrayList<>(paths);
     this.horsePositions = new HashMap<>();
 
     // 시작 지점과 도착 지점 설정
-    Spot start = null;
     Spot finish = null;
     for (Spot spot : spots) {
-      if (spot.isStart()) {
-        start = spot;
-      }
       if (spot.isFinish()) {
         finish = spot;
       }
     }
 
-    this.startSpot = start;
-    this.finishSpot = finish;
+      this.finishSpot = finish;
 
     confirmBackdoConnections();
   }
@@ -59,28 +50,12 @@ public class Board {
     }
   }
 
-  public BoardType getType() {
-    return type;
-  }
-
   public List<Spot> getSpots() {
     return Collections.unmodifiableList(spots);
   }
 
   public List<Line> getLines() {
     return Collections.unmodifiableList(lines);
-  }
-
-  public List<Path> getPaths() {
-    return Collections.unmodifiableList(paths);
-  }
-
-  public Spot getStartSpot() {
-    return startSpot;
-  }
-
-  public Spot getFinishSpot() {
-    return finishSpot;
   }
 
   public void updateHorsePosition(Horse horse) {
@@ -116,15 +91,6 @@ public class Board {
     return Collections.unmodifiableList(horsePositions.get(spotId));
   }
 
-  public Spot getSpotById(int id) {
-    for (Spot spot : spots) {
-      if (spot.getId() == id) {
-        return spot;
-      }
-    }
-    return null;
-  }
-
   public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
     // 출발 전인 경우
     if (currentSpot == null) {
@@ -153,8 +119,6 @@ public class Board {
     Spot nextSpot = currentSpot;
 
     // 한 칸씩 이동하면서 시작 지점을 지나는지 확인
-    boolean passedStart = false;
-
     for (int i = 0; i < steps; i++) {
       // 첫 번째 이동에서만 특별 경로 확인 (모서리에서의 지름길)
       if (i == 0 && nextSpot.hasPath(result)) {
@@ -170,11 +134,6 @@ public class Board {
         }
 
         nextSpot = tempNext;
-      }
-
-      // 시작 지점을 지나면 표시
-      if (nextSpot.isStart()) {
-        passedStart = true;
       }
 
       // 도착 지점을 지나면 바로 도착으로 처리

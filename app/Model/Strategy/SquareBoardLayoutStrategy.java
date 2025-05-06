@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Board;
 import app.Model.Line;
@@ -327,6 +326,6 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
                 // 시작점에서 도착점 직접 연결
                 startSpot.addNextPath(YutResult.MO, directFinishPath); // 모가 나오면 바로 도착
 
-                return new Board(BoardType.SQUARE, spots, lines, paths);
+                return new Board(spots, lines, paths);
         }
 }
