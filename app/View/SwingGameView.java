@@ -46,7 +46,7 @@ public class SwingGameView implements GameView {
 
         frame = new JFrame("윷놀이 게임");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 700);
+        frame.setSize(1200, 1000);
         frame.setLayout(new BorderLayout());
 
         // 보드 패널
