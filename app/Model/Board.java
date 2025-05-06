@@ -99,13 +99,26 @@ public class Board {
     }
 
     public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
-        // 1) 첫 이동
+        // 출발 전인 경우
         if (currentSpot == null) {
+            // 시작점에서 출발
             return calculateFirstMove(result);
         }
-        // 2) 백도 처리
+
+        // 이미 도착한 말은 더 이상 이동할 수 없음
+        if (currentSpot.isFinish()) {
+            return null;
+        }
+
+        // 빽도인 경우
         if (result == YutResult.BACKDO) {
-            return currentSpot.isStart() ? null : currentSpot.getPrevSpot();
+            // 시작점에서는 빽도 사용 불가
+            if (currentSpot.isStart()) {
+                return null;
+            }
+
+            // 이전 칸으로 이동
+            return currentSpot.getPrevSpot();
         }
 
         // 3) Shortcut 경로 찾기 (진입 지점 또는 중간 지점)
@@ -146,7 +159,6 @@ public class Board {
         return dest;
     }
 
-
     private Spot moveAlongPath(Path path, Spot fromSpot, int moveCount) {
         if (path == null) return null;
         return path.getSpotAfterMove(fromSpot, moveCount);
@@ -167,6 +179,7 @@ public class Board {
         }
         return null;
     }
+
 
     private Spot calculateFirstMove(YutResult result) {
         if (result == YutResult.BACKDO) return null;
