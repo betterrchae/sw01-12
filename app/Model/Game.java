@@ -104,7 +104,7 @@ public class Game {
         YutResult result = yut.throwYut();
 
         // 빽도가 나왔고 현재 플레이어의 모든 말이 아직 시작하지 않았으면 턴 넘김
-        if (result == YutResult.BACKDO && !hasMovableHorses(result)) {
+        if (result == YutResult.BACKDO && !hasMovableHorses(result) && currentResults.isEmpty()) {
             // 이벤트 발생: 빽도로 인한 턴 변경
             Map<String, Object> data = new HashMap<>();
             data.put("player", currentPlayer);
@@ -114,6 +114,7 @@ public class Game {
 
             // 턴 넘김
             nextTurn();
+            canThrowAgain = true;
             return result;
         }
         // 현재 결과에 추가
@@ -169,7 +170,7 @@ public class Game {
         }
 
         Spot currentSpot = horse.getCurrentSpot();
-        Spot nextSpot = board.calculateNextSpot(currentSpot, result);
+        Spot nextSpot = board.calculateNextSpot(horse, currentSpot, result);
 
         if (nextSpot != null && nextSpot.isFinish()) {
             // 말 또는 그룹 단위로 setFinished 해두고

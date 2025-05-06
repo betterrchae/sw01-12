@@ -6,6 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="ec08290d-fb84-4361-b401-8c7ad9580d5d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Horse/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Horse/Horse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Path.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +38,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2wiwr7WiTPizyuqXud2sfkkIh7w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,7 +50,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feat/20",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
@@ -70,7 +91,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1746537897240</updated>
-      <workItem from="1746537898644" duration="754000" />
+      <workItem from="1746537898644" duration="2836000" />
     </task>
     <servers />
   </component>

@@ -76,7 +76,7 @@ public class Board {
         horsePositions.computeIfAbsent(id, k -> new ArrayList<>()).add(horse);
     }
 
-    public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
+    public Spot calculateNextSpot(Horse horse, Spot currentSpot, YutResult result) {
         // 출발 전인 경우
         if (currentSpot == null) {
             // 시작점에서 출발
@@ -90,7 +90,19 @@ public class Board {
 
         // 빽도인 경우
         if (result == YutResult.BACKDO) {
-            // 이전 칸으로 이동
+            Path currentPath = horse.getCurrentPath();
+
+            // 대각선 처리
+            if (currentPath != null && currentPath.getSpots().contains(currentSpot)) {
+                int index = currentPath.getSpots().indexOf(currentSpot);
+                if (index > 0) {
+                    return currentPath.getSpots().get(index - 1);
+                }
+                else {
+                    return null;
+                }
+            }
+
             return currentSpot.getPrevSpot();
         }
 
@@ -113,6 +125,7 @@ public class Board {
         Spot dest;
         if (path != null && path.isShortcut()) {
             int moveCount = result.getMoveCount();
+            horse.setCurrentPath(path);
 
             // 4-b) 중앙에 “딱” 멈출 경우 우선 처리
             int currIdx = path.getSpots().indexOf(currentSpot);

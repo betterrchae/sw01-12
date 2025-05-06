@@ -5,47 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec08290d-fb84-4361-b401-8c7ad9580d5d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Model/Strategy/HexagonBoardLayoutStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Model/Strategy/PentagonBoardLayoutStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/BoardType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/YutResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEventListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEventManager.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Line.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/SpecificYutThrowStrategy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/SquareBoardLayoutStrategy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/YutThrowStrategy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Yut.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardLayoutStrategy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Event/GameEventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Event/GameEventManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/Horse/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Horse/Horse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/View/BoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/BoardFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/YutGameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/YutGameApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +50,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat/20 병합 중",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feat/20",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
