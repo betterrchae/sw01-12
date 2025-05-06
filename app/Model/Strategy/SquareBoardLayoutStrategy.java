@@ -48,14 +48,14 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         Spot bottom3 = new Spot(18, new Point(centerX + boardSize / 2 - 3 * gridSize, centerY + boardSize / 2), false, false, false);
         Spot bottom4 = new Spot(19, new Point(centerX + boardSize / 2 - 4 * gridSize, centerY + boardSize / 2), false, false, false);
 
-        Spot diag1_1 = new Spot(21, new Point(centerX - boardSize / 2 + gridSize, centerY + boardSize / 2 - gridSize), false, false, false);
-        Spot diag1_2 = new Spot(22, new Point(centerX - boardSize / 2 + 2 * gridSize, centerY + boardSize / 2 - 2 * gridSize), false, false, false);
+        Spot diag1_2 = new Spot(21, new Point(centerX - boardSize / 2 + gridSize, centerY + boardSize / 2 - gridSize), false, false, false);
+        Spot diag1_1 = new Spot(22, new Point(centerX - boardSize / 2 + 2 * gridSize, centerY + boardSize / 2 - 2 * gridSize), false, false, false);
         Spot diag2_1 = new Spot(23, new Point(centerX - boardSize / 2 + gridSize, centerY - boardSize / 2 + gridSize), false, false, false);
         Spot diag2_2 = new Spot(24, new Point(centerX - boardSize / 2 + 2 * gridSize, centerY - boardSize / 2 + 2 * gridSize), false, false, false);
         Spot diag3_1 = new Spot(25, new Point(centerX + boardSize / 2 - gridSize, centerY - boardSize / 2 + gridSize), false, false, false);
         Spot diag3_2 = new Spot(26, new Point(centerX + boardSize / 2 - 2 * gridSize, centerY - boardSize / 2 + 2 * gridSize), false, false, false);
-        Spot diag4_1 = new Spot(27, new Point(centerX + boardSize / 2 - gridSize, centerY + boardSize / 2 - gridSize), false, false, false);
-        Spot diag4_2 = new Spot(28, new Point(centerX + boardSize / 2 - 2 * gridSize, centerY + boardSize / 2 - 2 * gridSize), false, false, false);
+        Spot diag4_2 = new Spot(27, new Point(centerX + boardSize / 2 - gridSize, centerY + boardSize / 2 - gridSize), false, false, false);
+        Spot diag4_1 = new Spot(28, new Point(centerX + boardSize / 2 - 2 * gridSize, centerY + boardSize / 2 - 2 * gridSize), false, false, false);
 
         // 5) Spot 목록에 모두 추가
         spots.add(startSpot);
@@ -227,10 +227,6 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
                 centerSpot.addNextPath(r, centerToStart);
             }
         }
-
-        // directFinish mapping
-        startSpot.addNextPath(YutResult.MO, directFinish);
-        startSpot.addNextPath(YutResult.YUT, directFinish);
 
         return new Board(BoardType.SQUARE, spots, lines, paths);
     }
