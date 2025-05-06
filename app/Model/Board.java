@@ -82,6 +82,11 @@ public class Board {
     }
 
     public void updateHorsePosition(Horse horse) {
+
+        if (horse.isFinished()) {
+            horsePositions.values().forEach(list -> list.remove(horse));
+            return;
+        }
         // 1) 모든 스팟에서 해당 말을 제거해 이전 위치 기록을 삭제
         horsePositions.values().forEach(list -> list.remove(horse));
         // 2) 현재 위치(새 스팟)에 말 추가
@@ -112,13 +117,12 @@ public class Board {
 
         // 빽도인 경우
         if (result == YutResult.BACKDO) {
-            // 시작점에서는 빽도 사용 불가
-            if (currentSpot.isStart()) {
-                return null;
-            }
-
             // 이전 칸으로 이동
             return currentSpot.getPrevSpot();
+        }
+
+        if (currentSpot.isStart() && !currentSpot.equals(calculateFirstMove(YutResult.DO))) {
+            return finishSpot;
         }
 
         // 3) Shortcut 경로 찾기 (진입 지점 또는 중간 지점)
@@ -156,6 +160,7 @@ public class Board {
             dest = moveAlongMainPath(currentSpot, result.getMoveCount());
         }
 
+
         return dest;
     }
 
@@ -167,8 +172,12 @@ public class Board {
     private Spot moveAlongMainPath(Spot startSpot, int rem) {
         Spot s = startSpot;
         for (int i = 0; i < rem; i++) {
-            s = s.getNextSpot(YutResult.DO);
-            if (s == null) break;
+            Spot next = s.getNextSpot(YutResult.DO);
+            // “다음이 없다” → 곧바로 도착 처리
+            if (next == null) {
+                return finishSpot;
+            }
+            s = next;
         }
         return s;
     }

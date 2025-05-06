@@ -114,6 +114,9 @@ public class SwingGameView implements GameView {
         // 각 플레이어의 말 위치 업데이트
         for (Player player : players) {
             for (Horse horse : player.getHorses()) {
+                if (horse.isFinished()) {
+                    continue;
+                }
                 Spot spot = horse.getCurrentSpot();
                 if (spot != null) {
                     Point basePosition = spot.getPosition();
@@ -159,16 +162,13 @@ public class SwingGameView implements GameView {
             nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             playerInfo.add(nameLabel);
 
-            JLabel horseLabel = new JLabel("말: " + player.getFinishedHorseCount()
-                    + "/" + player.getHorses().size());
+            JLabel horseLabel = new JLabel("말: " + player.getFinishedHorseCount() + "/" + player.getHorses().size());
             horseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             playerInfo.add(horseLabel);
 
             // 말 선택 버튼 추가
             Game game = getGameFromController();
-            if (game != null && player == game.getCurrentPlayer() &&
-                    game.getState() == GameState.IN_PROGRESS &&
-                    !game.getCurrentResults().isEmpty()) {
+            if (game != null && player == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS && !game.getCurrentResults().isEmpty()) {
 
                 JPanel horseButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 horseButtons.setBackground(new Color(250, 250, 250));
@@ -212,12 +212,9 @@ public class SwingGameView implements GameView {
 
         // 윷 결과 표시
         Game game = getGameFromController();
-        String playerName = (game != null && game.getCurrentPlayer() != null) ? game.getCurrentPlayer().getName()
-                : "현재 플레이어";
+        String playerName = (game != null && game.getCurrentPlayer() != null) ? game.getCurrentPlayer().getName() : "현재 플레이어";
 
-        JOptionPane.showMessageDialog(frame,
-                playerName + "의 윷 결과: " + result.getDisplayName(),
-                "윷 결과", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, playerName + "의 윷 결과: " + result.getDisplayName(), "윷 결과", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -227,9 +224,7 @@ public class SwingGameView implements GameView {
         }
 
         // 게임 결과 표시
-        int option = JOptionPane.showConfirmDialog(frame,
-                winner.getName() + "님이 승리했습니다!\n새 게임을 시작하시겠습니까?",
-                "게임 종료", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(frame, winner.getName() + "님이 승리했습니다!\n새 게임을 시작하시겠습니까?", "게임 종료", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
             if (controller != null) {
@@ -262,8 +257,7 @@ public class SwingGameView implements GameView {
         panel.add(boardLabel);
         panel.add(boardCombo);
 
-        int result = JOptionPane.showConfirmDialog(frame, panel, "게임 설정",
-                JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(frame, panel, "게임 설정", JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             int playerCount = (Integer) playerSpinner.getValue();
@@ -307,8 +301,7 @@ public class SwingGameView implements GameView {
                         }
                     }
 
-                    @SuppressWarnings("unchecked")
-                    List<Player> setupPlayers = (List<Player>) event.get("players");
+                    @SuppressWarnings("unchecked") List<Player> setupPlayers = (List<Player>) event.get("players");
                     if (setupPlayers != null) {
                         updatePlayers(setupPlayers);
                     } else {
@@ -327,9 +320,7 @@ public class SwingGameView implements GameView {
                     String reason = (String) event.get("reason");
                     if (reason != null && result == YutResult.BACKDO) {
                         // 빽도로 인한 턴 변경 메시지
-                        JOptionPane.showMessageDialog(frame,
-                                reason,
-                                "빽도 - 턴 변경", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frame, reason, "빽도 - 턴 변경", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         // 일반 윷 결과 표시
                         showYutResult(result);
@@ -353,8 +344,7 @@ public class SwingGameView implements GameView {
 
                 case CAPTURE:
                     // 말 잡기 후 보드 업데이트
-                    JOptionPane.showMessageDialog(frame,
-                            "말을 잡았습니다! 한 번 더 던질 수 있습니다.");
+                    JOptionPane.showMessageDialog(frame, "말을 잡았습니다! 한 번 더 던질 수 있습니다.");
 
                     game = getGameFromController();
                     if (game != null) {
@@ -374,8 +364,7 @@ public class SwingGameView implements GameView {
                     // 턴 변경 시 플레이어 정보 업데이트
                     Player currentPlayer = (Player) event.get("player");
                     if (currentPlayer != null) {
-                        JOptionPane.showMessageDialog(frame,
-                                currentPlayer.getName() + "의 차례입니다.");
+                        JOptionPane.showMessageDialog(frame, currentPlayer.getName() + "의 차례입니다.");
                     }
 
                     game = getGameFromController();
@@ -411,8 +400,7 @@ public class SwingGameView implements GameView {
         @Override
         public void mouseClicked(MouseEvent e) {
             Game game = getGameFromController();
-            if (game == null || game.getState() != GameState.IN_PROGRESS ||
-                    game.getCurrentResults().isEmpty()) {
+            if (game == null || game.getState() != GameState.IN_PROGRESS || game.getCurrentResults().isEmpty()) {
                 return;
             }
 
@@ -424,10 +412,7 @@ public class SwingGameView implements GameView {
 
                 // 말이 클릭 영역 내에 있는지 확인
                 int horseSize = BoardPanel.SPOT_SIZE - 6;
-                Rectangle horseBounds = new Rectangle(
-                        horsePos.x - horseSize / 2,
-                        horsePos.y - horseSize / 2,
-                        horseSize, horseSize);
+                Rectangle horseBounds = new Rectangle(horsePos.x - horseSize / 2, horsePos.y - horseSize / 2, horseSize, horseSize);
 
                 if (horseBounds.contains(clickPoint)) {
                     if (horse.getOwner() == game.getCurrentPlayer()) {

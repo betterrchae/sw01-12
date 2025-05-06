@@ -84,7 +84,7 @@ public class GameController {
       if (option == JOptionPane.OK_OPTION) {
         YutResult selectedResult = (YutResult) resultCombo.getSelectedItem();
         boolean moved = game.moveHorse(horse, selectedResult);
-
+        
         // 말이 이동했고, 그 후에도 사용 가능한 윷 결과가 있으면 hasThrownYut 초기화
         // (말 잡기나 윷/모가 나와 추가 던지기가 가능한 경우)
         if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
