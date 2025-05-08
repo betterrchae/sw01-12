@@ -31,9 +31,6 @@ public class RandomYutThrowStrategy implements YutThrowStrategy {
                 return YutResult.YUT;
             default:
                 // 빽도 (추가 랜덤 확률로 등장)
-                if (frontCount == 1 && random.nextFloat() < 0.1f) {
-                    return YutResult.BACKDO;
-                }
                 return YutResult.DO;
         }
     }

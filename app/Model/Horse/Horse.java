@@ -2,6 +2,7 @@ package app.Model.Horse;
 
 import app.Model.Player.Player;
 import app.Model.Spot;
+import app.Model.Path;
 
 public class Horse {
   private final int id;
@@ -9,6 +10,7 @@ public class Horse {
   private Spot currentSpot;
   private HorseGroup group;
   private boolean isFinished;
+  private Path currentPath;
 
   public Horse(int id, Player owner) {
     this.id = id;
@@ -38,6 +40,8 @@ public class Horse {
     return group;
   }
 
+  public Path getCurrentPath() { return currentPath; }
+
   public void setGroup(HorseGroup group) {
     this.group = group;
   }
@@ -50,15 +54,10 @@ public class Horse {
     isFinished = finished;
   }
 
+  public void setCurrentPath(Path currentPath) { this.currentPath = currentPath; }
+
   public boolean isInGroup() {
     return group != null;
-  }
-
-  public void leaveGroup() {
-    if (group != null) {
-      group.removeHorse(this);
-      this.group = null;
-    }
   }
 
   public boolean move(Spot destination) {
@@ -84,4 +83,6 @@ public class Horse {
   public String toString() {
     return "Horse{id=" + id + ", owner=" + owner.getName() + "}";
   }
+
+
 }

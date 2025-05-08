@@ -16,6 +16,11 @@ public class Path {
   }
 
   public void addSpot(Spot spot) {
+    // 이전 spot이 있다면 prevSpot 연결
+    if (!spots.isEmpty()) {
+      Spot prev = spots.get(spots.size() - 1);
+      spot.setPrevSpot(prev);
+    }
     spots.add(spot);
   }
 
@@ -29,10 +34,6 @@ public class Path {
 
   public String getName() {
     return name;
-  }
-
-  public Spot getFirstSpot() {
-    return spots.isEmpty() ? null : spots.get(0);
   }
 
   public Spot getLastSpot() {

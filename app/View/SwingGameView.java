@@ -2,6 +2,9 @@ package app.View;
 
 import javax.swing.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import app.Controller.GameController;
 import app.Model.Enum.BoardType;
 import app.Model.Enum.GameState;
@@ -21,14 +24,14 @@ import java.util.*;
 import java.util.List;
 
 public class SwingGameView implements GameView {
+    private static final Logger logger = Logger.getLogger(SwingGameView.class.getName());
     private JFrame frame;
     private BoardPanel boardPanel;
-    private JPanel controlPanel;
     private JPanel playerPanel;
     private GameController controller;
     private Board board;
     private List<Player> players;
-    private Map<Horse, Point> horsePositions;
+    private final Map<Horse, Point> horsePositions;
 
     public SwingGameView() {
         this.horsePositions = new HashMap<>();
@@ -41,7 +44,7 @@ public class SwingGameView implements GameView {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "An error occurred while doing something", e);
         }
 
         frame = new JFrame("윷놀이 게임");
@@ -60,7 +63,7 @@ public class SwingGameView implements GameView {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         // 컨트롤 패널
-        controlPanel = new JPanel();
+        JPanel controlPanel = new JPanel();
         controlPanel.setBorder(BorderFactory.createTitledBorder("컨트롤"));
 
         JButton randomButton = new JButton("랜덤 윷 던지기");
@@ -288,10 +291,10 @@ public class SwingGameView implements GameView {
 
         try {
             switch (event.getType()) {
-                case GAME_SETUP:
+                case GAME_SETUP: {
                     // 게임 설정 이벤트 처리
                     Object boardObj = event.get("board");
-                    if (boardObj != null && boardObj instanceof Board) {
+                    if (boardObj instanceof Board) {
                         updateBoard((Board) boardObj);
                     } else {
                         // Game 객체에서 보드 직접 가져오기
@@ -312,8 +315,9 @@ public class SwingGameView implements GameView {
                         }
                     }
                     break;
+                }
 
-                case YUT_THROW:
+                case YUT_THROW: {
                     YutResult result = (YutResult) event.get("result");
 
                     // 빽도 특별 메시지 처리
@@ -332,8 +336,9 @@ public class SwingGameView implements GameView {
                         }
                     }
                     break;
+                }
 
-                case HORSE_MOVE:
+                case HORSE_MOVE: {
                     // 말 이동 후 보드 업데이트
                     Game game = getGameFromController();
                     if (game != null) {
@@ -341,51 +346,55 @@ public class SwingGameView implements GameView {
                         updatePlayers(game.getPlayers());
                     }
                     break;
+                }
 
-                case CAPTURE:
+                case CAPTURE: {
                     // 말 잡기 후 보드 업데이트
                     JOptionPane.showMessageDialog(frame, "말을 잡았습니다! 한 번 더 던질 수 있습니다.");
 
-                    game = getGameFromController();
+                    Game game = getGameFromController();
                     if (game != null) {
                         updateBoard(game.getBoard());
                     }
                     break;
+                }
 
-                case GROUP:
+                case GROUP: {
                     // 말 업기 후 보드 업데이트
-                    game = getGameFromController();
+                    Game game = getGameFromController();
                     if (game != null) {
                         updateBoard(game.getBoard());
                     }
                     break;
+                }
 
-                case TURN_CHANGE:
+                case TURN_CHANGE: {
                     // 턴 변경 시 플레이어 정보 업데이트
                     Player currentPlayer = (Player) event.get("player");
                     if (currentPlayer != null) {
                         JOptionPane.showMessageDialog(frame, currentPlayer.getName() + "의 차례입니다.");
                     }
 
-                    game = getGameFromController();
+                    Game game = getGameFromController();
                     if (game != null) {
                         updatePlayers(game.getPlayers());
                     }
                     break;
+                }
 
-                case GAME_OVER:
+                case GAME_OVER: {
                     // 게임 종료 시 승자 표시
                     Player winner = (Player) event.get("winner");
                     showGameResult(winner);
                     break;
+                }
 
                 default:
                     System.out.println("처리되지 않은 이벤트 타입: " + event.getType());
                     break;
             }
         } catch (Exception e) {
-            System.err.println("Error in event handling: " + e.getMessage());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "예외 발생", e);
         }
     }
 

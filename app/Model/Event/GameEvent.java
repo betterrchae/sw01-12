@@ -1,6 +1,5 @@
 package app.Model.Event;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,10 +16,6 @@ public class GameEvent {
 
   public GameEventType getType() {
     return type;
-  }
-
-  public Map<String, Object> getData() {
-    return Collections.unmodifiableMap(data);
   }
 
   public Object get(String key) {

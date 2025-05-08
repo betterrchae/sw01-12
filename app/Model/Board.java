@@ -15,7 +15,6 @@ public class Board {
     private final List<Spot> spots;
     private final List<Line> lines;
     private final List<Path> paths;
-    private final Spot startSpot;
     private final Spot finishSpot;
     private final Map<Integer, List<Horse>> horsePositions;
 
@@ -26,13 +25,10 @@ public class Board {
         this.paths = new ArrayList<>(paths);
         this.horsePositions = new HashMap<>();
 
-        Spot start = null;
         Spot finish = null;
         for (Spot spot : spots) {
-            if (spot.isStart()) start = spot;
-            if (spot.isFinish()) finish = spot;
+            if (spot.isFinish()) { finish = spot; }
         }
-        this.startSpot = start;
         this.finishSpot = finish;
 
         confirmBackdoConnections();
@@ -51,28 +47,12 @@ public class Board {
         }
     }
 
-    public BoardType getType() {
-        return type;
-    }
-
     public List<Spot> getSpots() {
         return Collections.unmodifiableList(spots);
     }
 
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines);
-    }
-
-    public List<Path> getPaths() {
-        return Collections.unmodifiableList(paths);
-    }
-
-    public Spot getStartSpot() {
-        return startSpot;
-    }
-
-    public Spot getFinishSpot() {
-        return finishSpot;
     }
 
     public List<Horse> getHorsesAtSpot(Spot spot) {
@@ -96,14 +76,7 @@ public class Board {
         horsePositions.computeIfAbsent(id, k -> new ArrayList<>()).add(horse);
     }
 
-    public Spot getSpotById(int id) {
-        for (Spot spot : spots) {
-            if (spot.getId() == id) return spot;
-        }
-        return null;
-    }
-
-    public Spot calculateNextSpot(Spot currentSpot, YutResult result) {
+    public Spot calculateNextSpot(Horse horse, Spot currentSpot, YutResult result) {
         // 출발 전인 경우
         if (currentSpot == null) {
             // 시작점에서 출발
@@ -117,7 +90,19 @@ public class Board {
 
         // 빽도인 경우
         if (result == YutResult.BACKDO) {
-            // 이전 칸으로 이동
+            Path currentPath = horse.getCurrentPath();
+
+            // 대각선 처리
+            if (currentPath != null && currentPath.getSpots().contains(currentSpot)) {
+                int index = currentPath.getSpots().indexOf(currentSpot);
+                if (index > 0) {
+                    return currentPath.getSpots().get(index - 1);
+                }
+                else {
+                    return null;
+                }
+            }
+
             return currentSpot.getPrevSpot();
         }
 
@@ -140,6 +125,7 @@ public class Board {
         Spot dest;
         if (path != null && path.isShortcut()) {
             int moveCount = result.getMoveCount();
+            horse.setCurrentPath(path);
 
             // 4-b) 중앙에 “딱” 멈출 경우 우선 처리
             int currIdx = path.getSpots().indexOf(currentSpot);
@@ -181,14 +167,6 @@ public class Board {
         }
         return s;
     }
-
-    public Path getPathByName(String name) {
-        for (Path p : paths) {
-            if (name.equals(p.getName())) return p;
-        }
-        return null;
-    }
-
 
     private Spot calculateFirstMove(YutResult result) {
         if (result == YutResult.BACKDO) return null;

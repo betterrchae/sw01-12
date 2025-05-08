@@ -19,7 +19,6 @@ public class YutGameApplication {
             // 컨트롤러를 통해 게임 초기화 및 시작
             controller.initializeGame();
         } catch (Exception e) {
-            e.printStackTrace();
             System.err.println("게임 시작 중 오류가 발생했습니다: " + e.getMessage());
             System.exit(1);
         }

@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ec08290d-fb84-4361-b401-8c7ad9580d5d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/HexagonBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/HexagonBoardLayoutStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/PentagonBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/PentagonBoardLayoutStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/BoardFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,33 +17,47 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;betterrchae&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/betterrchae/sw01-12&quot;,
+    &quot;accountId&quot;: &quot;09929bf1-4de7-4556-aa2a-3d1b52456e45&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2wiwr7WiTPizyuqXud2sfkkIh7w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true",
-    "애플리케이션.YutGameApplication.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/20&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/yechan/IdeaProjects/sw01-12&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;애플리케이션.YutGameApplication.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="YutGameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.YutGameApplication" />
