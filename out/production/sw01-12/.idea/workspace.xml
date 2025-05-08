@@ -6,26 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ec08290d-fb84-4361-b401-8c7ad9580d5d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Horse/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Horse/Horse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Path.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameEventType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Enum/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Event/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Path.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Spot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/Model/Strategy/RandomYutThrowStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/GameViewFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardClickListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView$BoardPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/View/SwingGameView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sw01-12/app/YutGameApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +16,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "betterrchae"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/betterrchae/sw01-12",
+    "accountId": "09929bf1-4de7-4556-aa2a-3d1b52456e45"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -59,6 +52,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.YutGameApplication.executor": "Run"
   }
