@@ -205,6 +205,9 @@ public class Game {
         if (horse.isInGroup()) {
             HorseGroup group = horse.getGroup();
             moved = group.move(nextSpot);
+            for (Horse h : group.getHorses()) {
+                board.updateHorsePosition(h);
+            }
         } else {
             moved = horse.move(nextSpot);
             board.updateHorsePosition(horse);
