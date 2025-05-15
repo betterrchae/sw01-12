@@ -6,7 +6,7 @@ import app.Model.Enum.YutResult;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.View.BoardLayoutStrategy;
+import app.presentation.view.BoardLayoutStrategy;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -125,9 +125,7 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         lines.add(new Line(diag1_2, centerSpot));
 
         // 왼쪽 위 대각선
-        lines.add(new Line(corner1, diag2_1));
-        lines.add(new Line(diag2_1, diag2_2));
-        lines.add(new Line(diag2_2, centerSpot));
+        extracted_diag_2(lines, corner1, diag2_1, diag2_2, centerSpot);
 
         // 오른쪽 위 대각선
         lines.add(new Line(corner2, diag3_1));
@@ -229,5 +227,11 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         }
 
         return new Board(BoardType.SQUARE, spots, lines, paths);
+    }
+
+    private static void extracted_diag_2(List<Line> lines, Spot corner1, Spot diag2_1, Spot diag2_2, Spot centerSpot) {
+        lines.add(new Line(corner1, diag2_1));
+        lines.add(new Line(diag2_1, diag2_2));
+        lines.add(new Line(diag2_2, centerSpot));
     }
 }

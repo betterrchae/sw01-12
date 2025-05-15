@@ -1,4 +1,4 @@
-package app.View;
+package app.presentation.view;
 
 import app.Controller.GameController;
 import app.Model.Board;
@@ -281,6 +281,19 @@ public class SwingGameView implements GameView {
         if (frame != null) {
             frame.dispose();
         }
+    }
+
+    @Override
+    public YutResult promptYutSelection(List<YutResult> options) {
+        JComboBox<YutResult> combo = new JComboBox<>(options.toArray(new YutResult[0]));
+        int choice = JOptionPane.showConfirmDialog(frame, combo, "Select Yut Result", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        return choice == JOptionPane.OK_OPTION ? (YutResult) combo.getSelectedItem() : null;
+    }
+
+
+    @Override
+    public void showNotification(String message) {
+        JOptionPane.showMessageDialog(frame, message, "알림", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":bug: 도착 안되던거 고침" />
+    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":truck: app.presentation.view">
+      <change beforePath="$PROJECT_DIR$/app/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/presentation/view/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/presentation/view/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/presentation/view/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/presentation/view/SwingGameView.java" afterDir="false" />
+    </list>
     <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="" />
+    <list id="97db6ba7-cbfb-46a3-8b81-8531b220ffd3" name="micha 님이 변경한 내용" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +26,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -36,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feat/33",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
     "node.js.detected.package.eslint": "true",
@@ -111,7 +118,8 @@
       <workItem from="1746169776639" duration="20000" />
       <workItem from="1747035732752" duration="49000" />
       <workItem from="1747106277970" duration="5000" />
-      <workItem from="1747107829678" duration="316000" />
+      <workItem from="1747107829678" duration="1084000" />
+      <workItem from="1747294614503" duration="2220000" />
     </task>
     <task id="LOCAL-00001" summary=":memo: Write README.md">
       <option name="closed" value="true" />
@@ -129,7 +137,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746168853477</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=":recycle: Code Formatting">
+      <option name="closed" value="true" />
+      <created>1747294996879</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747294996879</updated>
+    </task>
+    <task id="LOCAL-00004" summary=":truck: app.presentation.view">
+      <option name="closed" value="true" />
+      <created>1747296087305</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747296087305</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,23 +173,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":memo: Write README.md" />
     <MESSAGE value=":sparkles: Horse.java" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Horse.java" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value=":recycle: Code Formatting" />
+    <MESSAGE value=":truck: app.presentation.view" />
+    <option name="LAST_COMMIT_MESSAGE" value=":truck: app.presentation.view" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

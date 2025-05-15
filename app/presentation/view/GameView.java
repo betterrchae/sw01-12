@@ -1,4 +1,4 @@
-package app.View;
+package app.presentation.view;
 
 import app.Model.Board;
 import app.Model.Enum.YutResult;
@@ -21,4 +21,8 @@ public interface GameView extends GameEventListener {
     void showSetupDialog();
 
     void close();
+
+    YutResult promptYutSelection(List<YutResult> options);
+
+    void showNotification(String message);
 }

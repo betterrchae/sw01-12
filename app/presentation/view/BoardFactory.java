@@ -1,4 +1,4 @@
-package app.View;
+package app.presentation.view;
 
 import app.Model.Board;
 import app.Model.Enum.BoardType;

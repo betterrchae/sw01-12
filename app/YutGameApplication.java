@@ -2,8 +2,8 @@ package app;
 
 import app.Controller.GameController;
 import app.Model.Game;
-import app.View.GameView;
-import app.View.GameViewFactory;
+import app.presentation.view.GameView;
+import app.presentation.view.GameViewFactory;
 
 public class YutGameApplication {
     public static void main(String[] args) {
