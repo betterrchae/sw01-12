@@ -61,24 +61,34 @@ public class GameController {
     }
 
     public void handleHorseSelection(Horse horse) {
-        List<YutResult> availableResults = game.getCurrentResults();
-        if (!availableResults.isEmpty()) {
-            List<YutResult> available = game.getCurrentResults();
-            if (available.isEmpty()) return;
+        // 1) 사용 가능한 윷 결과 리스트 조회
+        List<YutResult> available = game.getCurrentResults();
+        if (available.isEmpty()) {
+            // (옵션) 선택지 자체가 없으면 사용자에게 알림
+            view.showNotification("사용 가능한 윷 결과가 없습니다.");
+            return;
+        }
 
-            YutResult selected = view.promptYutSelection(available);
-            if (selected == null) return;
+        // 2) View에 다이얼로그 호출을 위임
+        YutResult selected = view.promptYutSelection(available);
+        if (selected == null) {
+            // 취소했으면 아무 작업도 하지 않음
+            return;
+        }
 
-            boolean moved = game.moveHorse(horse, selected);
+        // 3) 선택된 결과로 말 이동
+        boolean moved = game.moveHorse(horse, selected);
 
-            view.updateBoard(game.getBoard());
-            view.updatePlayers(game.getPlayers());
+        // 4) 화면 갱신
+        view.updateBoard(game.getBoard());
+        view.updatePlayers(game.getPlayers());
 
-            if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
-                hasThrownYut = false;
-            }
+        // 5) 추가 던지기 가능 시 상태 초기화
+        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+            hasThrownYut = false;
         }
     }
+
 
     public void handleRestartGame() {
         game.restart();
@@ -94,11 +104,6 @@ public class GameController {
     public void initializeGame() {
         // 뷰 초기화
         view.initialize();
-
-        // 게임 이벤트 리스너 등록
-        for (GameEventType type : GameEventType.values()) {
-            game.addEventListener(type, view);
-        }
 
         // 게임 설정 다이얼로그 표시
         view.showSetupDialog();
