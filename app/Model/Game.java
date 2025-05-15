@@ -1,12 +1,5 @@
 package app.Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import app.Model.Enum.BoardType;
 import app.Model.Enum.GameEventType;
 import app.Model.Enum.GameState;
@@ -22,19 +15,22 @@ import app.Model.Strategy.SpecificYutThrowStrategy;
 import app.View.BoardFactory;
 
 import java.awt.*;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 게임 클래스
  */
 public class Game {
     private final List<Player> players;
-    private Board board;
     private final Yut yut;
+    private final GameEventManager eventManager;
+    private final List<YutResult> currentResults;
+    private Board board;
     private Player currentPlayer;
     private int currentPlayerIndex;
     private GameState state;
-    private final GameEventManager eventManager;
-    private final List<YutResult> currentResults;
     private boolean canThrowAgain;
 
     public Game() {

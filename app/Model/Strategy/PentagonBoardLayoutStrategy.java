@@ -1,16 +1,16 @@
 package app.Model.Strategy;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import app.Model.Board;
+import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.Model.Enum.BoardType;
 import app.View.BoardLayoutStrategy;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PentagonBoardLayoutStrategy implements BoardLayoutStrategy {
     @Override

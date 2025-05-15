@@ -1,14 +1,10 @@
 package app.Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
+
+import java.util.*;
 
 public class Board {
     private final BoardType type;
@@ -27,7 +23,9 @@ public class Board {
 
         Spot finish = null;
         for (Spot spot : spots) {
-            if (spot.isFinish()) { finish = spot; }
+            if (spot.isFinish()) {
+                finish = spot;
+            }
         }
         this.finishSpot = finish;
 
@@ -97,8 +95,7 @@ public class Board {
                 int index = currentPath.getSpots().indexOf(currentSpot);
                 if (index > 0) {
                     return currentPath.getSpots().get(index - 1);
-                }
-                else {
+                } else {
                     return null;
                 }
             }

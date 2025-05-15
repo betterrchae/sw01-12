@@ -1,24 +1,24 @@
 package app.View;
 
-import java.util.List;
-
+import app.Model.Board;
 import app.Model.Enum.YutResult;
 import app.Model.Event.GameEventListener;
-import app.Model.Board;
 import app.Model.Player.Player;
 
+import java.util.List;
+
 public interface GameView extends GameEventListener {
-  void initialize();
+    void initialize();
 
-  void updateBoard(Board board);
+    void updateBoard(Board board);
 
-  void updatePlayers(List<Player> players);
+    void updatePlayers(List<Player> players);
 
-  void showYutResult(YutResult result);
+    void showYutResult(YutResult result);
 
-  void showGameResult(Player winner);
+    void showGameResult(Player winner);
 
-  void showSetupDialog();
+    void showSetupDialog();
 
-  void close();
+    void close();
 }

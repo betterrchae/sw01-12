@@ -1,37 +1,37 @@
 package app.View;
 
-import javax.swing.*;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import app.Controller.GameController;
+import app.Model.Board;
 import app.Model.Enum.BoardType;
 import app.Model.Enum.GameState;
 import app.Model.Enum.YutResult;
 import app.Model.Event.GameEvent;
-import app.Model.Board;
 import app.Model.Game;
 import app.Model.Horse.Horse;
 import app.Model.Line;
 import app.Model.Player.Player;
 import app.Model.Spot;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SwingGameView implements GameView {
     private static final Logger logger = Logger.getLogger(SwingGameView.class.getName());
+    private final Map<Horse, Point> horsePositions;
     private JFrame frame;
     private BoardPanel boardPanel;
     private JPanel playerPanel;
     private GameController controller;
     private Board board;
     private List<Player> players;
-    private final Map<Horse, Point> horsePositions;
 
     public SwingGameView() {
         this.horsePositions = new HashMap<>();

@@ -1,8 +1,8 @@
 package app.Model.Strategy;
 
-import java.util.Random;
-
 import app.Model.Enum.YutResult;
+
+import java.util.Random;
 
 public class RandomYutThrowStrategy implements YutThrowStrategy {
     private final Random random = new Random();
