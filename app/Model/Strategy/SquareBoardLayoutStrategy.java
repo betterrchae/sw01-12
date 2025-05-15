@@ -6,7 +6,6 @@ import app.Model.Enum.YutResult;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.presentation.view.BoardLayoutStrategy;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -139,9 +138,6 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
 
         // 시작점과 도착점 연결 (시작점에서 한 번에 도착점으로)
         lines.add(new Line(startSpot, finishSpot));
-
-        // // 중앙에서 도착점 연결
-        // lines.add(new Line(center, finishSpot));
 
         // 경로 설정
         // 기본 외곽 경로

@@ -6,7 +6,6 @@ import app.Model.Enum.YutResult;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.presentation.view.BoardLayoutStrategy;
 
 import java.awt.*;
 import java.util.ArrayList;

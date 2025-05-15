@@ -1,4 +1,4 @@
-package app.presentation.view;
+package app.Model.Strategy;
 
 import app.Model.Board;
 

@@ -12,7 +12,7 @@ import app.Model.Horse.HorseGroup;
 import app.Model.Player.Player;
 import app.Model.Strategy.RandomYutThrowStrategy;
 import app.Model.Strategy.SpecificYutThrowStrategy;
-import app.presentation.view.BoardFactory;
+import app.Model.Strategy.BoardFactory;
 
 import java.awt.*;
 import java.util.List;

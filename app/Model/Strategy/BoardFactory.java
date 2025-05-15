@@ -1,10 +1,7 @@
-package app.presentation.view;
+package app.Model.Strategy;
 
 import app.Model.Board;
 import app.Model.Enum.BoardType;
-import app.Model.Strategy.HexagonBoardLayoutStrategy;
-import app.Model.Strategy.PentagonBoardLayoutStrategy;
-import app.Model.Strategy.SquareBoardLayoutStrategy;
 
 public class BoardFactory {
     public static Board createBoard(BoardType type) {
