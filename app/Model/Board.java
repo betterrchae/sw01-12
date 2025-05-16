@@ -4,6 +4,8 @@ import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
 
+import java.awt.*;
+import java.util.List;
 import java.util.*;
 
 public class Board {
@@ -13,13 +15,16 @@ public class Board {
     private final List<Path> paths;
     private final Spot finishSpot;
     private final Map<Integer, List<Horse>> horsePositions;
+    private final Map<Spot, Point> spotPositions;
 
-    public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths) {
+
+    public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths, Map<Spot, Point> spotPositions) {
         this.type = type;
         this.spots = new ArrayList<>(spots);
         this.lines = new ArrayList<>(lines);
         this.paths = new ArrayList<>(paths);
         this.horsePositions = new HashMap<>();
+        this.spotPositions = new HashMap<>(spotPositions);
 
         Spot finish = null;
         for (Spot spot : spots) {
@@ -43,6 +48,10 @@ public class Board {
                 }
             }
         }
+    }
+
+    public Point getSpotPosition(Spot spot) {
+        return spotPositions.get(spot);
     }
 
     public List<Spot> getSpots() {

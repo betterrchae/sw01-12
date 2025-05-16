@@ -13,7 +13,7 @@ import java.util.List;
 public class GameController {
     private final Game game;
     private final GameView view;
-    private boolean hasThrownYut; // 윷을 던졌는지 여부
+    private boolean hasThrownYut = false; // 윷을 던졌는지 여부
 
     public GameController(Game game, GameView view) {
         this.game = game;
