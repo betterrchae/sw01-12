@@ -5,8 +5,8 @@ import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
 
 import java.awt.*;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 
 public class Board {
     private final BoardType type;

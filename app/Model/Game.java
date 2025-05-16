@@ -15,8 +15,8 @@ import app.Model.Strategy.RandomYutThrowStrategy;
 import app.Model.Strategy.SpecificYutThrowStrategy;
 
 import java.awt.*;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
