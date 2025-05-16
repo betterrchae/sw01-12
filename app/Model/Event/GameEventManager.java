@@ -23,10 +23,6 @@ public class GameEventManager {
         }
     }
 
-    public void removeListener(GameEventType type, GameEventListener listener) {
-        listeners.get(type).remove(listener);
-    }
-
     public void fireEvent(GameEvent event) {
         List<GameEventListener> typeListeners = listeners.get(event.getType());
         for (GameEventListener listener : typeListeners) {

@@ -22,24 +22,7 @@ public class LayoutResult {
         this.lines = lines;
     }
 
-    /**
-     * 생성된 Board 객체를 반환합니다.
-     */
     public Board getBoard() {
         return board;
-    }
-
-    /**
-     * View에서 사용할 Spot ↔ 좌표 맵을 반환합니다.
-     */
-    public Map<Spot, Point> getSpotPositions() {
-        return spotPositions;
-    }
-
-    /**
-     * 보드 위에 그릴 선 리스트를 반환합니다.
-     */
-    public List<Line> getLines() {
-        return lines;
     }
 }
