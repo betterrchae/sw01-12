@@ -194,34 +194,6 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         paths.add(directFinish);
     }
 
-    private static void diag_line(List<Line> lines, Spot startSpot, Spot diag1_1, Spot diag1_2, Spot centerSpot, Spot corner1, Spot diag2_1, Spot diag2_2, Spot corner2, Spot diag3_1, Spot diag3_2, Spot corner3, Spot diag4_1, Spot diag4_2) {
-        // 왼쪽 아래 대각선
-        extracted_diag_1(lines, startSpot, diag1_1, diag1_2, centerSpot);
-
-        // 왼쪽 위 대각선
-        extracted_diag_2(lines, corner1, diag2_1, diag2_2, centerSpot);
-
-        // 오른쪽 위 대각선
-        extracted_diag_3(lines, corner2, diag3_1, diag3_2, centerSpot);
-
-        // 오른쪽 아래 대각선
-        extracted_diag_4(lines, corner3, diag4_1, diag4_2, centerSpot);
-    }
-
-    private static void side_line(List<Line> lines, Spot startSpot, Spot left1, Spot left2, Spot left3, Spot left4, Spot corner1, Spot top1, Spot top2, Spot top3, Spot top4, Spot corner2, Spot right1, Spot right2, Spot right3, Spot right4, Spot corner3, Spot bottom1, Spot bottom2, Spot bottom3, Spot bottom4) {
-        // 왼쪽 변
-        extracted_left(lines, startSpot, left1, left2, left3, left4, corner1);
-
-        // 위쪽 변
-        extracted_top(lines, corner1, top1, top2, top3, top4, corner2);
-
-        // 오른쪽 변
-        extracted_right(lines, corner2, right1, right2, right3, right4, corner3);
-
-        // 아래쪽 변
-        extracted_bottom(lines, corner3, bottom1, bottom2, bottom3, bottom4, startSpot);
-    }
-
     @Override
     public LayoutResult createLayout() {
         List<Spot> spots = new ArrayList<>();
