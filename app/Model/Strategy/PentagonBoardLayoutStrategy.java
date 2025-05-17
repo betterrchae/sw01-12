@@ -1,16 +1,19 @@
 package app.Model.Strategy;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import app.Model.Board;
 import app.Model.Enum.YutResult;
+import app.Model.Enum.BoardType;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.Model.Enum.BoardType;
-import app.View.BoardLayoutStrategy;
+
 
 public class PentagonBoardLayoutStrategy implements BoardLayoutStrategy {
 
@@ -257,11 +260,11 @@ public class PentagonBoardLayoutStrategy implements BoardLayoutStrategy {
         spots.add(finishSpot);
     }
     @Override
-    public Board createBoard() {
+    public LayoutResult createLayout() {
         List<Spot> spots = new ArrayList<>();
         List<Line> lines = new ArrayList<>();
         List<Path> paths = new ArrayList<>();
-        Map<Spot, Point> spotPointMap = new Hashmap<>();
+        Map<Spot, Point> spotPositions = new HashMap<>();
 
         // 중심점과 화면 크기 설정
         int centerX = 600;
@@ -270,104 +273,104 @@ public class PentagonBoardLayoutStrategy implements BoardLayoutStrategy {
 
         // 출발/도착 지점을 포함한 모서리 지점 (더 크게 표시)
         Spot startSpot = new Spot(0, true, true, false);
-        spotPointMap.put(startSpot,new Point(centerX - 200, centerY + 300));
+        spotPositions.put(startSpot,new Point(centerX - 200, centerY + 300));
 
         Spot corner1 = new Spot(5, true, false, false);
-        spotPointMap.put(corner1,new Point(centerX + 200, centerY + 300));
+        spotPositions.put(corner1,new Point(centerX + 200, centerY + 300));
 
         Spot corner2 = new Spot(10, true, false, false);
-        spotPointMap.put(corner2, new Point(centerX + 300, centerY),);
+        spotPositions.put(corner2, new Point(centerX + 300, centerY));
 
         Spot corner3 = new Spot(15, true, false, false);
-        spotPointMap.put(corner3, new Point(centerX, centerY - 300));
+        spotPositions.put(corner3, new Point(centerX, centerY - 300));
 
         Spot corner4 = new Spot(20, true, false, false);
-        spotPointMap.put(corner4, new Point(centerX - 300, centerY));
+        spotPositions.put(corner4, new Point(centerX - 300, centerY));
 
         Spot center = new Spot(25, true, false, false);
-        spotPointMap.put(center, new Point(centerX, centerY));
+        spotPositions.put(center, new Point(centerX, centerY));
 
         Spot finishSpot = new Spot(36, false, false, true);
-        spotPointMap.put(finishSpot,new Point(centerX - 250, centerY + 300));
+        spotPositions.put(finishSpot,new Point(centerX - 250, centerY + 300));
 
 
 
         // 최하단 수평 변
         Spot bottom1 = new Spot(1, false, false, false);
-        spotPointMap.put(bottom1, new Point(centerX - 200 + bottomLineWidth / 5, centerY + 300));
+        spotPositions.put(bottom1, new Point(centerX - 200 + bottomLineWidth / 5, centerY + 300));
         Spot bottom2 = new Spot(2, false, false, false);
-        spotPointMap.put(bottom2,new Point(centerX - 200 + bottomLineWidth / 5 * 2, centerY + 300));
+        spotPositions.put(bottom2,new Point(centerX - 200 + bottomLineWidth / 5 * 2, centerY + 300));
         Spot bottom3 = new Spot(3, false, false, false);
-        spotPointMap.put(bottom3,new Point(centerX - 200 + bottomLineWidth / 5 * 3, centerY + 300));
+        spotPositions.put(bottom3,new Point(centerX - 200 + bottomLineWidth / 5 * 3, centerY + 300));
         Spot bottom4 = new Spot(4, false, false, false);
-        spotPointMap.put( bottom4,new Point(centerX - 200 + bottomLineWidth / 5 * 4, centerY + 300));
+        spotPositions.put( bottom4,new Point(centerX - 200 + bottomLineWidth / 5 * 4, centerY + 300));
 
 
         // 오른쪽 + 아래쪽 변
         Spot right_bottom1 = new Spot(6, false, false, false);
-        spotPointMap.put(right_bottom1,new Point(centerX + 200 + 20, centerY + 300 - 60));
+        spotPositions.put(right_bottom1,new Point(centerX + 200 + 20, centerY + 300 - 60));
         Spot right_bottom2 = new Spot(7, false, false, false);
-        spotPointMap.put(right_bottom2, new Point(centerX + 200 + 40, centerY + 300 - 120));
+        spotPositions.put(right_bottom2, new Point(centerX + 200 + 40, centerY + 300 - 120));
         Spot right_bottom3 = new Spot(8, false, false, false);
-        spotPointMap.put(right_bottom3, new Point(centerX + 200 + 60, centerY + 300 - 180));
+        spotPositions.put(right_bottom3, new Point(centerX + 200 + 60, centerY + 300 - 180));
         Spot right_bottom4 = new Spot(9, false, false, false);
-        spotPointMap.put(right_bottom4,new Point(centerX + 200 + 80, centerY + 300 - 240));
+        spotPositions.put(right_bottom4,new Point(centerX + 200 + 80, centerY + 300 - 240));
 
 
         // 오른쪽 + 위쪽 변
         Spot right_top1 = new Spot(11, false, false, false);
-        spotPointMap.put(right_top1,new Point(centerX + 300 - 60, centerY - 60));
+        spotPositions.put(right_top1,new Point(centerX + 300 - 60, centerY - 60));
         Spot right_top2 = new Spot(12, false, false, false);
-        spotPointMap.put(right_top2,new Point(centerX + 300 - 120, centerY - 120));
+        spotPositions.put(right_top2,new Point(centerX + 300 - 120, centerY - 120));
         Spot right_top3 = new Spot(13, false, false, false);
-        spotPointMap.put(right_top3, new Point(centerX + 300 - 180, centerY - 180));
+        spotPositions.put(right_top3, new Point(centerX + 300 - 180, centerY - 180));
         Spot right_top4 = new Spot(14, false, false, false);
-        spotPointMap.put(right_top4,new Point(centerX + 300 - 240, centerY - 240));
+        spotPositions.put(right_top4,new Point(centerX + 300 - 240, centerY - 240));
 
 
         // 왼쪽 + 위쪽 변
         Spot left_top1 = new Spot(16, false, false, false);
-        spotPointMap.put(left_top1,new Point(centerX - 60, centerY - 300 + 60));
+        spotPositions.put(left_top1,new Point(centerX - 60, centerY - 300 + 60));
         Spot left_top2 = new Spot(17, false, false, false);
-        spotPointMap.put(left_top2, new Point(centerX - 120, centerY - 300 + 120));
+        spotPositions.put(left_top2, new Point(centerX - 120, centerY - 300 + 120));
         Spot left_top3 = new Spot(18, false, false, false);
-        spotPointMap.put(left_top3, new Point(centerX - 180, centerY - 300 + 180));
+        spotPositions.put(left_top3, new Point(centerX - 180, centerY - 300 + 180));
         Spot left_top4 = new Spot(19, false, false, false);
-        spotPointMap.put(left_top4, new Point(centerX - 240, centerY - 300 + 240));
+        spotPositions.put(left_top4, new Point(centerX - 240, centerY - 300 + 240));
 
 
         // 왼쪽 + 아래쪽 변
         Spot left_bottom1 = new Spot(21, false, false, false);
-        spotPointMap.put(left_bottom1, new Point(centerX - 200 - 80, centerY + 300 - 240));
+        spotPositions.put(left_bottom1, new Point(centerX - 200 - 80, centerY + 300 - 240));
         Spot left_bottom2 = new Spot(22, false, false, false);
-        spotPointMap.put(left_bottom2, new Point(centerX - 200 - 60, centerY + 300 - 180));
+        spotPositions.put(left_bottom2, new Point(centerX - 200 - 60, centerY + 300 - 180));
         Spot left_bottom3 = new Spot(23, false, false, false);
-        spotPointMap.put(left_bottom3, new Point(centerX - 200 - 40, centerY + 300 - 120));
+        spotPositions.put(left_bottom3, new Point(centerX - 200 - 40, centerY + 300 - 120));
         Spot left_bottom4 = new Spot(24, false, false, false);
-        spotPointMap.put(left_bottom4, new Point(centerX - 200 - 20, centerY + 300 - 60));
+        spotPositions.put(left_bottom4, new Point(centerX - 200 - 20, centerY + 300 - 60));
 
 
         // diag1 corner1 -> center
         Spot diag1_1 = new Spot(26, false, false, false);
-        spotPointMap.put(diag1_1, new Point(centerX + 150, centerY + 200));
+        spotPositions.put(diag1_1, new Point(centerX + 150, centerY + 200));
         Spot diag1_2 = new Spot(27, false, false, false);
-        spotPointMap.put(diag1_2, new Point(centerX + 50, centerY + 100));
+        spotPositions.put(diag1_2, new Point(centerX + 50, centerY + 100));
         Spot diag2_1 = new Spot(28, false, false, false);
-        spotPointMap.put(diag2_1,, new Point(centerX + 200, centerY));
+        spotPositions.put(diag2_1, new Point(centerX + 200, centerY));
         Spot diag2_2 = new Spot(29, false, false, false);
-        spotPointMap.put(diag2_2, new Point(centerX + 100, centerY));
+        spotPositions.put(diag2_2, new Point(centerX + 100, centerY));
         Spot diag3_1 = new Spot(30, false, false, false);
-        spotPointMap.put(diag3_1, new Point(centerX, centerY - 200));
+        spotPositions.put(diag3_1, new Point(centerX, centerY - 200));
         Spot diag3_2 = new Spot(31, false, false, false);
-        spotPointMap.put(diag3_2, new Point(centerX, centerY - 100));
+        spotPositions.put(diag3_2, new Point(centerX, centerY - 100));
         Spot diag4_1 = new Spot(32, false, false, false);
-        spotPointMap.put(diag4_1, new Point(centerX - 200, centerY));
+        spotPositions.put(diag4_1, new Point(centerX - 200, centerY));
         Spot diag4_2 = new Spot(33, false, false, false);
-        spotPointMap.put(diag4_2, new Point(centerX - 100, centerY));
+        spotPositions.put(diag4_2, new Point(centerX - 100, centerY));
         Spot diag5_1 = new Spot(34, false, false, false);
-        spotPointMap.put(diag5_1, new Point(centerX - 150, centerY + 200));
+        spotPositions.put(diag5_1, new Point(centerX - 150, centerY + 200));
         Spot diag5_2 = new Spot(35, false, false, false);
-        spotPointMap.put(diag5_2, new Point(centerX - 50, centerY + 100));
+        spotPositions.put(diag5_2, new Point(centerX - 50, centerY + 100));
 
 
         //Spot 목록에 추가
@@ -389,22 +392,16 @@ public class PentagonBoardLayoutStrategy implements BoardLayoutStrategy {
         // ─── 경로(Path) 설정 ───
         // 1) 기본 외곽 경로(main: 0 → … → 24 → finishSpot)
         Path mainPath = getMainPath(startSpot, bottom1, bottom2, bottom3, bottom4, corner1, right_bottom1, right_bottom2, right_bottom3, right_bottom4, corner2, right_top1, right_top2, right_top3, right_top4, corner3, left_top1, left_top2, left_top3, left_top4, corner4, left_bottom1, left_bottom2, left_bottom3, left_bottom4, finishSpot, paths);
-
-        // 2) 코너(5,10,15) → 중앙(25) → 코너4(20) → finish
         Path diag5to20_A = getDiag5to20A(corner1, diag1_1, diag1_2, center, diag4_2, diag4_1, corner4, paths);
         Path diag10to20_B = getDiag10to20B(corner2, diag2_1, diag2_2, center, diag4_2, diag4_1, corner4, paths);
         Path diag15to20_C = getDiag15to20C(corner3, diag3_1, diag3_2, center, diag4_2, diag4_1, corner4, paths);
-        // 3) 중앙(25)에 정확히 멈출 경우 → start(0) 로 돌아가서 finish
         Path centerToStart = getCenterToStart(center, diag5_2, diag5_1, startSpot, finishSpot, paths);
-        // 4) 바로 finish 로 가는 경우 (예: 모·윷에서 한 번에)
         directFinish(finishSpot, paths);
 
-        // ─── nextSpot / nextPath 매핑 ───
-        // 외곽 이동 (항상 DO 결과로 한 칸씩)
         mainPath_move(mainPath);
-        // 코너 5,10,15 에서 모든 윷 결과(빽도 제외) 시 대각선 진입
         diagPath_move(corner1, diag5to20_A, corner2, diag10to20_B, corner3, diag15to20_C, center, centerToStart);
 
-        return new Board(BoardType.PENTAGON, spots, lines, paths);
+        Board board = new Board(BoardType.PENTAGON, spots, lines, paths, spotPositions);
+        return new LayoutResult(board, spotPositions, lines);
     }
 }
