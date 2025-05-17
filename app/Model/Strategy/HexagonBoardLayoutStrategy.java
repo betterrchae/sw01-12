@@ -1,18 +1,90 @@
 package app.Model.Strategy;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import app.Model.Board;
+import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Line;
 import app.Model.Path;
 import app.Model.Spot;
-import app.Model.Enum.BoardType;
-import app.View.BoardLayoutStrategy;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HexagonBoardLayoutStrategy implements BoardLayoutStrategy {
+    private static void centerPath_move(Spot center, Path centerToStart) {
+        for (YutResult r : YutResult.values()) {
+            if (r != YutResult.BACKDO) {
+                center.addNextPath(r, centerToStart);
+            }
+        }
+    }
+
+    private static void diagPath_move(Spot corner1, Path diagFrom5, Spot corner2, Path diagFrom10, Spot corner3, Path diagFrom15, Spot corner4, Path diagFrom20) {
+        for (YutResult r : YutResult.values()) {
+            if (r != YutResult.BACKDO) {
+                corner1.addNextPath(r, diagFrom5);
+                corner2.addNextPath(r, diagFrom10);
+                corner3.addNextPath(r, diagFrom15);
+                corner4.addNextPath(r, diagFrom20);
+            }
+        }
+    }
+
+    private static void mainPath_move(Path mainPath) {
+        for (int i = 0; i < mainPath.getSpots().size() - 1; i++) {
+            Spot cur = mainPath.getSpots().get(i);
+            Spot nxt = mainPath.getSpots().get(i + 1);
+            cur.addNextSpot(YutResult.DO, nxt);
+        }
+    }
+
+
+    private static void left_top_Spots(List<Spot> spots, Spot left_top1, Spot left_top2, Spot left_top3, Spot left_top4) {
+        spots.add(left_top1);
+        spots.add(left_top2);
+        spots.add(left_top3);
+        spots.add(left_top4);
+    }
+
+    private static void top_Spots(List<Spot> spots, Spot top1, Spot top2, Spot top3, Spot top4) {
+        spots.add(top1);
+        spots.add(top2);
+        spots.add(top3);
+        spots.add(top4);
+    }
+
+    private static void right_top_Spots(List<Spot> spots, Spot right_top1, Spot right_top2, Spot right_top3, Spot right_top4) {
+        spots.add(right_top1);
+        spots.add(right_top2);
+        spots.add(right_top3);
+        spots.add(right_top4);
+    }
+
+    private static void right_bottom_Spots(List<Spot> spots, Spot right_bottom1, Spot right_bottom2, Spot right_bottom3, Spot right_bottom4) {
+        spots.add(right_bottom1);
+        spots.add(right_bottom2);
+        spots.add(right_bottom3);
+        spots.add(right_bottom4);
+    }
+
+    private static void bottom_Spots(List<Spot> spots, Spot bottom1, Spot bottom2, Spot bottom3, Spot bottom4) {
+        spots.add(bottom1);
+        spots.add(bottom2);
+        spots.add(bottom3);
+        spots.add(bottom4);
+    }
+
+    private static void left_bottom_Spots(List<Spot> spots, Spot left_bottom1, Spot left_bottom2, Spot left_bottom3, Spot left_bottom4) {
+        spots.add(left_bottom1);
+        spots.add(left_bottom2);
+        spots.add(left_bottom3);
+        spots.add(left_bottom4);
+    }
+
+
     private static Path getCenterToStart(Spot center, Spot diag6_2, Spot diag6_1, Spot startSpot, Spot finishSpot, List<Path> paths) {
         Path centerToStart = new Path("centerToStart", true);
         centerToStart.addSpot(center);    // 30
@@ -239,10 +311,11 @@ public class HexagonBoardLayoutStrategy implements BoardLayoutStrategy {
         spots.add(finishSpot);
     }
     @Override
-    public Board createBoard() {
+    public LayoutResult createLayout() {
         List<Spot> spots = new ArrayList<>();
         List<Line> lines = new ArrayList<>();
         List<Path> paths = new ArrayList<>();
+        Map<Spot,Point> spotPositions = new HashMap<>();
 
         // 중심점과 화면 크기 설정
         int startX = 300;
@@ -256,110 +329,122 @@ public class HexagonBoardLayoutStrategy implements BoardLayoutStrategy {
         int centerY = startY - height / 2;
 
         // 출발/도착 지점을 포함한 모서리 지점 (더 크게 표시)
-        Spot startSpot = new Spot(0, new Point(startX, startY), true, true, false);
-        Spot corner1 = new Spot(5, new Point(startX + horizontalLineWidth, startY), true, false, false);
-        Spot corner2 = new Spot(10, new Point(startX + horizontalLineWidth * 3 / 2, startY - height / 2), true, false, false);
-        Spot corner3 = new Spot(15, new Point(startX + horizontalLineWidth, startY - height), true, false, false);
-        Spot corner4 = new Spot(20, new Point(startX, startY - height), true, false, false);
-        Spot corner5 = new Spot(25, new Point(startX - horizontalLineWidth / 2, startY - height / 2), true, false, false);
-        Spot center = new Spot(30, new Point(centerX, centerY), true, false, false);
+        Spot startSpot = new Spot(0, true, true, false);
+        spotPositions.put(startSpot, new Point(startX, startY));
+        Spot corner1 = new Spot(5, true, false, false);
+        spotPositions.put(corner1,new Point(startX + horizontalLineWidth, startY));
+        Spot corner2 = new Spot(10, true, false, false);
+        spotPositions.put(corner2, new Point(startX + horizontalLineWidth * 3 / 2, startY - height / 2));
+        Spot corner3 = new Spot(15, true, false, false);
+        spotPositions.put(corner3, new Point(startX + horizontalLineWidth, startY - height));
+        Spot corner4 = new Spot(20, true, false, false);
+        spotPositions.put(corner4, new Point(startX, startY - height));
+        Spot corner5 = new Spot(25, true, false, false);
+        spotPositions.put(corner5,new Point(startX - horizontalLineWidth / 2, startY - height / 2));
+        Spot center = new Spot(30, true, false, false);
+        spotPositions.put(center, new Point(centerX, centerY));
 
-        Spot finishSpot = new Spot(43, new Point(startX - 65, startY), false, false, true);
+        Spot finishSpot = new Spot(43, false, false, true);
+        spotPositions.put(finishSpot,new Point(startX - 65, startY));
 
         main_Spots(spots, startSpot, corner1, corner2, corner3, corner4, corner5, center, finishSpot);
 
         // 아랫 변
-        Spot bottom1 = new Spot(1, new Point(startX + horizontalLineGrid, startY), false, false, false);
-        Spot bottom2 = new Spot(2, new Point(startX + horizontalLineGrid * 2, startY), false, false, false);
-        Spot bottom3 = new Spot(3, new Point(startX + horizontalLineGrid * 3, startY), false, false, false);
-        Spot bottom4 = new Spot(4, new Point(startX + horizontalLineGrid * 4, startY), false, false, false);
+        Spot bottom1 = new Spot(1, false, false, false);
+        spotPositions.put(bottom1,new Point(startX + horizontalLineGrid, startY));
+        Spot bottom2 = new Spot(2, false, false, false);
+        spotPositions.put(bottom2, new Point(startX + horizontalLineGrid * 2, startY));
+        Spot bottom3 = new Spot(3, false, false, false);
+        spotPositions.put(bottom3, new Point(startX + horizontalLineGrid * 3, startY));
+        Spot bottom4 = new Spot(4, false, false, false);
+        spotPositions.put(bottom4,new Point(startX + horizontalLineGrid * 4, startY));
 
-        spots.add(bottom1);
-        spots.add(bottom2);
-        spots.add(bottom3);
-        spots.add(bottom4);
+        bottom_Spots(spots, bottom1, bottom2, bottom3, bottom4);
 
         // 오른쪽 + 아래쪽 변
         int heightGrid = height / 2 / 5;
         int widthGrid = horizontalLineWidth / 2 / 5;
-        Spot right_bottom1 = new Spot(6, new Point(startX + horizontalLineWidth + widthGrid, startY - heightGrid), false, false, false);
-        Spot right_bottom2 = new Spot(7, new Point(startX + horizontalLineWidth + widthGrid * 2, startY - heightGrid * 2), false, false, false);
-        Spot right_bottom3 = new Spot(8, new Point(startX + horizontalLineWidth + widthGrid * 3, startY - heightGrid * 3), false, false, false);
-        Spot right_bottom4 = new Spot(9, new Point(startX + horizontalLineWidth + widthGrid * 4, startY - heightGrid * 4), false, false, false);
 
-        spots.add(right_bottom1);
-        spots.add(right_bottom2);
-        spots.add(right_bottom3);
-        spots.add(right_bottom4);
+        Spot right_bottom1 = new Spot(6, false, false, false);
+        spotPositions.put(right_bottom1, new Point(startX + horizontalLineWidth + widthGrid, startY - heightGrid));
+        Spot right_bottom2 = new Spot(7, false, false, false);
+        spotPositions.put(right_bottom2,new Point(startX + horizontalLineWidth + widthGrid * 2, startY - heightGrid * 2));
+        Spot right_bottom3 = new Spot(8, false, false, false);
+        spotPositions.put(right_bottom3,new Point(startX + horizontalLineWidth + widthGrid * 3, startY - heightGrid * 3));
+        Spot right_bottom4 = new Spot(9, false, false, false);
+        spotPositions.put(right_bottom4,new Point(startX + horizontalLineWidth + widthGrid * 4, startY - heightGrid * 4));
 
         // 오른쪽 + 위쪽 변
-        Spot right_top1 = new Spot(11, new Point(startX + horizontalLineWidth + widthGrid * 4, startY - height / 2 - heightGrid), false, false, false);
-        Spot right_top2 = new Spot(12, new Point(startX + horizontalLineWidth + widthGrid * 3, startY - height / 2 - heightGrid * 2), false, false, false);
-        Spot right_top3 = new Spot(13, new Point(startX + horizontalLineWidth + widthGrid * 2, startY - height / 2 - heightGrid * 3), false, false, false);
-        Spot right_top4 = new Spot(14, new Point(startX + horizontalLineWidth + widthGrid, startY - height / 2 - heightGrid * 4), false, false, false);
-
-        spots.add(right_top1);
-        spots.add(right_top2);
-        spots.add(right_top3);
-        spots.add(right_top4);
+        Spot right_top1 = new Spot(11, false, false, false);
+        spotPositions.put(right_top1,new Point(startX + horizontalLineWidth + widthGrid * 4, startY - height / 2 - heightGrid));
+        Spot right_top2 = new Spot(12, false, false, false);
+        spotPositions.put(right_top2,new Point(startX + horizontalLineWidth + widthGrid * 3, startY - height / 2 - heightGrid * 2));
+        Spot right_top3 = new Spot(13, false, false, false);
+        spotPositions.put(right_top3, new Point(startX + horizontalLineWidth + widthGrid * 2, startY - height / 2 - heightGrid * 3));
+        Spot right_top4 = new Spot(14, false, false, false);
+        spotPositions.put(right_top4, new Point(startX + horizontalLineWidth + widthGrid, startY - height / 2 - heightGrid * 4));
 
         // 윗 변
-        Spot top1 = new Spot(16, new Point(startX + horizontalLineGrid * 4, startY - height), false, false, false);
-        Spot top2 = new Spot(17, new Point(startX + horizontalLineGrid * 3, startY - height), false, false, false);
-        Spot top3 = new Spot(18, new Point(startX + horizontalLineGrid * 2, startY - height), false, false, false);
-        Spot top4 = new Spot(19, new Point(startX + horizontalLineGrid, startY - height), false, false, false);
-
-        spots.add(top1);
-        spots.add(top2);
-        spots.add(top3);
-        spots.add(top4);
+        Spot top1 = new Spot(16, false, false, false);
+        spotPositions.put(top1, new Point(startX + horizontalLineGrid * 4, startY - height));
+        Spot top2 = new Spot(17, false, false, false);
+        spotPositions.put(top2,new Point(startX + horizontalLineGrid * 3, startY - height));
+        Spot top3 = new Spot(18, false, false, false);
+        spotPositions.put(top3,new Point(startX + horizontalLineGrid * 2, startY - height));
+        Spot top4 = new Spot(19, false, false, false);
+        spotPositions.put(top4,new Point(startX + horizontalLineGrid, startY - height));
 
         // // 왼쪽 + 위쪽 변
-        Spot left_top1 = new Spot(21, new Point(startX - widthGrid, startY - height / 2 - heightGrid * 4), false, false, false);
-        Spot left_top2 = new Spot(22, new Point(startX - widthGrid * 2, startY - height / 2 - heightGrid * 3), false, false, false);
-        Spot left_top3 = new Spot(23, new Point(startX - widthGrid * 3, startY - height / 2 - heightGrid * 2), false, false, false);
-        Spot left_top4 = new Spot(24, new Point(startX - widthGrid * 4, startY - height / 2 - heightGrid), false, false, false);
-
-        spots.add(left_top1);
-        spots.add(left_top2);
-        spots.add(left_top3);
-        spots.add(left_top4);
+        Spot left_top1 = new Spot(21, false, false, false);
+        spotPositions.put(left_top1,new Point(startX - widthGrid, startY - height / 2 - heightGrid * 4));
+        Spot left_top2 = new Spot(22, false, false, false);
+        spotPositions.put(left_top2,new Point(startX - widthGrid * 2, startY - height / 2 - heightGrid * 3));
+        Spot left_top3 = new Spot(23, false, false, false);
+        spotPositions.put(left_top3, new Point(startX - widthGrid * 3, startY - height / 2 - heightGrid * 2));
+        Spot left_top4 = new Spot(24, false, false, false);
+        spotPositions.put(left_top4, new Point(startX - widthGrid * 4, startY - height / 2 - heightGrid));
 
         // // 왼쪽 + 아래쪽 변
-        Spot left_bottom1 = new Spot(26, new Point(startX - widthGrid * 4, startY - heightGrid * 4), false, false, false);
-        Spot left_bottom2 = new Spot(27, new Point(startX - widthGrid * 3, startY - heightGrid * 3), false, false, false);
-        Spot left_bottom3 = new Spot(28, new Point(startX - widthGrid * 2, startY - heightGrid * 2), false, false, false);
-        Spot left_bottom4 = new Spot(29, new Point(startX - widthGrid, startY - heightGrid), false, false, false);
+        Spot left_bottom1 = new Spot(26, false, false, false);
+        spotPositions.put(left_bottom1, new Point(startX - widthGrid * 4, startY - heightGrid * 4));
+        Spot left_bottom2 = new Spot(27, false, false, false);
+        spotPositions.put(left_bottom2, new Point(startX - widthGrid * 3, startY - heightGrid * 3));
+        Spot left_bottom3 = new Spot(28, false, false, false);
+        spotPositions.put(left_bottom3, new Point(startX - widthGrid * 2, startY - heightGrid * 2));
+        Spot left_bottom4 = new Spot(29, false, false, false);
+        spotPositions.put(left_bottom4, new Point(startX - widthGrid, startY - heightGrid));
 
-        spots.add(left_bottom1);
-        spots.add(left_bottom2);
-        spots.add(left_bottom3);
-        spots.add(left_bottom4);
+        // 대각선
+        Spot diag1_1 = new Spot(31, false, false, false);
+        spotPositions.put(diag1_1, new Point(startX + horizontalLineWidth - 65, startY - 100));
+        Spot diag1_2 = new Spot(32, false, false, false);
+        spotPositions.put(diag1_2, new Point(startX + horizontalLineWidth - 130, startY - 200));
+        Spot diag2_1 = new Spot(33, false, false, false);
+        spotPositions.put(diag2_1, new Point(startX + horizontalLineWidth / 2 + 280, startY - height / 2));
+        Spot diag2_2 = new Spot(34, false, false, false);
+        spotPositions.put(diag2_2, new Point(startX + horizontalLineWidth / 2 + 140, startY - height / 2));
+        Spot diag3_1 = new Spot(35, false, false, false);
+        spotPositions.put(diag3_1, new Point(startX + horizontalLineWidth - 65, startY - height + 100));
+        Spot diag3_2 = new Spot(36, false, false, false);
+        spotPositions.put(diag3_2, new Point(startX + horizontalLineWidth - 130, startY - height + 200));
+        Spot diag4_1 = new Spot(37, false, false, false);
+        spotPositions.put(diag4_1, new Point(startX + 65, startY - height + 100));
+        Spot diag4_2 = new Spot(38, false, false, false);
+        spotPositions.put(diag4_2, new Point(startX + 130, startY - height + 200));
+        Spot diag5_1 = new Spot(39, false, false, false);
+        spotPositions.put(diag5_1, new Point(startX + horizontalLineWidth / 2 - 280, startY - height / 2));
+        Spot diag5_2 = new Spot(40, false, false, false);
+        spotPositions.put(diag5_2, new Point(startX + horizontalLineWidth / 2 - 140, startY - height / 2));
+        Spot diag6_1 = new Spot(41, false, false, false);
+        spotPositions.put(diag6_1, new Point(startX + 65, startY - 100));
+        Spot diag6_2 = new Spot(42, false, false, false);
+        spotPositions.put(diag6_2, new Point(startX + 130, startY - 200));
 
-        // diag1 corner1 -> center
-        Spot diag1_1 = new Spot(31, new Point(startX + horizontalLineWidth - 65, startY - 100), false, false, false);
-        Spot diag1_2 = new Spot(32, new Point(startX + horizontalLineWidth - 130, startY - 200), false, false, false);
-
-        // diag2 corner2 -> center
-        Spot diag2_1 = new Spot(33, new Point(startX + horizontalLineWidth / 2 + 280, startY - height / 2), false, false, false);
-        Spot diag2_2 = new Spot(34, new Point(startX + horizontalLineWidth / 2 + 140, startY - height / 2), false, false, false);
-
-        // diag3 corner3 -> center
-        Spot diag3_1 = new Spot(35, new Point(startX + horizontalLineWidth - 65, startY - height + 100), false, false, false);
-        Spot diag3_2 = new Spot(36, new Point(startX + horizontalLineWidth - 130, startY - height + 200), false, false, false);
-
-        // diag4 corner4 -> center
-        Spot diag4_1 = new Spot(37, new Point(startX + 65, startY - height + 100), false, false, false);
-        Spot diag4_2 = new Spot(38, new Point(startX + 130, startY - height + 200), false, false, false);
-
-        // diag5 corner5 -> center
-        Spot diag5_1 = new Spot(39, new Point(startX + horizontalLineWidth / 2 - 280, startY - height / 2), false, false, false);
-        Spot diag5_2 = new Spot(40, new Point(startX + horizontalLineWidth / 2 - 140, startY - height / 2), false, false, false);
-
-        // diag6 start -> center
-        Spot diag6_1 = new Spot(41, new Point(startX + 65, startY - 100), false, false, false);
-        Spot diag6_2 = new Spot(42, new Point(startX + 130, startY - 200), false, false, false);
-
+        right_bottom_Spots(spots, right_bottom1, right_bottom2, right_bottom3, right_bottom4);
+        right_top_Spots(spots, right_top1, right_top2, right_top3, right_top4);
+        top_Spots(spots, top1, top2, top3, top4);
+        left_top_Spots(spots, left_top1, left_top2, left_top3, left_top4);
+        left_bottom_Spots(spots, left_bottom1, left_bottom2, left_bottom3, left_bottom4);
         diag_Spots(spots, diag1_1, diag1_2, diag2_1, diag2_2, diag3_1, diag3_2, diag4_1, diag4_2, diag5_1, diag5_2, diag6_1, diag6_2);
 
         // 외곽 선 연결
@@ -393,31 +478,16 @@ public class HexagonBoardLayoutStrategy implements BoardLayoutStrategy {
 
 // ─── 4) nextSpot / nextPath 매핑 ───
 // 4-1) 외곽 메인 패스: DO 하나당 한 칸씩 진행
-        for (int i = 0; i < mainPath.getSpots().size() - 1; i++) {
-            Spot cur = mainPath.getSpots().get(i);
-            Spot nxt = mainPath.getSpots().get(i + 1);
-            cur.addNextSpot(YutResult.DO, nxt);
-        }
+        mainPath_move(mainPath);
 
 // 4-2) 코너(5,10,15,20)에서 DO~MO 시 중앙선 진입
-        for (YutResult r : YutResult.values()) {
-            if (r != YutResult.BACKDO) {
-                corner1.addNextPath(r, diagFrom5);
-                corner2.addNextPath(r, diagFrom10);
-                corner3.addNextPath(r, diagFrom15);
-                corner4.addNextPath(r, diagFrom20);
-            }
-        }
+        diagPath_move(corner1, diagFrom5, corner2, diagFrom10, corner3, diagFrom15, corner4, diagFrom20);
 
 // 4-3) 중앙(30)에서 DO~MO 시 centerToStart 진입
-        for (YutResult r : YutResult.values()) {
-            if (r != YutResult.BACKDO) {
-                center.addNextPath(r, centerToStart);
-            }
-        }
+        centerPath_move(center, centerToStart);
 
-
-        return new Board(BoardType.PENTAGON, spots, lines, paths);
+        Board board = new Board(BoardType.HEXAGON, spots, lines, paths, spotPositions);
+        return new LayoutResult(board, spotPositions, lines);
     }
 
 
