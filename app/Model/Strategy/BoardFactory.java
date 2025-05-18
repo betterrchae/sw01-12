@@ -9,20 +9,12 @@ import app.Model.Enum.BoardType;
  */
 public class BoardFactory {
     public static Board createBoard(BoardType type) {
-        BoardLayoutStrategy strategy;
-        switch (type) {
-            case SQUARE:
-                strategy = new SquareBoardLayoutStrategy();
-                break;
-//            case PENTAGON:
-//                strategy = new PentagonBoardLayoutStrategy();
-//                break;
-//            case HEXAGON:
-//                strategy = new HexagonBoardLayoutStrategy();
-//                break;
-            default:
-                throw new IllegalArgumentException("Unsupported board type: " + type);
-        }
+        BoardLayoutStrategy strategy = switch (type) {
+            case SQUARE -> new SquareBoardLayoutStrategy();
+            case PENTAGON -> new PentagonBoardLayoutStrategy();
+            case HEXAGON -> new HexagonBoardLayoutStrategy();
+            default -> throw new IllegalArgumentException("Unsupported board type: " + type);
+        };
         // 레이아웃 결과에서 Board 객체만 추출
         return strategy.createLayout().getBoard();
     }

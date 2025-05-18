@@ -91,7 +91,7 @@ public class Board {
         }
 
         // 이미 도착한 말은 더 이상 이동할 수 없음
-        if (currentSpot.isFinish()) {
+        if (horse.isFinished()) {
             return null;
         }
 

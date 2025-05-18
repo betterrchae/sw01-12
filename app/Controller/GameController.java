@@ -6,7 +6,9 @@ import app.Model.Enum.YutResult;
 import app.Model.Game;
 import app.Model.Horse.Horse;
 import app.presentation.view.GameView;
+import app.presentation.view.JavaFXGameView;
 import app.presentation.view.SwingGameView;
+import javafx.application.Platform;
 
 import java.util.List;
 
@@ -24,6 +26,10 @@ public class GameController {
             ((SwingGameView) view).setController(this);
         }
 
+        if (view instanceof JavaFXGameView) {
+            ((JavaFXGameView) view).setController(this);
+        }
+
         // 게임 이벤트 리스너 등록
         for (GameEventType type : GameEventType.values()) {
             game.addEventListener(type, view);
@@ -39,8 +45,10 @@ public class GameController {
 
     public void setupGame(int playerCount, int horseCount, BoardType boardType) {
         game.setupGame(playerCount, horseCount, boardType);
-        view.updateBoard(game.getBoard());
-        view.updatePlayers(game.getPlayers());
+        runOnUIThread(() -> {
+            view.updateBoard(game.getBoard());
+            view.updatePlayers(game.getPlayers());
+        });
         hasThrownYut = false; // 새 게임 시작시 초기화
     }
 
@@ -56,7 +64,7 @@ public class GameController {
                 // 빽도로 인해 턴이 넘어가면 hasThrownYut이 자동으로 false로 초기화됨
             }
         } else {
-            view.showNotification("이미 윷을 던졌습니다. 말을 이동시켜야 합니다.");
+            runOnUIThread(() -> view.showNotification("이미 윷을 던졌습니다. 말을 이동시켜야 합니다."));
         }
     }
 
@@ -65,47 +73,68 @@ public class GameController {
         List<YutResult> available = game.getCurrentResults();
         if (available.isEmpty()) {
             // (옵션) 선택지 자체가 없으면 사용자에게 알림
-            view.showNotification("사용 가능한 윷 결과가 없습니다.");
+            runOnUIThread(() -> view.showNotification("사용 가능한 윷 결과가 없습니다."));
             return;
         }
 
         // 2) View에 다이얼로그 호출을 위임
-        YutResult selected = view.promptYutSelection(available);
-        if (selected == null) {
-            // 취소했으면 아무 작업도 하지 않음
-            return;
-        }
+        runOnUIThread(() -> {
+            YutResult selected = view.promptYutSelection(available);
+            if (selected == null) {
+                // 취소했으면 아무 작업도 하지 않음
+                return;
+            }
 
-        // 3) 선택된 결과로 말 이동
-        boolean moved = game.moveHorse(horse, selected);
+            // 3) 선택된 결과로 말 이동
+            boolean moved = game.moveHorse(horse, selected);
 
-        // 4) 화면 갱신
-        view.updateBoard(game.getBoard());
-        view.updatePlayers(game.getPlayers());
+            // 4) 화면 갱신
+            view.updateBoard(game.getBoard());
+            view.updatePlayers(game.getPlayers());
 
-        // 5) 추가 던지기 가능 시 상태 초기화
-        if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
-            hasThrownYut = false;
-        }
+            // 5) 추가 던지기 가능 시 상태 초기화
+            if (moved && game.getCurrentResults().isEmpty() && game.canThrowAgain()) {
+                hasThrownYut = false;
+            }
+        });
     }
 
 
     public void handleRestartGame() {
         game.restart();
         hasThrownYut = false;
-        view.showSetupDialog();
+        runOnUIThread(view::showSetupDialog);
     }
 
     public void handleExitGame() {
-        view.close();
-        System.exit(0);
+        if (view instanceof JavaFXGameView) {
+            view.close();
+            Platform.exit();
+        } else {
+            view.close();
+            System.exit(0);
+        }
     }
 
     public void initializeGame() {
-        // 뷰 초기화
-        view.initialize();
+        runOnUIThread(() -> {
+            // 뷰 초기화
+            view.initialize();
 
-        // 게임 설정 다이얼로그 표시
-        view.showSetupDialog();
+            // 게임 설정 다이얼로그 표시
+            view.showSetupDialog();
+        });
+    }
+
+    private void runOnUIThread(Runnable action) {
+        if (view instanceof JavaFXGameView) {
+            if (Platform.isFxApplicationThread()) {
+                action.run();
+            } else {
+                Platform.runLater(action);
+            }
+        } else {
+            action.run();
+        }
     }
 }

@@ -141,7 +141,7 @@ public class Game {
         // 빽도인 경우, 이미 보드 위에 있는 말이 있는지 확인
         for (Horse horse : currentPlayer.getHorses()) {
             // 말이 보드 위에 있고, 시작 지점이 아니면 이동 가능
-            if (horse.getCurrentSpot() != null && !horse.getCurrentSpot().isStart() && !horse.isFinished()) {
+            if (horse.getCurrentSpot() != null && !horse.isFinished()) {
                 return true;
             }
         }

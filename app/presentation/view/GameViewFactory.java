@@ -1,14 +1,16 @@
 package app.presentation.view;
 
+import javafx.stage.Stage;
+
 public class GameViewFactory {
     public static GameView createGameView(String uiType) {
-        switch (uiType.toLowerCase()) {
-            case "swing":
-                return new SwingGameView();
-            case "javafx":
-//                return new JavaFXGameView(fxStage);
-            default:
-                throw new IllegalArgumentException("Unknown UI type: " + uiType);
-        }
+        return switch (uiType.toLowerCase()) {
+            case "swing" -> new SwingGameView();
+            case "javafx" -> {
+                Stage fxStage = new Stage();
+                yield new JavaFXGameView(fxStage);
+            }
+            default -> throw new IllegalArgumentException("Unknown UI type: " + uiType);
+        };
     }
 }
