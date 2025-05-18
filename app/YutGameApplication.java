@@ -11,9 +11,8 @@ import java.util.Scanner;
 
 public class YutGameApplication {
     public static void main(String[] args) {
-        // UI 타입 설정 (기본값: Swing)
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         System.out.print("UI 타입을 입력하세요 (swing 또는 javafx): ");
         String uiType = scanner.nextLine().trim().toLowerCase();
 
