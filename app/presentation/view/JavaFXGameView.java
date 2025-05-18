@@ -73,7 +73,7 @@ public class JavaFXGameView implements GameView {
             randomButton.setOnAction(e -> controller.handleYutThrow(true, null));
 
             ComboBox<YutResult> comboBox = new ComboBox<>(FXCollections.observableArrayList(YutResult.values()));
-            comboBox.setValue(YutResult.BACKDO);
+            comboBox.getSelectionModel().selectFirst();
 
             Button specificButton = new Button("지정 윷 던지기");
             specificButton.setOnAction(e -> controller.handleYutThrow(false, comboBox.getValue()));
