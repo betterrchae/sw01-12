@@ -197,7 +197,9 @@ public class JavaFXGameView implements GameView {
                 playerBox.getChildren().add(status);
 
                 if (p == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS && !game.getCurrentResults().isEmpty()) {
-                    HBox buttons = new HBox(5);
+                    FlowPane buttons = new FlowPane();
+                    buttons.setHgap(5);
+                    buttons.setVgap(5);
                     for (Horse h : p.getHorses()) {
                         if (!h.isFinished()) {
                             Button b = new Button("말 " + (h.getId() + 1));
