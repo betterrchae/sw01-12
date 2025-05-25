@@ -1,37 +1,40 @@
-package app.View;
-
-import javax.swing.*;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package app.presentation.view;
 
 import app.Controller.GameController;
+import app.Model.Board;
 import app.Model.Enum.BoardType;
 import app.Model.Enum.GameState;
 import app.Model.Enum.YutResult;
 import app.Model.Event.GameEvent;
-import app.Model.Board;
 import app.Model.Game;
 import app.Model.Horse.Horse;
 import app.Model.Line;
 import app.Model.Player.Player;
 import app.Model.Spot;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * Swing 기반 게임 뷰
+ */
 public class SwingGameView implements GameView {
     private static final Logger logger = Logger.getLogger(SwingGameView.class.getName());
+    private final Map<Horse, Point> horsePositions;
     private JFrame frame;
     private BoardPanel boardPanel;
     private JPanel playerPanel;
     private GameController controller;
     private Board board;
     private List<Player> players;
-    private final Map<Horse, Point> horsePositions;
 
     public SwingGameView() {
         this.horsePositions = new HashMap<>();
@@ -40,11 +43,10 @@ public class SwingGameView implements GameView {
 
     @Override
     public void initialize() {
-        // Swing UI 초기화
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error occurred while doing something", e);
+            logger.log(Level.SEVERE, "UI 초기화 오류", e);
         }
 
         frame = new JFrame("윷놀이 게임");
@@ -52,42 +54,32 @@ public class SwingGameView implements GameView {
         frame.setSize(1200, 1000);
         frame.setLayout(new BorderLayout());
 
-        // 보드 패널
         boardPanel = new BoardPanel();
         boardPanel.setBackground(new Color(240, 240, 200));
         boardPanel.addMouseListener(new BoardClickListener());
 
-        JScrollPane scrollPane = new JScrollPane(boardPanel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane = new JScrollPane(boardPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // 컨트롤 패널
         JPanel controlPanel = new JPanel();
         controlPanel.setBorder(BorderFactory.createTitledBorder("컨트롤"));
 
         JButton randomButton = new JButton("랜덤 윷 던지기");
         randomButton.addActionListener(e -> {
-            if (controller != null) {
-                controller.handleYutThrow(true, null);
-            }
+            if (controller != null) controller.handleYutThrow(true, null);
         });
 
-        JComboBox<YutResult> specificYutCombo = new JComboBox<>(YutResult.values());
+        JComboBox<YutResult> specificCombo = new JComboBox<>(YutResult.values());
         JButton specificButton = new JButton("지정 윷 던지기");
         specificButton.addActionListener(e -> {
-            if (controller != null) {
-                controller.handleYutThrow(false, (YutResult) specificYutCombo.getSelectedItem());
-            }
+            if (controller != null) controller.handleYutThrow(false, (YutResult) specificCombo.getSelectedItem());
         });
 
         controlPanel.add(randomButton);
-        controlPanel.add(specificYutCombo);
+        controlPanel.add(specificCombo);
         controlPanel.add(specificButton);
-
         frame.add(controlPanel, BorderLayout.SOUTH);
 
-        // 플레이어 패널
         playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
         playerPanel.setBorder(BorderFactory.createTitledBorder("플레이어"));
@@ -109,33 +101,22 @@ public class SwingGameView implements GameView {
 
     private void updateHorsePositions() {
         horsePositions.clear();
+        if (board == null || players == null) return;
 
-        if (board == null || players == null) {
-            return;
-        }
-
-        // 각 플레이어의 말 위치 업데이트
         for (Player player : players) {
             for (Horse horse : player.getHorses()) {
-                if (horse.isFinished()) {
-                    continue;
-                }
+                if (horse.isFinished()) continue;
                 Spot spot = horse.getCurrentSpot();
                 if (spot != null) {
-                    Point basePosition = spot.getPosition();
-
-                    // 같은 칸에 여러 말이 있을 경우 약간 위치 조정
-                    List<Horse> horsesAtSpot = board.getHorsesAtSpot(spot);
-                    int index = horsesAtSpot.indexOf(horse);
-
-                    if (index > 0) {
-                        // 말을 약간 어긋나게 배치
-                        int offsetX = (index % 2) * 10;
-                        int offsetY = (index / 2) * 10;
-                        basePosition = new Point(basePosition.x + offsetX, basePosition.y + offsetY);
+                    Point base = board.getSpotPosition(spot);
+                    List<Horse> at = board.getHorsesAtSpot(spot);
+                    int idx = at.indexOf(horse);
+                    if (idx > 0) {
+                        int ox = (idx % 2) * 10;
+                        int oy = (idx / 2) * 10;
+                        base = new Point(base.x + ox, base.y + oy);
                     }
-
-                    horsePositions.put(horse, basePosition);
+                    horsePositions.put(horse, base);
                 }
             }
         }
@@ -143,68 +124,50 @@ public class SwingGameView implements GameView {
 
     @Override
     public void updatePlayers(List<Player> players) {
-        if (players == null) {
-            System.err.println("Warning: updatePlayers called with null players list");
-            return;
-        }
-
+        if (players == null) return;
         this.players = new ArrayList<>(players);
 
-        // 플레이어 UI 업데이트
         playerPanel.removeAll();
+        Game game = controller.getGame();
+        for (Player p : players) {
+            JPanel info = new JPanel();
+            info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+            info.setBorder(BorderFactory.createLineBorder(p.getColor(), 2));
+            info.setBackground(new Color(250, 250, 250));
 
-        for (Player player : players) {
-            JPanel playerInfo = new JPanel();
-            playerInfo.setLayout(new BoxLayout(playerInfo, BoxLayout.Y_AXIS));
-            playerInfo.setBorder(BorderFactory.createLineBorder(player.getColor(), 2));
-            playerInfo.setBackground(new Color(250, 250, 250));
+            JLabel name = new JLabel(p.getName());
+            name.setForeground(p.getColor());
+            name.setFont(new Font("Arial", Font.BOLD, 14));
+            name.setAlignmentX(Component.CENTER_ALIGNMENT);
+            info.add(name);
 
-            JLabel nameLabel = new JLabel(player.getName());
-            nameLabel.setForeground(player.getColor());
-            nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
-            nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            playerInfo.add(nameLabel);
+            JLabel status = new JLabel("말: " + p.getFinishedHorseCount() + "/" + p.getHorses().size());
+            status.setAlignmentX(Component.CENTER_ALIGNMENT);
+            info.add(status);
 
-            JLabel horseLabel = new JLabel("말: " + player.getFinishedHorseCount() + "/" + player.getHorses().size());
-            horseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            playerInfo.add(horseLabel);
-
-            // 말 선택 버튼 추가
-            Game game = getGameFromController();
-            if (game != null && player == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS && !game.getCurrentResults().isEmpty()) {
-
-                JPanel horseButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                horseButtons.setBackground(new Color(250, 250, 250));
-
-                for (Horse horse : player.getHorses()) {
-                    if (!horse.isFinished()) {
-                        JButton horseButton = new JButton("말 " + (horse.getId() + 1));
-                        horseButton.addActionListener(e -> {
-                            if (controller != null) {
-                                controller.handleHorseSelection(horse);
-                            }
-                        });
-                        horseButtons.add(horseButton);
+            if (p == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS && !game.getCurrentResults().isEmpty()) {
+                JPanel buttons = new JPanel(new FlowLayout());
+                buttons.setBackground(new Color(250, 250, 250));
+                for (Horse h : p.getHorses()) {
+                    if (!h.isFinished()) {
+                        JButton b = new JButton("말 " + (h.getId() + 1));
+                        b.addActionListener(e -> controller.handleHorseSelection(h));
+                        buttons.add(b);
                     }
                 }
-
-                playerInfo.add(horseButtons);
+                info.add(buttons);
             }
-
-            playerPanel.add(playerInfo);
+            playerPanel.add(info);
             playerPanel.add(Box.createVerticalStrut(10));
         }
-
         playerPanel.revalidate();
         playerPanel.repaint();
-
-        // 말 위치 업데이트 및 보드 다시 그리기
         updateHorsePositions();
         boardPanel.repaint();
     }
 
     private Game getGameFromController() {
-        return (controller != null) ? controller.getGame() : null;
+        return controller.getGame();
     }
 
     @Override
@@ -278,9 +241,19 @@ public class SwingGameView implements GameView {
 
     @Override
     public void close() {
-        if (frame != null) {
-            frame.dispose();
-        }
+        if (frame != null) frame.dispose();
+    }
+
+    @Override
+    public YutResult promptYutSelection(List<YutResult> options) {
+        JComboBox<YutResult> combo = new JComboBox<>(options.toArray(new YutResult[0]));
+        int choice = JOptionPane.showConfirmDialog(frame, combo, "Select Yut Result", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        return choice == JOptionPane.OK_OPTION ? (YutResult) combo.getSelectedItem() : null;
+    }
+
+    @Override
+    public void showNotification(String msg) {
+        JOptionPane.showMessageDialog(frame, msg);
     }
 
     @Override
@@ -402,9 +375,6 @@ public class SwingGameView implements GameView {
         this.controller = controller;
     }
 
-    /**
-     * 보드 클릭 이벤트 처리
-     */
     private class BoardClickListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -433,92 +403,64 @@ public class SwingGameView implements GameView {
         }
     }
 
-    /**
-     * 윷놀이 보드를 그리는 커스텀 패널
-     */
     private class BoardPanel extends JPanel {
         public static final int SPOT_SIZE = 30;
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-
             if (board == null) {
                 g.setColor(Color.RED);
                 g.drawString("보드가 초기화되지 않았습니다.", 50, 50);
                 return;
             }
-
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            // 선 그리기
-            g2d.setColor(Color.BLACK);
-            g2d.setStroke(new BasicStroke(2.0f));
-
-            System.out.println(board.getLines());
-            for (Line line : board.getLines()) {
-                Point fromPos = line.getFrom().getPosition();
-                Point toPos = line.getTo().getPosition();
-                g2d.drawLine(fromPos.x, fromPos.y, toPos.x, toPos.y);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(Color.BLACK);
+            g2.setStroke(new BasicStroke(2));
+            for (Line ln : board.getLines()) {
+                Point a = board.getSpotPosition(ln.getFrom());
+                Point b = board.getSpotPosition(ln.getTo());
+                g2.drawLine(a.x, a.y, b.x, b.y);
             }
-
-            // 칸 그리기
-            for (Spot spot : board.getSpots()) {
-                Point pos = spot.getPosition();
-                int x = pos.x - SPOT_SIZE / 2;
-                int y = pos.y - SPOT_SIZE / 2;
-
-                if (spot.isCorner()) {
-                    // 모서리 칸은 다른 색상으로
-                    g2d.setColor(new Color(255, 200, 100));
-                    g2d.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                    g2d.setColor(Color.BLACK);
-                    g2d.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                } else if (spot.isStart()) {
-                    // 시작 칸
-                    g2d.setColor(new Color(100, 200, 100));
-                    g2d.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                    g2d.setColor(Color.BLACK);
-                    g2d.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                } else if (spot.isFinish()) {
-                    // 도착 칸
-                    g2d.setColor(new Color(100, 100, 255));
-                    g2d.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                    g2d.setColor(Color.BLACK);
-                    g2d.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
+            for (Spot sp : board.getSpots()) {
+                Point p = board.getSpotPosition(sp);
+                int x = p.x - SPOT_SIZE / 2, y = p.y - SPOT_SIZE / 2;
+                if (sp.isCorner()) {
+                    g2.setColor(new Color(255, 200, 100));
+                    g2.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                    g2.setColor(Color.BLACK);
+                    g2.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                } else if (sp.isStart()) {
+                    g2.setColor(new Color(100, 200, 100));
+                    g2.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                    g2.setColor(Color.BLACK);
+                    g2.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                } else if (sp.isFinish()) {
+                    g2.setColor(new Color(100, 100, 255));
+                    g2.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                    g2.setColor(Color.BLACK);
+                    g2.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
                 } else {
-                    // 일반 칸
-                    g2d.setColor(Color.WHITE);
-                    g2d.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
-                    g2d.setColor(Color.BLACK);
-                    g2d.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                    g2.setColor(Color.WHITE);
+                    g2.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
+                    g2.setColor(Color.BLACK);
+                    g2.drawOval(x, y, SPOT_SIZE, SPOT_SIZE);
                 }
-
-                // 칸 번호 표시
-                g2d.setColor(Color.BLACK);
-                g2d.drawString(String.valueOf(spot.getId()), pos.x - 5, pos.y + 5);
+                g2.setColor(Color.BLACK);
+                g2.drawString(String.valueOf(sp.getId()), p.x - 5, p.y + 5);
             }
-
-            // 말 그리기
-            for (Map.Entry<Horse, Point> entry : horsePositions.entrySet()) {
-                Horse horse = entry.getKey();
-                Point pos = entry.getValue();
-
-                // 말 크기는 칸보다 약간 작게
-                int horseSize = SPOT_SIZE - 6;
-                int x = pos.x - horseSize / 2;
-                int y = pos.y - horseSize / 2;
-
-                // 말 소유자의 색상으로 그리기
-                g2d.setColor(horse.getOwner().getColor());
-                g2d.fillRoundRect(x, y, horseSize, horseSize, 8, 8);
-                g2d.setColor(Color.BLACK);
-                g2d.drawRoundRect(x, y, horseSize, horseSize, 8, 8);
-
-                g2d.setColor(Color.WHITE);
-                g2d.drawString(String.valueOf(horse.getId() + 1), pos.x - 3, pos.y + 4);
-
+            for (Map.Entry<Horse, Point> e : horsePositions.entrySet()) {
+                Horse h = e.getKey();
+                Point p = e.getValue();
+                int size = SPOT_SIZE - 6;
+                int x = p.x - size / 2, y = p.y - size / 2;
+                g2.setColor(h.getOwner().getColor());
+                g2.fillRoundRect(x, y, size, size, 8, 8);
+                g2.setColor(Color.BLACK);
+                g2.drawRoundRect(x, y, size, size, 8, 8);
+                g2.setColor(Color.WHITE);
+                g2.drawString(String.valueOf(h.getId() + 1), p.x - 3, p.y + 4);
             }
         }
 
@@ -531,6 +473,5 @@ public class SwingGameView implements GameView {
         public Dimension getMinimumSize() {
             return new Dimension(800, 600);
         }
-
     }
 }

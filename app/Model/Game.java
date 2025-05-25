@@ -1,12 +1,5 @@
 package app.Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import app.Model.Enum.BoardType;
 import app.Model.Enum.GameEventType;
 import app.Model.Enum.GameState;
@@ -17,24 +10,27 @@ import app.Model.Event.GameEventManager;
 import app.Model.Horse.Horse;
 import app.Model.Horse.HorseGroup;
 import app.Model.Player.Player;
+import app.Model.Strategy.BoardFactory;
 import app.Model.Strategy.RandomYutThrowStrategy;
 import app.Model.Strategy.SpecificYutThrowStrategy;
-import app.View.BoardFactory;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 게임 클래스
  */
 public class Game {
     private final List<Player> players;
-    private Board board;
     private final Yut yut;
+    private final GameEventManager eventManager;
+    private final List<YutResult> currentResults;
+    private Board board;
     private Player currentPlayer;
     private int currentPlayerIndex;
     private GameState state;
-    private final GameEventManager eventManager;
-    private final List<YutResult> currentResults;
     private boolean canThrowAgain;
 
     public Game() {
@@ -145,7 +141,7 @@ public class Game {
         // 빽도인 경우, 이미 보드 위에 있는 말이 있는지 확인
         for (Horse horse : currentPlayer.getHorses()) {
             // 말이 보드 위에 있고, 시작 지점이 아니면 이동 가능
-            if (horse.getCurrentSpot() != null && !horse.getCurrentSpot().isStart() && !horse.isFinished()) {
+            if (horse.getCurrentSpot() != null && !horse.isFinished()) {
                 return true;
             }
         }

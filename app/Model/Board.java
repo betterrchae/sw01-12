@@ -1,14 +1,12 @@
 package app.Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import app.Model.Enum.BoardType;
 import app.Model.Enum.YutResult;
 import app.Model.Horse.Horse;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Board {
     private final BoardType type;
@@ -17,17 +15,22 @@ public class Board {
     private final List<Path> paths;
     private final Spot finishSpot;
     private final Map<Integer, List<Horse>> horsePositions;
+    private final Map<Spot, Point> spotPositions;
 
-    public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths) {
+
+    public Board(BoardType type, List<Spot> spots, List<Line> lines, List<Path> paths, Map<Spot, Point> spotPositions) {
         this.type = type;
         this.spots = new ArrayList<>(spots);
         this.lines = new ArrayList<>(lines);
         this.paths = new ArrayList<>(paths);
         this.horsePositions = new HashMap<>();
+        this.spotPositions = new HashMap<>(spotPositions);
 
         Spot finish = null;
         for (Spot spot : spots) {
-            if (spot.isFinish()) { finish = spot; }
+            if (spot.isFinish()) {
+                finish = spot;
+            }
         }
         this.finishSpot = finish;
 
@@ -45,6 +48,10 @@ public class Board {
                 }
             }
         }
+    }
+
+    public Point getSpotPosition(Spot spot) {
+        return spotPositions.get(spot);
     }
 
     public List<Spot> getSpots() {
@@ -84,7 +91,7 @@ public class Board {
         }
 
         // 이미 도착한 말은 더 이상 이동할 수 없음
-        if (currentSpot.isFinish()) {
+        if (horse.isFinished()) {
             return null;
         }
 
@@ -97,8 +104,7 @@ public class Board {
                 int index = currentPath.getSpots().indexOf(currentSpot);
                 if (index > 0) {
                     return currentPath.getSpots().get(index - 1);
-                }
-                else {
+                } else {
                     return null;
                 }
             }
