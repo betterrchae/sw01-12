@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+   id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+group = 'app'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+// JavaFX 모듈 (버전, OS별 classifier는 플러그인이 자동으로 처리)
+   implementation 'org.openjfx:javafx-base:20.0.2'
+   implementation 'org.openjfx:javafx-graphics:20.0.2'
+   implementation 'org.openjfx:javafx-controls:20.0.2'
+   implementation 'org.openjfx:javafx-fxml:20.0.2'
+}
+
+javafx {
+    version = "20.0.2"
+    modules = [ "javafx.controls", "javafx.fxml" ]
+}
+
+application {
+    mainClass = 'app.YutGameApplication'
+}
+
+test {
+    useJUnitPlatform()
+}

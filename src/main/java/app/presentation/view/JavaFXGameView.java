@@ -100,11 +100,13 @@ public class JavaFXGameView implements GameView {
 
     private void updateHorsePositions() {
         horsePositions.clear();
-        if (board == null || players == null) return;
+        if (board == null || players == null)
+            return;
 
         for (Player player : players) {
             for (Horse horse : player.getHorses()) {
-                if (horse.isFinished()) continue;
+                if (horse.isFinished())
+                    continue;
                 Spot spot = horse.getCurrentSpot();
                 if (spot != null) {
                     Point2D base = toPoint2D(board.getSpotPosition(spot));
@@ -134,7 +136,8 @@ public class JavaFXGameView implements GameView {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-            if (board == null) return;
+            if (board == null)
+                return;
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(2);
             for (Line line : board.getLines()) {
@@ -148,10 +151,14 @@ public class JavaFXGameView implements GameView {
                 double x = p.getX() - (double) SPOT_SIZE / 2;
                 double y = p.getY() - (double) SPOT_SIZE / 2;
 
-                if (spot.isCorner()) gc.setFill(Color.ORANGE);
-                else if (spot.isStart()) gc.setFill(Color.GREEN);
-                else if (spot.isFinish()) gc.setFill(Color.BLUE);
-                else gc.setFill(Color.WHITE);
+                if (spot.isCorner())
+                    gc.setFill(Color.ORANGE);
+                else if (spot.isStart())
+                    gc.setFill(Color.GREEN);
+                else if (spot.isFinish())
+                    gc.setFill(Color.BLUE);
+                else
+                    gc.setFill(Color.WHITE);
 
                 gc.fillOval(x, y, SPOT_SIZE, SPOT_SIZE);
                 gc.setStroke(Color.BLACK);
@@ -196,7 +203,8 @@ public class JavaFXGameView implements GameView {
                 Label status = new Label("말: " + p.getFinishedHorseCount() + "/" + p.getHorses().size());
                 playerBox.getChildren().add(status);
 
-                if (p == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS && !game.getCurrentResults().isEmpty()) {
+                if (p == game.getCurrentPlayer() && game.getState() == GameState.IN_PROGRESS
+                        && !game.getCurrentResults().isEmpty()) {
                     FlowPane buttons = new FlowPane();
                     buttons.setHgap(5);
                     buttons.setVgap(5);
@@ -218,7 +226,8 @@ public class JavaFXGameView implements GameView {
 
     private void handleCanvasClick(MouseEvent e) {
         Game game = controller.getGame();
-        if (game == null || game.getState() != GameState.IN_PROGRESS || game.getCurrentResults().isEmpty()) return;
+        if (game == null || game.getState() != GameState.IN_PROGRESS || game.getCurrentResults().isEmpty())
+            return;
 
         for (Map.Entry<Horse, Point2D> entry : horsePositions.entrySet()) {
             Horse horse = entry.getKey();
@@ -237,7 +246,8 @@ public class JavaFXGameView implements GameView {
     @Override
     public void showYutResult(YutResult result) {
         Platform.runLater(() -> {
-            String playerName = Optional.ofNullable(controller.getGame().getCurrentPlayer()).map(Player::getName).orElse("현재 플레이어");
+            String playerName = Optional.ofNullable(controller.getGame().getCurrentPlayer()).map(Player::getName)
+                    .orElse("현재 플레이어");
             new Alert(Alert.AlertType.INFORMATION, playerName + "의 윷 결과: " + result.getDisplayName()).showAndWait();
         });
     }
@@ -250,8 +260,10 @@ public class JavaFXGameView implements GameView {
             alert.setHeaderText(null);
             alert.setContentText(winner.getName() + "님이 승리했습니다! 새 게임을 시작하시겠습니까?");
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) controller.handleRestartGame();
-            else controller.handleExitGame();
+            if (result.isPresent() && result.get() == ButtonType.OK)
+                controller.handleRestartGame();
+            else
+                controller.handleExitGame();
         });
     }
 
@@ -297,7 +309,7 @@ public class JavaFXGameView implements GameView {
 
     @Override
     public YutResult promptYutSelection(List<YutResult> options) {
-        ChoiceDialog<YutResult> dialog = new ChoiceDialog<>(options.getFirst(), options);
+        ChoiceDialog<YutResult> dialog = new ChoiceDialog<>(options.get(0), options);
         dialog.setTitle("윷 선택");
         dialog.setContentText("결과를 선택하세요:");
         Optional<YutResult> result = dialog.showAndWait();
@@ -331,7 +343,8 @@ public class JavaFXGameView implements GameView {
 
     @Override
     public void onGameEvent(GameEvent event) {
-        if (event == null) return;
+        if (event == null)
+            return;
         try {
             switch (event.getType()) {
                 case GAME_SETUP:
@@ -405,18 +418,20 @@ public class JavaFXGameView implements GameView {
     }
 
     private void adjustCanvasSize() {
-        if (board == null) return;
+        if (board == null)
+            return;
 
         int maxX = 0;
         int maxY = 0;
         for (Spot spot : board.getSpots()) {
             java.awt.Point pt = board.getSpotPosition(spot);
-            if (pt.x > maxX) maxX = pt.x;
-            if (pt.y > maxY) maxY = pt.y;
+            if (pt.x > maxX)
+                maxX = pt.x;
+            if (pt.y > maxY)
+                maxY = pt.y;
         }
 
         canvas.setWidth(maxX + 100);
         canvas.setHeight(maxY + 100);
     }
 }
-
