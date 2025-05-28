@@ -10,10 +10,213 @@
  
 
 # UseCase Model
+## UseCase Text
 
+**Scope**
+Yut Game System
+
+**Level**
+User Goal Level
+
+**\<UseCase List\>**
+1. 게임 실행
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 원하는 설정값으로 윷 게임 진행
+    
+    System: 플레이어가 윷 게임을 진행할 수 있도록 게임 실행을 보장
+    
+    **Success Guarantee**
+    
+    1. 윷놀이 게임을 진행한다.
+    
+    **Main Success Scenario**
+    
+    1. UI 프레임워크 타입을 설정한다.
+    2. 보드 유형, 플레이어 수(2~4)와 말 수(2~5)를 선택한다.
+    3. 게임 실행 버튼을 누른다.
+    
+    **Extensions**
+    
+    1. 설정값을 설정하지 않은 경우: 게임이 실행되지 않는다.
+    
+2. 윷 던지기
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 윷 결과를 확인하고 게임을 진행
+    
+    System: 올바른 윷 결과 생성 및 플레이어에게 전달을 보장
+    
+    **Precondition**
+    
+    1. 게임이 진행 중이어야 한다.
+    
+    **Success Guarantee**
+    
+    1. 플레이어가 윷 결과를 사용할 수 있도록 윷 결과가 기록된다.
+    2. 윷, 모인 경우 윷 던지기 기회를 한번 더 제공한다.
+    
+    **Main Success Scenario**
+    
+    1. 지정 윷던지기, 랜덤 윷던지기 중 하나를 선택한다.
+    2. 윷던지기 버튼을 누른다.
+    3. 윷 결과가 표시된다.
+    4. 윷 결과가 저장된다.
+    
+    **Extensions**
+    
+    1. 윷 던지기 기회를 모두 사용한 경우: 말 선택 및 이동하는 단계로 넘어간다.
+    2. 보드에 나온 말이 없는 상태로 빽도가 나온 경우: 턴이 즉시 종료되고, 턴이 넘어간다.
+    
+3. 말 이동
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 윷 결과에 따라 말을 움직이고 모든 말을 완주
+    
+    System: 규칙에 맞게 플레이어가 원하는 대로 이동을 처리하고 게임 상태를 정확히 반영
+    
+    **Precondition**
+    
+    1. 윷을 던져 결과가 하나 이상 존재해야 한다.
+    
+    **Success Guarantee**
+    
+    1. 이동이 완료되면 사용한 윷 결과를 제거한다.
+    
+    **Main Success Scenario**
+    
+    1. 현재 턴의 플레이어가 말을 선택한다.
+    2. 이동에 사용할 윷 결과를 선택한다.
+    3. 말이 지정된 칸으로 이동한다.
+    
+    **Extensions**
+    
+    1. 해당 칸에 같은 팀 말이 있는 경우: 업기를 진행한다.
+    2. 해당 칸에 다른 팀 말이 있는 경우: 상대 말을 잡고 윷 던지기 기회를 한번 더 제공한다.
+    
+4. 승자 결정
+    
+    **Primary Actor**
+    
+    System
+    
+    **Stakeholders and Interests list**
+    
+    Player: 모든 말을 모두 완주시켜 승리
+    
+    System: 승자를 결정
+    
+    **Precondition**
+    
+    1. 한 플레이어가 자신의 모든 말을 완주한다.
+    
+    **Success Guarantee**
+    
+    1. 게임 재시작 또는 게임 종료 중 선택할 수 있도록 다이얼로그를 표시한다.
+    
+    **Main Success Scenario**
+    
+    1. 플레이어가 말 이동한 후 모든 말이 완주했는지 체크한다.
+    2. 모든 말이 완주했다면 해당 플레이어를 승리자로 판단하고 게임을 종료한다.
+    3. 다이얼로그를 통해 승리자를 표시한다.
+    
+    **Extensions**
+    
+    1. 게임 재시작을 누른 경우: 새로운 게임이 시작되고, 게임 설정 화면이 나타난다.
+    2. 게임 종료를 누른 경우: UI가 종료된다.
+5. 턴 전환
+    
+    **Primary Actor**
+    
+    System
+    
+    **Stakeholders and Interests list**
+    
+    Player: 자신의 차례가 제대로 돌아오길 원함
+    
+    System: 규칙에 따라 플레이어 턴을 정확히 전환
+    
+    **Precondition**
+    
+    1. 현재 플레이어의 윷 던지기 횟수가 남아있지 않다.
+    2. 현재 플레이어의 윷 결과 사용이 모두 완료되었다.
+    
+    **Success Guarantee**
+    
+    1. 다음 순번의 플레이어가 현재 플레이어로 설정된다.
+    
+    **Main Success Scenario**
+    
+    1. 현재 플레이어의 윷던지기 횟수가 모두 사용 됐는지 확인한다.
+    2. 사용하지 않은 윷 결과가 있는지 확인한다.
+    3. 조건을 만족하는 경우, 다음 플레이어에게 턴을 넘긴다.
+    4. 다이얼로그를 통해 턴이 넘어갔음을 알린다.
+    
+6. 게임 재시작
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 새로운 게임을 진행
+    
+    System: 기존 게임을 종료하고 새로운 게임 실행을 보장
+    
+    **Precondition**
+    
+    1. 승리자가 존재한다.
+    
+    **Main Success Scenario**
+    
+    1. 승리자가 나오고 게임이 끝난 상태에서 게임 재시작 버튼을 누른다.
+    2. 기존 게임을 초기화하고 새로운 게임의 설정창을 보여준다.
+    
+    **Extensions**
+    
+    1. 새로운 게임의 설정을 완료한 경우: 새로운 게임이 시작된다.
+    
+7. 게임 종료
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 게임을 종료
+    
+    System: 기존 게임을 종료하고 UI를 종료
+    
+    **Precondition**
+    
+    1. 승리자가 존재한다.
+    
+    **Main Success Scenario**
+    
+    1. 승리자가 나오고 게임이 끝난 상태에서 게임 종료 버튼을 누른다.
+    2. UI가 닫히며 프로그램이 종료된다.
+
+## UseCase Diagram
+![UseCaseDiagram](report_img/usecase_diagram.png)
 
 # 설계 및 구현 리포트
-
 
 ## 주요 구현 목표
 1. MVC 구조 적용
