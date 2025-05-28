@@ -404,10 +404,200 @@ JavaSwing으로 구현했던 윷놀이 게임을 기반으로 JavaFX 프레임�
 최종적으로 구현한 로직들을 테스트하기 위해 전체적인 테스트 코드를 작성하며 프로그램이 버그없이 요구사항에 맞게, 잘 동작하는지 테스트하였다.
 
 # 테스트 리포트
+### 1. Test 환경
+
+사용한 테스트 프레임워크: JUnit5
+
+개발환경
+
+- Java version 21.0.2
+- Gradle version 8.14.1
+
+### 2. Test 항목 및 시나리오
+
+## BoardTest
+
+| 테스트 메소드                         | 검증 포인트                                                            | JUnit Assertion 예시                                                         |
+| ------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **testGetSpotPosition**               | Spot ID에 매핑된 좌표(Point)를 올바르게 반환하는지                      | `assertEquals(new Point(10,0), board.getSpotPosition(s1));`                 |
+| **testUpdateAndGetHorsesAtSpot**      | - Spot에 말 배치 후 조회<br>- 말 완주 처리 시 보드에서 제거되는지      | `assertEquals(1, atS1.size());`<br>`assertTrue(...isEmpty());`              |
+| **testCalculateNextSpot_DO_and_BACKDO** | - DO 이동: 다음 칸으로<br>- BACKDO 이동: 이전 칸으로<br>- 시작 칸 BACKDO 시 null 반환 | `assertEquals(s2, nextFromS1);`<br>`assertNull(...);`                        |
+| **testMoveAlongMainPath_multipleSteps** | - GAE(2) 이동 시 여러 칸 건너뛰어 도착<br>- 경로 끝 넘으면 도착 칸 반환 | `assertEquals(s2, twoSteps);`<br>`assertEquals(s2, overshoot);`             |
+
+![BoardTest](report_img/1.png)
+
+✅ BoardTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## GameEventManagerTest
+
+| 테스트 메소드                                 | 검증 포인트                                               | JUnit Assertion 예시            |
+| --------------------------------------------- | ---------------------------------------------------------- | ------------------------------- |
+| **addListenerAndFireEvent_shouldCallListener** | 지정 이벤트 타입 리스너 등록 후 `fireEvent` 시 해당 리스너 호출 여부 | `assertTrue(called.get());`     |
+| **duplicateListener_shouldBeRegisteredOnce**   | 동일 리스너 중복 등록 시 한 번만 호출되는지 (간접 검증)    | `assertTrue(called.get());`     |
+
+![GameEventManagerTest](report_img/2.png)
+
+✅ GameEventManagerTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## GameTest
+
+| 테스트 메소드                                        | 검증 포인트                                                                                   | JUnit Assertion 예시                                                                                 |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **setupGame_throwsOnTooFewPlayers**                 | 플레이어 수가 2 미만일 때 `IllegalArgumentException` 발생 여부                                  | `assertThrows(IllegalArgumentException.class, () -> …);`                                             |
+| **testSetupGame_validParameters_initializesCorrectly** | 유효 파라미터로 `setupGame` 호출 시 내부 상태(플레이어 수, 상태, 보드, 윷결과 리스트)가 올바른지 확인 | `assertEquals(2, players.size());`<br>`assertEquals(IN_PROGRESS, game.getState());`                 |
+| **testThrowYut_specificResult_addedToCurrentResults** | 지정 던지기 모드에서 결과가 `currentResults` 에 추가되고 `canThrowAgain()` 상태가 올바른지 검증   | `assertEquals(YutResult.DO, result);`<br>`assertFalse(game.canThrowAgain());`                       |
+| **testThrowYut_MO_canThrowAgainTrue**               | MO(5) 결과 시 `canThrowAgain()`이 `true` 인지                                                  | `assertTrue(game.canThrowAgain());`                                                                  |
+| **testMoveHorse_DO_movesHorseAlongMainPath**        | DO(1) 이동 시 말의 `currentSpot.id` 가 1 증가하고, 사용된 결과가 리스트에서 제거되는지         | `assertEquals(1, h.getCurrentSpot().getId());`<br>`assertTrue(game.getCurrentResults().isEmpty());` |
+| **testCaptureEnemyHorse_returnsToStartAndCanThrowAgain** | 상대 말 잡기 시 상대 말이 시작 칸으로 복귀되고, 공격자가 한 번 더 던질 수 있는지 확인             | `assertTrue(defenderHorse.isAtStart());`<br>`assertTrue(game.canThrowAgain());`                     |
+
+![GameTest](report_img/3.png)
+
+✅ GameTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## HorseGroupTest
+
+| 테스트 메소드                                      | 검증 포인트                                                             | JUnit Assertion 예시                                                            |
+| ------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **constructorAddsInitialHorse**                   | 생성자 호출 시 초기 말이 그룹에 포함되고, 말의 `group` 참조가 설정되는지 | `assertTrue(horses.contains(h1));`<br>`assertEquals(group, h1.getGroup());`       |
+| **addHorseAddsNewHorse**                          | `addHorse(h2)` 호출 시 그룹 크기가 2가 되고, `h2.getGroup()` 이 `group` 인지 확인 | `assertEquals(2, horses.size());`<br>`assertEquals(group, h2.getGroup());`       |
+| **addHorseNullOrDuplicateDoesNothing**            | `null` 또는 중복 말 추가 시 그룹 변화가 없는지                           | `assertEquals(1, group.getHorses().size());`                                     |
+| **removeHorseRemovesAndClearsGroupWhenOneLeft**   | 두 마리 중 하나 제거 후 남은 한 마리까지 그룹 해제 및 `group` 참조가 `null` 이 되는지 | `assertTrue(group.getHorses().isEmpty());`<br>`assertNull(h2.getGroup());`       |
+| **removeHorseWhenNotInGroupDoesNothing**          | 그룹에 없는 말 제거 시 아무 변화 없는지                                  | `assertEquals(1, group.getHorses().size());`                                     |
+| **moveSetsAllHorsesToDestinationAndMarksFinished** | 일반/도착 칸으로 이동 시 모든 말의 `currentSpot` 과 `isFinished` 플래그 상태 검증 | `assertEquals(normalSpot, h1.getCurrentSpot());`<br>`assertTrue(h1.isFinished());` |
+| **getHorsesReturnsUnmodifiableList**              | `getHorses()` 로 반환된 리스트가 수정 불가능한지                         | `assertThrows(UnsupportedOperationException.class, () -> list.add(h2));`         |
+
+![HorseGroupTest](report_img/4.png)
+
+✅ HorseGroupTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## HorseTest
+
+| 테스트 메소드                             | 검증 포인트                                                                                 | JUnit Assertion 예시                                                            |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **testInitialState**                     | - 초기 `id`, `owner`<br>- `currentSpot` null<br>- `isFinished`, `isInGroup` false           | `assertEquals(7, horse.getId());`<br>`assertNull(horse.getCurrentSpot());`     |
+| **testMoveUpdatesSpot**                  | `move(spotA)` 호출 시<br>- `currentSpot` 업데이트<br>- `isFinished` false                   | `assertTrue(moved);`<br>`assertEquals(spotA, horse.getCurrentSpot());`         |
+| **testMoveToFinishSpotSetsFinished**     | `move(spotFinish)` 호출 시<br>- `currentSpot` 업데이트<br>- `isFinished` true               | `assertTrue(horse.isFinished());`                                               |
+| **testCannotMoveWhenAlreadyFinished**    | 이미 `finished` 상태일 때 `move()` false, `currentSpot` 변하지 않는지                       | `assertFalse(moved);`<br>`assertEquals(spotA, horse.getCurrentSpot());`         |
+| **testCannotMoveWhenInGroup**            | 그룹에 속한 말일 때 `move()` false, `currentSpot` 변하지 않는지                            | `assertFalse(moved);`<br>`assertNull(horse.getCurrentSpot());`                  |
+| **testToStringContainsIdAndOwnerName**   | `toString()` 결과에 `id` 와 `owner.name` 포함 여부                                         | `assertTrue(str.contains("id=7"));`<br>`assertTrue(str.contains("Tester"));`    |
+
+![HorseTest](report_img/5.png)
+
+✅ HorseTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## LineTest
+
+| 테스트 메소드                                      | 검증 포인트                                                          | JUnit Assertion 예시                                                         |
+| ------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **equals_sameFromTo_shouldBeEqual**               | 동일 `from`/`to` 로 생성한 두 객체가 `equals` 와 `hashCode` 동등      | `assertEquals(l1, l2);`<br>`assertEquals(l1.hashCode(), l2.hashCode());`     |
+| **equals_differentFromOrTo_shouldNotBeEqual**     | `from`/`to` 순서가 다르거나 `to` 가 다를 때 `equals` false            | `assertNotEquals(l1, l2);`<br>`assertNotEquals(l1, l3);`                     |
+| **equals_nullOrOtherType_shouldReturnFalse**      | `null` 또는 다른 타입과 비교 시 `equals` false                        | `assertNotEquals(l, null);`<br>`assertNotEquals(l, "string");`               |
+| **getters_shouldReturnConstructorValues**         | `getFrom()`/`getTo()` 가 생성자 인자 객체를 그대로 반환               | `assertSame(a, l.getFrom());`<br>`assertSame(b, l.getTo());`                 |
+
+![LineTest](report_img/6.png)
+
+✅ LineTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## PathTest
+
+| 테스트 메소드                               | 검증 포인트                                                      | JUnit Assertion 예시                                                             |
+| ------------------------------------------ | ----------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **testNameAndShortcutFlag**                | 생성자 인자 `name`, `isShortcut` 필드 반영 여부                 | `assertEquals("main", mainPath.getName());`<br>`assertTrue(shortcutPath.isShortcut());` |
+| **testAddSpotAndPrevSpotLinking**          | `addSpot()` 후 `getSpots()` 순서, 각 Spot 의 `prevSpot` 연결     | `assertSame(s0, list.get(0));`<br>`assertSame(s0, s1.getPrevSpot());`            |
+| **testGetLastSpotEmptyAndNonEmpty**        | 빈 경로 `getLastSpot()` null, Spot 추가 시 마지막 요소 반환      | `assertNull(empty.getLastSpot());`<br>`assertSame(s1, mainPath.getLastSpot());`  |
+| **testGetSpotAfterMoveValid**              | 경로 내 n칸 이동 시 올바른 Spot 반환                             | `assertSame(s1, mainPath.getSpotAfterMove(s0,1));`<br>`assertSame(s2, mainPath.getSpotAfterMove(s0,2));` |
+| **testGetSpotAfterMoveInvalid**            | 경로 벗어남, 존재하지 않는 Spot, 빈 경로 경우 null 반환         | `assertNull(mainPath.getSpotAfterMove(s0,5));`<br>`assertNull(empty.getSpotAfterMove(s0,1));` |
+| **testGetSpotsUnmodifiable**               | `getSpots()` 로 반환된 리스트 수정 시 예외 발생                 | `assertThrows(UnsupportedOperationException.class, () -> spotsView.add(s1));`     |
+
+![PathTest](report_img/7.png)
+
+✅ PathTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## RandomYutThrowStrategyTest
+
+| 테스트 메소드                                | 검증 포인트                                               | JUnit Assertion 예시                                                     |
+| ------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **testThrowYut_MO_whenZeroTrues**           | `nextBoolean()` 모두 false → `MO` 반환                     | `assertEquals(YutResult.MO, strategy.throwYut());`                     |
+| **testThrowYut_DO_whenOneTrue**             | 정확히 1회 true → `DO` 반환                                | `assertEquals(YutResult.DO, strategy.throwYut());`                     |
+| **testThrowYut_GAE_whenTwoTrues**           | 정확히 2회 true → `GAE` 반환                               | `assertEquals(YutResult.GAE, strategy.throwYut());`                    |
+| **testThrowYut_GEOL_whenThreeTrues**        | 정확히 3회 true → `GEOL` 반환                              | `assertEquals(YutResult.GEOL, strategy.throwYut());`                   |
+| **testThrowYut_YUT_whenFourTrues**          | 4회 모두 true → `YUT` 반환                                 | `assertEquals(YutResult.YUT, strategy.throwYut());`                    |
+| **testThrowYut_MultipleRunsCoverAllCases**  | 랜덤 반복 실행 시 null 아니며 가능한 결과만 반환           | `assertTrue(Set.of(YutResult.values()).contains(r));`                  |
+
+![RandomYutThrowStrategyTest](report_img/8.png)
+
+✅ RandomYutThrowStrategyTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
+
+## SpotTest
+
+| 테스트 메소드                                    | 검증 포인트                                                          | JUnit Assertion 예시                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **testIdAndFlags**                              | `id`, `isStart`, `isCorner`, `isFinish` 플래그 초기값 올바른지       | `assertEquals(0, s0.getId());`<br>`assertTrue(s0.isStart());`               |
+| **testAddNextSpotAndPrevSpot**                  | `addNextSpot(YUT/GAE 등)` 시 `getNextSpot()`, `prevSpot` 설정 여부 | `assertSame(s1, s0.getNextSpot(YutResult.DO));`<br>`assertSame(s0, s1.getPrevSpot());` |
+| **testGetNextSpotChaining_DO_GAE_GEOL**         | 체이닝된 DO/GAE/GEOL 호출 시 올바른 Spot 반환, 오버슈트 시 null   | `assertSame(s2, s0.getNextSpot(YutResult.GAE));`<br>`assertNull(s0.getNextSpot(YutResult.YUT));` |
+| **testBackdo**                                  | `BACKDO` 호출 시 `prevSpot` 반환, 시작 칸 시 null 반환             | `assertSame(s1, s2.getNextSpot(YutResult.BACKDO));`<br>`assertNull(s0.getNextSpot(YutResult.BACKDO));` |
+| **testAddAndGetNextPath**                       | `addNextPath()` 후 `hasPath()`, `getNextPath()` 동작 여부         | `assertTrue(s0.hasPath(YutResult.YUT));`<br>`assertSame(shortcut, s0.getNextPath(YutResult.YUT));` |
+| **testGetNextSpotWithOnlyPathEntry**            | Path 엔트리만 있을 때 기본 로직(없으면 null) 동작 확인            | `assertNull(s0.getNextSpot(YutResult.YUT));`                                |
+| **testToString**                                | `toString()` 결과가 `"Spot{id=<id>}"` 형태인지                   | `assertEquals("Spot{id=0}", s0.toString());`                               |
+
+![SpotTest](report_img/9.png)
+
+✅ SpotTest의 빌드와 테스트(위에 적힌 테스트 메소드 전부)를 모두 통과한 결과인 BUILD SUCCESSFUL을 확인할 수 있음
 
 
 # Github 프로젝트 리포트
+## GitHub 사용 & 개발 워크플로우
 
+### 1. Repository Structure
+
+- `main` 브랜치
+    - README.md
+- `dev` 브랜치
+    - 일일 통합 브랜치 (최종 코드가 담긴 Branch)
+    - 기능이 완성될 때마다 Pull Request로 머지
+- `feat/<숫자(이슈번호)>` 브랜치
+    - 새로운 기능이나 개선 작업마다 생성
+    - 예: `feat/35` 등
+
+### 2. Issues (15개)
+
+#1 Write README.md
+
+#4 Horses, Player → branch `feat/4` -m ‘replaced Player and Horse’
+
+#6 Yut, Game, Board
+
+#7 add hasThrownYut → branch `feat/7` -m ‘add hasThrownYut’
+
+#14 각 꼭짓점, 중앙점에서 지름길로 이동하지 않고 있음 → branch `feat/14` -m ‘도착 안되던거 고침’
+
+#15 도착점에서 상대편 말이 잡힘 
+
+#18 말이 하나도 없을 때 빽도가 나오면 윷을 못던짐
+
+#20 대각선 빽도 
+
+#21 빽도 오류 
+
+#24 오각형, 육각형 view → branch `feat/24` -m ‘오각형, 육각형 view’
+
+#26 오각형, 육각형 Path → branch `feat/26` -m ‘육각형, 오각형 Path 추가’
+
+#33 MVC 패턴 
+
+#34 Strategy 함수 분리
+
+#35 Create Test Code
+
+#36 JavaFX Game View
+
+### 3. Branches
+
+### ✅ “gradle-test-env” branch
+
+- Gradle을 활용하여 JUnit 테스트 코드를 돌림.
+- Gradle을 구동하는데 필요한 모든 파일 및 폴더를 담은 브랜치.
+- JavaFXGameView.java의 `ChoiceDialog<YutResult> dialog = new ChoiceDialog<>(options.getFirst(), options);` 를 `ChoiceDialog<YutResult> dialog = new ChoiceDialog<>(options.get(0), options);` 으로 바꿈. (Gradle 구동 시 오류가 발생하여 이 부분만 수정함.)
 
 # GitHub Link
 [GitHub - betterrchae/sw01-12](https://github.com/betterrchae/sw01-12.git)

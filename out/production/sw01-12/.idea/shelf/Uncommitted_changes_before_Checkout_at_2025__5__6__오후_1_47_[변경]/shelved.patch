@@ -1,0 +1,76 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"853ed6fa-b5fb-4ae9-a10f-c961c722dc0a\" name=\"변경\" comment=\":sparkles: Horse.java\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/View/SwingGameView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/View/SwingGameView.java\" afterDir=\"false\" />\n    </list>\n    <list id=\"5bfd7023-afe9-437a-b50c-1271f7d52742\" name=\"Changes by yechan\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/app/View/GameViewFactory.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/View/GameViewFactory.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"RESET_MODE\" value=\"HARD\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProblemsViewState\">\n    <option name=\"selectedTabId\" value=\"ProjectErrors\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"2vZU1iPtsUC9ZkqmbLoZJs71m61\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.YutGameApplication.executor\": \"Run\",\n    \"Application.app.YutGameApplication.executor\": \"Run\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"dart.analysis.tool.window.visible\": \"false\",\n    \"git-widget-placeholder\": \"feat/12\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"/Users/yechan/IdeaProjects/sw01-12\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/app\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"app.Model.Horse\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"YutGameApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"src.app.YutGameApplication\" />\n      <module name=\"sw01-12\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"src.app.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"app.YutGameApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"app.YutGameApplication\" />\n      <module name=\"sw01-12\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"app.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\n      <module name=\"sw01-12\" />\n      <option name=\"filePath\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.app.YutGameApplication\" />\n        <item itemvalue=\"Application.YutGameApplication\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\n      <changelist id=\"853ed6fa-b5fb-4ae9-a10f-c961c722dc0a\" name=\"변경\" comment=\"\" />\n      <created>1744351876605</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1744351876605</updated>\n      <workItem from=\"1744351877651\" duration=\"2194000\" />\n      <workItem from=\"1744354850942\" duration=\"853000\" />\n      <workItem from=\"1746168634131\" duration=\"969000\" />\n      <workItem from=\"1746169776639\" duration=\"20000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\":memo: Write README.md\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1744354912060</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1744354912061</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\":sparkles: Horse.java\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1746168853477</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1746168853477</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\":memo: Write README.md\" />\n    <MESSAGE value=\":sparkles: Horse.java\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\":sparkles: Horse.java\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>\n          <line>42</line>\n          <option name=\"timeStamp\" value=\"1\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/app/View/SwingGameView.java</url>\n          <line>43</line>\n          <option name=\"timeStamp\" value=\"2\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a2f71a1a4a231ad0b1c08519befec09541864847)
++++ b/.idea/workspace.xml	(date 1746506818529)
+@@ -4,9 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment=":sparkles: Horse.java">
++    <list default="true" id="853ed6fa-b5fb-4ae9-a10f-c961c722dc0a" name="변경" comment="workspace.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/View/SwingGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/SwingGameView.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Board.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Strategy/SquareBoardLayoutStrategy.java" afterDir="false" />
+     </list>
+     <list id="5bfd7023-afe9-437a-b50c-1271f7d52742" name="Changes by yechan" comment="">
+       <change beforePath="$PROJECT_DIR$/app/View/GameViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/GameViewFactory.java" afterDir="false" />
+@@ -20,6 +21,18 @@
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+     <option name="RESET_MODE" value="HARD" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "HUISMI"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/betterrchae/sw01-12.git",
++    "accountId": "0bc1d43c-0692-4595-b6ad-d30a6587e11b"
++  }
++}]]></component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+@@ -40,8 +53,9 @@
+     "Application.app.YutGameApplication.executor": "Run",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.git.unshallow": "true",
+     "dart.analysis.tool.window.visible": "false",
+-    "git-widget-placeholder": "feat/12",
++    "git-widget-placeholder": "feat/14",
+     "kotlin-language-version-configured": "true",
+     "last_opened_file_path": "/Users/yechan/IdeaProjects/sw01-12",
+     "node.js.detected.package.eslint": "true",
+@@ -61,7 +75,7 @@
+       <recent name="app.Model.Horse" />
+     </key>
+   </component>
+-  <component name="RunManager">
++  <component name="RunManager" selected="Application.app.YutGameApplication">
+     <configuration name="YutGameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="src.app.YutGameApplication" />
+       <module name="sw01-12" />
+@@ -101,13 +115,6 @@
+         <item itemvalue="Application.YutGameApplication" />
+       </list>
+     </recent_temporary>
+-  </component>
+-  <component name="SharedIndexes">
+-    <attachedChunks>
+-      <set>
+-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+-      </set>
+-    </attachedChunks>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
