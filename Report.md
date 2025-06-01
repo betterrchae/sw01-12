@@ -403,6 +403,10 @@ JavaSwing으로 구현했던 윷놀이 게임을 기반으로 JavaFX 프레임�
 
 최종적으로 구현한 로직들을 테스트하기 위해 전체적인 테스트 코드를 작성하며 프로그램이 버그없이 요구사항에 맞게, 잘 동작하는지 테스트하였다.
 
+# Sequence Diagram
+
+![sequenceDiagram](report_img/sequence_diagram_윷놀이.jpg)
+
 # 테스트 리포트
 ### 1. Test 환경
 
