@@ -617,6 +617,8 @@ JavaFX 프레임워크 기반으로 GameView 인터페이스를 구현한 클래
 
 ### 2. Elaboration
 
+![simple_class_diagram](report_img/simple_class_diagram.jpg)
+
 분석한 요구사항을 바탕으로 유스케이스 모델을 만들며 필요한 기능을 정리하였다.
 
 요구사항을 분석하여 보드 모양, UI 프레임워크 등 확장이 필요한 부분을 파악하고, 먼저 JavaSwing 프레임워크를 사용하여 사각형 보드로 윷놀이 게임을 구현하되, 보드 모양, UI 프레임워크를 확장할 수 있게 설계하였다.
