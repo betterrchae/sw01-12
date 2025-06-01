@@ -7,13 +7,224 @@
 6. GitHub 프로젝트 리포트 - 휘민
 
 # 프로젝트 개요
- 
+ 이 프로젝트는 전통 윷놀이 게임을 객체 지향 분석 및 설계 기법(OOAD)을 활용해 소프트웨어로 개발하는 것을 목표로 한다. 사용자는 말과 사용자 수를 선택할 수 있으며, 커스터마이징 가능한 윷놀이 판(오각형, 육각형)과 윷 던지기 기능(지정 혹은 랜덤), 말 선택 및 이동, 업기, 잡기, 게임 종료 또는 재시작의 기능을 지원한다. 또한, MVC 아키텍처 패턴을 사용하여 UI를 분리함으로써 두 가지 이상의 UIToolKit을 사용하여 구현했을 때 코드 수정을 최소화해야 한다. 마지막으로 JUnit5으로 모델 테스트를 수행한다.
+
+![swing_square](report_img/swing_square.png)
+![swing_pentagon](report_img/swing_pentagon.png)
+![swing_hexagon](report_img/swing_hexagon.png)
+
+![javafx_square](report_img/javafx_square.png)
+![javafx_pentagon](report_img/javafx_pentagon.png)
+![javafx_hexagon](report_img/javafx_hexagon.png)
 
 # UseCase Model
+## UseCase Text
 
+**Scope**
+Yut Game System
+
+**Level**
+User Goal Level
+
+**\<UseCase List\>**
+1. 게임 실행
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 원하는 설정값으로 윷 게임 진행
+    
+    System: 플레이어가 윷 게임을 진행할 수 있도록 게임 실행을 보장
+    
+    **Success Guarantee**
+    
+    1. 윷놀이 게임을 진행한다.
+    
+    **Main Success Scenario**
+    
+    1. UI 프레임워크 타입을 설정한다.
+    2. 보드 유형, 플레이어 수(2~4)와 말 수(2~5)를 선택한다.
+    3. 게임 실행 버튼을 누른다.
+    
+    **Extensions**
+    
+    1. 설정값을 설정하지 않은 경우: 게임이 실행되지 않는다.
+    
+2. 윷 던지기
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 윷 결과를 확인하고 게임을 진행
+    
+    System: 올바른 윷 결과 생성 및 플레이어에게 전달을 보장
+    
+    **Precondition**
+    
+    1. 게임이 진행 중이어야 한다.
+    
+    **Success Guarantee**
+    
+    1. 플레이어가 윷 결과를 사용할 수 있도록 윷 결과가 기록된다.
+    2. 윷, 모인 경우 윷 던지기 기회를 한번 더 제공한다.
+    
+    **Main Success Scenario**
+    
+    1. 지정 윷던지기, 랜덤 윷던지기 중 하나를 선택한다.
+    2. 윷던지기 버튼을 누른다.
+    3. 윷 결과가 표시된다.
+    4. 윷 결과가 저장된다.
+    
+    **Extensions**
+    
+    1. 윷 던지기 기회를 모두 사용한 경우: 말 선택 및 이동하는 단계로 넘어간다.
+    2. 보드에 나온 말이 없는 상태로 빽도가 나온 경우: 턴이 즉시 종료되고, 턴이 넘어간다.
+    
+3. 말 이동
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 윷 결과에 따라 말을 움직이고 모든 말을 완주
+    
+    System: 규칙에 맞게 플레이어가 원하는 대로 이동을 처리하고 게임 상태를 정확히 반영
+    
+    **Precondition**
+    
+    1. 윷을 던져 결과가 하나 이상 존재해야 한다.
+    
+    **Success Guarantee**
+    
+    1. 이동이 완료되면 사용한 윷 결과를 제거한다.
+    
+    **Main Success Scenario**
+    
+    1. 현재 턴의 플레이어가 말을 선택한다.
+    2. 이동에 사용할 윷 결과를 선택한다.
+    3. 말이 지정된 칸으로 이동한다.
+    
+    **Extensions**
+    
+    1. 해당 칸에 같은 팀 말이 있는 경우: 업기를 진행한다.
+    2. 해당 칸에 다른 팀 말이 있는 경우: 상대 말을 잡고 윷 던지기 기회를 한번 더 제공한다.
+    
+4. 승자 결정
+    
+    **Primary Actor**
+    
+    System
+    
+    **Stakeholders and Interests list**
+    
+    Player: 모든 말을 모두 완주시켜 승리
+    
+    System: 승자를 결정
+    
+    **Precondition**
+    
+    1. 한 플레이어가 자신의 모든 말을 완주한다.
+    
+    **Success Guarantee**
+    
+    1. 게임 재시작 또는 게임 종료 중 선택할 수 있도록 다이얼로그를 표시한다.
+    
+    **Main Success Scenario**
+    
+    1. 플레이어가 말 이동한 후 모든 말이 완주했는지 체크한다.
+    2. 모든 말이 완주했다면 해당 플레이어를 승리자로 판단하고 게임을 종료한다.
+    3. 다이얼로그를 통해 승리자를 표시한다.
+    
+    **Extensions**
+    
+    1. 게임 재시작을 누른 경우: 새로운 게임이 시작되고, 게임 설정 화면이 나타난다.
+    2. 게임 종료를 누른 경우: UI가 종료된다.
+5. 턴 전환
+    
+    **Primary Actor**
+    
+    System
+    
+    **Stakeholders and Interests list**
+    
+    Player: 자신의 차례가 제대로 돌아오길 원함
+    
+    System: 규칙에 따라 플레이어 턴을 정확히 전환
+    
+    **Precondition**
+    
+    1. 현재 플레이어의 윷 던지기 횟수가 남아있지 않다.
+    2. 현재 플레이어의 윷 결과 사용이 모두 완료되었다.
+    
+    **Success Guarantee**
+    
+    1. 다음 순번의 플레이어가 현재 플레이어로 설정된다.
+    
+    **Main Success Scenario**
+    
+    1. 현재 플레이어의 윷던지기 횟수가 모두 사용 됐는지 확인한다.
+    2. 사용하지 않은 윷 결과가 있는지 확인한다.
+    3. 조건을 만족하는 경우, 다음 플레이어에게 턴을 넘긴다.
+    4. 다이얼로그를 통해 턴이 넘어갔음을 알린다.
+    
+6. 게임 재시작
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 새로운 게임을 진행
+    
+    System: 기존 게임을 종료하고 새로운 게임 실행을 보장
+    
+    **Precondition**
+    
+    1. 승리자가 존재한다.
+    
+    **Main Success Scenario**
+    
+    1. 승리자가 나오고 게임이 끝난 상태에서 게임 재시작 버튼을 누른다.
+    2. 기존 게임을 초기화하고 새로운 게임의 설정창을 보여준다.
+    
+    **Extensions**
+    
+    1. 새로운 게임의 설정을 완료한 경우: 새로운 게임이 시작된다.
+    
+7. 게임 종료
+    
+    **Primary Actor**
+    
+    Player
+    
+    **Stakeholders and Interests list**
+    
+    Player: 게임을 종료
+    
+    System: 기존 게임을 종료하고 UI를 종료
+    
+    **Precondition**
+    
+    1. 승리자가 존재한다.
+    
+    **Main Success Scenario**
+    
+    1. 승리자가 나오고 게임이 끝난 상태에서 게임 종료 버튼을 누른다.
+    2. UI가 닫히며 프로그램이 종료된다.
+
+## UseCase Diagram
+![UseCaseDiagram](report_img/usecase_diagram.png)
 
 # 설계 및 구현 리포트
-
 
 ## 주요 구현 목표
 1. MVC 구조 적용
@@ -236,6 +447,8 @@ Line: Spot 간의 연결 정보를 시각적으로 표현하는 선 (UI 그리�
 
 - from, to 로 시작 스팟과 종료 스팟 데이터 저장
 
+![ClassDiagramBoard](report_img/class_diagram_Board.png)
+
 #### Player
 
 **역할**
@@ -305,6 +518,8 @@ throwYut
 
 throwYut 메소드로 각 전략에 해당하는 알고리즘으로 윷던지기를 구현하도록 하였다.
 
+![ClassDiagramYutThrow](report_img/class_diagram_YutThrow.png)
+
 #### BoardLayoutStrategy
 
 **역할**
@@ -316,6 +531,8 @@ throwYut 메소드로 각 전략에 해당하는 알고리즘으로 윷던지기
 createBoard
 
 createBoard 메소드로 사각형, 오각형, 육각형 보드에 따라 각각의 UI를 그리기 전략 및 이동 전략에 맞게 보드를 생성하도록 구현하였다.
+
+![ClassDiagramBoardLayout](report_img/class_diagram_BoardLayout.png)
 
 #### GameEvent
 
@@ -362,20 +579,55 @@ GameView에서 이 인터페이스를 상속받고, 이 GameView 인터페이스
 - 등록된 이벤트 리스너에게 이벤트 전달
     - 메소드: fireEvent
 
+### View
 
-## UI를 교체했을 때 수정된 부분
+#### GameView
+
+**역할**
+
+다양한 UI 프레임워크에 대응하기 위해 설계된 View 인터페이스
+
+**기능**
+
+UI 초기화, 보드 업데이트, 플레이어 업데이트, 윷 결과 보여주기, 게임 결과 보여주기, 다이얼로그 띄우기, UI 종료 등 UI와 관련된 사용자와의 입출력 인터페이스를 정의하고 있다.
+
+#### SwingGameView
+
+**역할**
+
+JavaSwing 프레임워크 기반으로 GameView 인터페이스를 구현한 클래스로, JavaSwing 기반 UI가 실행될 수 있도록 한다.
+
+#### JavaFXGameView
+
+**역할**
+
+JavaFX 프레임워크 기반으로 GameView 인터페이스를 구현한 클래스로, JavaFX 기반 UI가 실행될 수 있도록 한다.
+
+![ClassDiagramView](report_img/class_diagram_View.png)
+
+
 
 ## 개발 과정
 
-### 1. 개발 전
+### 1. Inception
 
-먼저 여러차례 회의를 통해 요구사항 명세서를 분석하였다.
+먼저 첫 회의에서 요구사항 명세서를 분석하였다.
 
-분석한 요구사항을 바탕으로 유스케이스 다이어그램을 그려보며 필요한 기능을 파악하였다.
+기본적인 윷놀이 규칙에 대해 이야기하며 고려해야 할 부분을 정리하였다. 이때 윷 한번 더 던지는 케이스, 지름길에서의 빽도 규칙 등 각자 상이하게 파악하고 있는 사소한 규칙들에 대해 논의하고 하나로 통일하였다.
 
-이후 간단한 버전의 클래스 다이어그램을 그리며 필요한 모델 객체들을 우선 정의하였다.
+### 2. Elaboration
 
-### 2. 개발 초기
+분석한 요구사항을 바탕으로 유스케이스 모델을 만들며 필요한 기능을 정리하였다.
+
+요구사항을 분석하여 보드 모양, UI 프레임워크 등 확장이 필요한 부분을 파악하고, 먼저 JavaSwing 프레임워크를 사용하여 사각형 보드로 윷놀이 게임을 구현하되, 보드 모양, UI 프레임워크를 확장할 수 있게 설계하였다.
+
+이를 위해 MVC 구조로 Model, View, Controller로 구분해 필요한 클래스들을 파악하고, 간단한 버전의 클래스 다이어그램을 그리며 필요한 모델 객체들을 우선 정의하였다.
+
+또한, 재사용성, 확장성, 로직과 UI의 관심사 분리를 위해 이벤트 기반으로 윷놀이 게임을 설계하였다.
+
+### 3. Construction
+
+**iteration1**
 
 개발 초기에는 사각형 보드의 윷놀이 게임을 우선 개발하고, 추후 오각형, 육각형 보드를 개발하기로 하였다.
 
@@ -387,21 +639,52 @@ GameView에서 이 인터페이스를 상속받고, 이 GameView 인터페이스
 
 기본적인 기능을 구현한 후 테스트 코드와 실사용 테스트를 통해 버그 등을 수정하며 윷놀이 게임의 전반적인 알고리즘을 구현하였다.
 
-### 3. 개발 중반
+**iteration2**
 
-이후, 사각형 보드로 구현했던 윷놀이 게임에 오각형 보드와 육각형 보드의 레이아웃 전략을 구현하고 JavaSwing으로 보드 뷰도 구현하였다.
+이후에는 사각형 보드로 구현했던 윷놀이 게임에 JavaSwing으로 보드 뷰를 구현하고, 오각형 보드와 육각형 보드의 레이아웃 전략도 구현하였다.
 
-이후 테스트를 통해 요구사항대로 올바르게 동작하는지 확인하였다.
+이를 위해 오각형, 육각형 보드에서의 지름길 이동 규칙 등을 논의하고 정리하였다.
+
+오각형, 육각형 보드를 모두 구현한 후, 테스트를 통해 요구사항대로 올바르게 동작하는지 확인하였다.
 
 또한 MVC 구조에 적합하게 구현되었는지 점검하며 리팩토링을 진행하였다.
 
-### 4. 개발 후반
+**iteration3**
 
-JavaSwing으로 구현했던 윷놀이 게임을 기반으로 JavaFX 프레임워크를 사용해 뷰 그리기를 구현하였다.
+JavaSwing으로 구현했던 윷놀이 게임을 기반으로 JavaFX 프레임워크를 사용해 UI를 구현하였다.
 
-또한, JavaFX 프레임워크에 맞게 GameController와 GameViewFactory, YutGameApplication 클래스를 일부 수정하여, JavaFX 프레임워크로도 윷놀이 게임을 구현하였다.
+JavaFX 프레임워크에 맞게 GameController와 GameViewFactory, YutGameApplication 클래스를  최소한으로 수정하여, JavaFX 프레임워크로도 윷놀이 게임을 구현하였다.
 
-최종적으로 구현한 로직들을 테스트하기 위해 전체적인 테스트 코드를 작성하며 프로그램이 버그없이 요구사항에 맞게, 잘 동작하는지 테스트하였다.
+### 4. Transition
+
+최종적으로 구현한 로직들을 테스트하기 위해 전체적인 테스트 코드를 작성하고, 실행로 프로그램을 실행해보며 프로그램이 버그없이 요구사항에 맞게 잘 동작하는지 확인하고 수정하였다.
+
+또한, JUnit, JavaFX 등 이 프로그램을 실행하기 위해 필요한 패키지 설치 방법과 실행 방법을 README.md 파일에 정리하였다.
+
+## UI를 교체했을 때 수정된 부분
+**GameController.java**
+
+해당 파일을  별도의 수정 없이 실행시켰을 때, “Not on FX application thread”라는 오류가 발생하였다. 해당 오류는 JavaFX 어플리케이션에서 UI 관련 작업을 JavaFX 스레드가 아닌 다른 스레드에서 시도할 때 발생한다. 따라서, JavaFX 사용 시, 백그라운드 스레드가 아닌 반드시 JavaFX의 UI 스레드에서 UI 관련 작업이 이루어짐을 보장해야 한다.
+
+따라서, runOnUIThread 헬퍼 함수를 정의하였다. UI의 종류를 확인해서 Swing인 경우 그대로 실행하지만, JavaFX인 경우 현재 JavaFX Application 스레드에 있는지 검사한다. 만약 그렇다면 그대로 실행(action.run())하고, 아니라면 나중에 JavaFX UI 스레드에서 실행(Platform.runLater(action))한다.
+
+컨트롤러의 모든 View 관련 작업은 위의 헬퍼 메소드를 사용하여 처리함으로써, 스레드 오류 없이 작동할 수 있도록 하였다.
+
+**JavaFXGameView.java**
+
+GameController 수정 사항에서 언급했던 UI 스레드 관련 문제를 해결하기 위해, stage와 관련된 작업은 전부 Platform.runLater() 안에서 처리하였다.
+
+**GameViewFactory.java & YutGameApplication.java**
+
+사용자로부터 uiType을 입력 받아 문자열로 전달하여, 어떤 UI(Swing 또는 JavaFX)를 사용할 지 결정할 수 있도록 하였다.
+
+또한, `javafx.application.Platform` 을 사용하여 별도의 launcher 없이 하나의 메인 클래스 내에서 JavaFX를 실행 가능하도록 하였다.
+
+**MVC 아키텍처**
+
+UI를 교체하더라도 기본적인 Controller 구조와 Model의 수정은 필요하지 않았고, 메인 실행 클래스의 일부 내용 및 새로운 View 파일만 추가해주면 되었다. 따라서, MVC 패턴이 잘 지켜졌다고 할 수 있다.
+
+
 
 # Sequence Diagram
 
