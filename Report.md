@@ -7,7 +7,15 @@
 6. GitHub 프로젝트 리포트 - 휘민
 
 # 프로젝트 개요
- 
+ 이 프로젝트는 전통 윷놀이 게임을 객체 지향 분석 및 설계 기법(OOAD)을 활용해 소프트웨어로 개발하는 것을 목표로 한다. 사용자는 말과 사용자 수를 선택할 수 있으며, 커스터마이징 가능한 윷놀이 판(오각형, 육각형)과 윷 던지기 기능(지정 혹은 랜덤), 말 선택 및 이동, 업기, 잡기, 게임 종료 또는 재시작의 기능을 지원한다. 또한, MVC 아키텍처 패턴을 사용하여 UI를 분리함으로써 두 가지 이상의 UIToolKit을 사용하여 구현했을 때 코드 수정을 최소화해야 한다. 마지막으로 JUnit5으로 모델 테스트를 수행한다.
+
+![swing_square](report_img/swing_square.png)
+![swing_pentagon](report_img/swing_pentagon.png)
+![swing_hexagon](report_img/swing_hexagon.png)
+
+![javafx_square](report_img/javafx_square.png)
+![javafx_pentagon](report_img/javafx_pentagon.png)
+![javafx_hexagon](report_img/javafx_hexagon.png)
 
 # UseCase Model
 ## UseCase Text
@@ -597,7 +605,7 @@ JavaFX 프레임워크 기반으로 GameView 인터페이스를 구현한 클래
 
 ![ClassDiagramView](report_img/class_diagram_View.png)
 
-## UI를 교체했을 때 수정된 부분
+
 
 ## 개발 과정
 
@@ -652,6 +660,31 @@ JavaFX 프레임워크에 맞게 GameController와 GameViewFactory, YutGameAppli
 최종적으로 구현한 로직들을 테스트하기 위해 전체적인 테스트 코드를 작성하고, 실행로 프로그램을 실행해보며 프로그램이 버그없이 요구사항에 맞게 잘 동작하는지 확인하고 수정하였다.
 
 또한, JUnit, JavaFX 등 이 프로그램을 실행하기 위해 필요한 패키지 설치 방법과 실행 방법을 README.md 파일에 정리하였다.
+
+## UI를 교체했을 때 수정된 부분
+**GameController.java**
+
+해당 파일을  별도의 수정 없이 실행시켰을 때, “Not on FX application thread”라는 오류가 발생하였다. 해당 오류는 JavaFX 어플리케이션에서 UI 관련 작업을 JavaFX 스레드가 아닌 다른 스레드에서 시도할 때 발생한다. 따라서, JavaFX 사용 시, 백그라운드 스레드가 아닌 반드시 JavaFX의 UI 스레드에서 UI 관련 작업이 이루어짐을 보장해야 한다.
+
+따라서, runOnUIThread 헬퍼 함수를 정의하였다. UI의 종류를 확인해서 Swing인 경우 그대로 실행하지만, JavaFX인 경우 현재 JavaFX Application 스레드에 있는지 검사한다. 만약 그렇다면 그대로 실행(action.run())하고, 아니라면 나중에 JavaFX UI 스레드에서 실행(Platform.runLater(action))한다.
+
+컨트롤러의 모든 View 관련 작업은 위의 헬퍼 메소드를 사용하여 처리함으로써, 스레드 오류 없이 작동할 수 있도록 하였다.
+
+**JavaFXGameView.java**
+
+GameController 수정 사항에서 언급했던 UI 스레드 관련 문제를 해결하기 위해, stage와 관련된 작업은 전부 Platform.runLater() 안에서 처리하였다.
+
+**GameViewFactory.java & YutGameApplication.java**
+
+사용자로부터 uiType을 입력 받아 문자열로 전달하여, 어떤 UI(Swing 또는 JavaFX)를 사용할 지 결정할 수 있도록 하였다.
+
+또한, `javafx.application.Platform` 을 사용하여 별도의 launcher 없이 하나의 메인 클래스 내에서 JavaFX를 실행 가능하도록 하였다.
+
+**MVC 아키텍처**
+
+UI를 교체하더라도 기본적인 Controller 구조와 Model의 수정은 필요하지 않았고, 메인 실행 클래스의 일부 내용 및 새로운 View 파일만 추가해주면 되었다. 따라서, MVC 패턴이 잘 지켜졌다고 할 수 있다.
+
+
 
 # 테스트 리포트
 ### 1. Test 환경
