@@ -135,8 +135,8 @@ public class SquareBoardLayoutStrategy implements BoardLayoutStrategy {
         diagTopLeftToBotRight.addSpot(diag2_1);
         diagTopLeftToBotRight.addSpot(diag2_2);
         diagTopLeftToBotRight.addSpot(centerSpot);
-        diagTopLeftToBotRight.addSpot(diag4_1);
         diagTopLeftToBotRight.addSpot(diag4_2);
+        diagTopLeftToBotRight.addSpot(diag4_1);
         diagTopLeftToBotRight.addSpot(corner3);
         paths.add(diagTopLeftToBotRight);
         return diagTopLeftToBotRight;
