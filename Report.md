@@ -848,15 +848,21 @@ UI를 교체하더라도 기본적인 Controller 구조와 Model의 수정은 �
     - 새로운 기능이나 개선 작업마다 생성
     - 예: `feat/35` 등
 
-### 2. Issues (15개)
+### 2. Issues (22개)
 
 #1 Write README.md
+
+#2 Make base code
 
 #4 Horses, Player → branch `feat/4` -m ‘replaced Player and Horse’
 
 #6 Yut, Game, Board
 
 #7 add hasThrownYut → branch `feat/7` -m ‘add hasThrownYut’
+
+#10 🐛 말이 업혔을 때 잡았다고 뜸
+
+#12 🐛 Player이름이 알파벳G으로 바뀌어짐
 
 #14 각 꼭짓점, 중앙점에서 지름길로 이동하지 않고 있음 → branch `feat/14` -m ‘도착 안되던거 고침’
 
@@ -872,6 +878,12 @@ UI를 교체하더라도 기본적인 Controller 구조와 Model의 수정은 �
 
 #26 오각형, 육각형 Path → branch `feat/26` -m ‘육각형, 오각형 Path 추가’
 
+#28 대각선 빽도 이동
+
+#29 모-빽도 하면 턴 넘어감 수정 ( && currentResult.isEmpty() 추가 )
+
+#30 말이 하나도 없을 때 빽도 나오면 윷을 못 던짐 수정 ( canThrowAgain = true; 추가 )
+
 #33 MVC 패턴 
 
 #34 Strategy 함수 분리
@@ -879,6 +891,8 @@ UI를 교체하더라도 기본적인 Controller 구조와 Model의 수정은 �
 #35 Create Test Code
 
 #36 JavaFX Game View
+
+#39 🐛 사각형 보드 대각선 이동 오류
 
 ### 3. Branches
 
